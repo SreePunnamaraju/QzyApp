@@ -1,0 +1,149 @@
+package com.qyz.malls.restaurants.models;
+
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
+import java.io.Serializable;
+
+public class RestaurantListModel implements Parcelable, Serializable {
+
+    public String getRestid() {
+        return restid;
+    }
+
+    public void setRestid(String restid) {
+        this.restid = restid;
+    }
+
+    public String getMallid() {
+        return mallid;
+    }
+
+    public void setMallid(String mallid) {
+        this.mallid = mallid;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getCusine() {
+        return cusine;
+    }
+
+    public void setCusine(String cusine) {
+        this.cusine = cusine;
+    }
+
+    public String getRating() {
+        return rating;
+    }
+
+    public void setRating(String rating) {
+        this.rating = rating;
+    }
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
+    public String getOffer() {
+        return offer;
+    }
+
+    public void setOffer(String offer) {
+        this.offer = offer;
+    }
+
+    @SerializedName("restid")
+    @Expose
+    private String restid;
+
+    @SerializedName("mallid")
+    @Expose
+    private String mallid;
+
+    @SerializedName("name")
+    @Expose
+    private String name;
+
+    @SerializedName("cusine")
+    @Expose
+    private String cusine;
+
+    @SerializedName("rating")
+    @Expose
+    private String rating;
+
+    @SerializedName("time")
+    @Expose
+    private String time;
+
+    @SerializedName("imageUrl")
+    @Expose
+    private String imageUrl;
+
+    @SerializedName("offer")
+    @Expose
+    private String offer;
+
+    private RestaurantListModel(Parcel in) {
+        restid = in.readString();
+        mallid = in.readString();
+        name = in.readString();
+        cusine = in.readString();
+        rating = in.readString();
+        time = in.readString();
+        imageUrl = in.readString();
+        offer = in.readString();
+    }
+
+
+    public static final Creator<RestaurantListModel> CREATOR = new Creator<RestaurantListModel>() {
+        @Override
+        public RestaurantListModel createFromParcel(Parcel in) {
+            return new RestaurantListModel(in);
+        }
+
+        @Override
+        public RestaurantListModel[] newArray(int size) {
+            return new RestaurantListModel[size];
+        }
+    };
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeString(restid);
+        parcel.writeString(mallid);
+        parcel.writeString(name);
+        parcel.writeString(cusine);
+        parcel.writeString(rating);
+        parcel.writeString(time);
+        parcel.writeString(imageUrl);
+        parcel.writeString(offer);
+    }
+}
