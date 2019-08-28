@@ -13,7 +13,7 @@ import androidx.appcompat.app.ActionBarDrawerToggle;
 import android.view.MenuItem;
 
 import com.google.android.material.navigation.NavigationView;
-import com.qyz.malls.restaurants.RestaurantResultPageAdapter;
+import com.qyz.malls.restaurants.adapters.RestaurantResultPageAdapter;
 import com.qyz.malls.restaurants.models.CuisineFilterModel;
 import com.qyz.malls.restaurants.models.RestaurantBannerModel;
 import com.qyz.malls.restaurants.models.RestaurantListModel;
@@ -68,7 +68,7 @@ public class HomeActivity extends AppCompatActivity
         LinearLayoutManager layoutManager = new LinearLayoutManager(this,VERTICAL,false);
         homePageMainRecyler.setLayoutManager(layoutManager);
         RestaurantResultPageAdapter restaurantResultPageAdapter = new RestaurantResultPageAdapter(this,banner,cusinefilter,restList);
-
+        homePageMainRecyler.setAdapter(restaurantResultPageAdapter);
     }
 
 

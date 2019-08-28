@@ -10,6 +10,46 @@ import java.io.Serializable;
 
 public class RestaurantListModel implements Parcelable, Serializable {
 
+    @SerializedName("fav")
+    @Expose
+    private int fav;
+
+    @SerializedName("restid")
+    @Expose
+    private String restid;
+
+    @SerializedName("mallid")
+    @Expose
+    private String mallid;
+
+    @SerializedName("name")
+    @Expose
+    private String name;
+
+    @SerializedName("cusine")
+    @Expose
+    private String cusine;
+
+    @SerializedName("rating")
+    @Expose
+    private String rating;
+
+    @SerializedName("time")
+    @Expose
+    private String time;
+
+    @SerializedName("imageUrl")
+    @Expose
+    private String imageUrl;
+
+    @SerializedName("offer")
+    @Expose
+    private String offer;
+
+    @SerializedName("price")
+    @Expose
+    private String price;
+
     public String getRestid() {
         return restid;
     }
@@ -74,39 +114,24 @@ public class RestaurantListModel implements Parcelable, Serializable {
         this.offer = offer;
     }
 
-    @SerializedName("restid")
-    @Expose
-    private String restid;
+    public int getFav() {
+        return fav;
+    }
 
-    @SerializedName("mallid")
-    @Expose
-    private String mallid;
+    public void setFav(int fav) {
+        this.fav = fav;
+    }
 
-    @SerializedName("name")
-    @Expose
-    private String name;
+    public String getPrice() {
+        return price;
+    }
 
-    @SerializedName("cusine")
-    @Expose
-    private String cusine;
-
-    @SerializedName("rating")
-    @Expose
-    private String rating;
-
-    @SerializedName("time")
-    @Expose
-    private String time;
-
-    @SerializedName("imageUrl")
-    @Expose
-    private String imageUrl;
-
-    @SerializedName("offer")
-    @Expose
-    private String offer;
+    public void setPrice(String price) {
+        this.price = price;
+    }
 
     private RestaurantListModel(Parcel in) {
+        fav = in.readInt();
         restid = in.readString();
         mallid = in.readString();
         name = in.readString();
@@ -115,8 +140,8 @@ public class RestaurantListModel implements Parcelable, Serializable {
         time = in.readString();
         imageUrl = in.readString();
         offer = in.readString();
+        price = in.readString();
     }
-
 
     public static final Creator<RestaurantListModel> CREATOR = new Creator<RestaurantListModel>() {
         @Override
@@ -137,6 +162,7 @@ public class RestaurantListModel implements Parcelable, Serializable {
 
     @Override
     public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeInt(fav);
         parcel.writeString(restid);
         parcel.writeString(mallid);
         parcel.writeString(name);
@@ -145,5 +171,6 @@ public class RestaurantListModel implements Parcelable, Serializable {
         parcel.writeString(time);
         parcel.writeString(imageUrl);
         parcel.writeString(offer);
+        parcel.writeString(price);
     }
 }
