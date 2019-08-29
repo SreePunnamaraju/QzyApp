@@ -37,9 +37,21 @@ public class HomeActivity extends AppCompatActivity
     RecyclerView homePageMainRecyler;
     ArrayList<RestaurantListModel> restList;
     ArrayList<RestaurantBannerModel> banner;
-    ArrayList<CuisineFilterModel> cusinefilter;
+   ArrayList<CuisineFilterModel> cusinefilter;
 
-    @Override
+   /*
+   InputStream is = new FileInputStream(<<filename>>);
+   BufferedReader buf = new BufferedReader(new InputStreamReader(is));
+   String line = buf.readLine();
+   StringBuilder sb = new StringBuilder();while(line!=null)
+   {
+      sb.append(line).append("\n");
+      line = buf.readLine();
+   }
+   String fileAsString = sb.toString();
+   */
+
+   @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);

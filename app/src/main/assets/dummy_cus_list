@@ -1,0 +1,34 @@
+{
+	"cuisines": [
+	    {
+			"cusid": "1",
+			"name": "SOUTH INDIAN",
+			"colour": "palevioletred"
+		},
+		{
+			"cusid": "2",
+			"name": "CHINESE",
+			"colour": "burlywood"
+		},
+		{
+			"cusid": "3",
+			"name": "ITALIAN",
+			"colour": "violet"
+		},
+		{
+			"cusid": "4",
+			"name": "NORTH INDIAN",
+			"colour": "yellow"
+		},
+		{
+			"cusid": "5",
+			"name": "MEXICAN",
+			"colour": "lightgreen"
+		},
+		{
+			"cusid": "6",
+			"name": "DESSERTS",
+			"colour": "lightskyblue"
+		}
+	]
+}

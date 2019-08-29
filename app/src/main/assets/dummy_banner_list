@@ -1,0 +1,74 @@
+{
+	"banners": [
+	    {
+			"restid": "1",
+			"mallid": "1",
+			"name": "Shaolin Work",
+			"imageUrl": "https://www.gstatic.com/webp/gallery3/2.png",
+			"offer": ""
+		},
+		{
+			"restid": "2",
+			"mallid": "1",
+			"name": "Freshery",
+			"imageUrl": "https://www.gstatic.com/webp/gallery3/5.png",
+			"offer": ""
+		},
+		{
+			"restid": "3",
+			"mallid": "1",
+			"name": "Banner Restaurant 3",
+			"imageUrl": "https://www.gstatic.com/webp/gallery3/2.png",
+			"offer": ""
+		},
+		{
+			"restid": "4",
+			"mallid": "1",
+			"name": "Banner Restaurant 4",
+			"imageUrl": "https://www.gstatic.com/webp/gallery3/3.png",
+			"offer": ""
+		},
+		{
+			"restid": "5",
+			"mallid": "1",
+			"name": "Banner Restaurant 5",
+			"imageUrl": "https://www.gstatic.com/webp/gallery3/2.png",
+			"offer": ""
+		},
+		{
+			"restid": "6",
+			"mallid": "1",
+			"name": "BannerRestaurant 6",
+			"imageUrl": "https://www.gstatic.com/webp/gallery3/3.png",
+			"offer": ""
+		},
+		{
+			"restid": "7",
+			"mallid": "1",
+			"name": "Banner Restaurant 7",
+			"imageUrl": "https://www.gstatic.com/webp/gallery3/2.png",
+			"offer": ""
+		},
+		{
+			"restid": "8",
+			"mallid": "1",
+			"name": "Banner Restaurant 8",
+			"imageUrl": "https://www.gstatic.com/webp/gallery3/3.png",
+			"offer": ""
+		},
+		{
+			"restid": "9",
+			"mallid": "1",
+			"name": "Banner Restaurant 9",
+			"imageUrl": "https://www.gstatic.com/webp/gallery3/2.png",
+			"offer": ""
+		},
+		{
+			"restid": "10",
+			"mallid": "1",
+			"name": "Banner Restaurant 10",
+			"imageUrl": "https://www.gstatic.com/webp/gallery3/3.png",
+			"offer": ""
+		}
+	]
+}
