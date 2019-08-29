@@ -1,5 +1,7 @@
 package com.qyz.malls.restaurants.adapters;
 
+import android.graphics.Color;
+import android.graphics.drawable.GradientDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +22,7 @@ public class CusineClickAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     ArrayList<CuisineFilterModel> cusineFilterList;
 
     public CusineClickAdapter(HomeActivity homeActivity, ArrayList<CuisineFilterModel> cusineFilterList) {
+        System.out.println("sree cusine 1 " +cusineFilterList.size());
         this.homeActivity = homeActivity;
         this.cusineFilterList = cusineFilterList;
     }
@@ -34,12 +37,14 @@ public class CusineClickAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-
+        System.out.println("sree cusine 2");
         if(holder instanceof CusineClickHolder) {
             CusineClickHolder cusineClickHolder = (CusineClickHolder) holder;
             CuisineFilterModel model = cusineFilterList.get(position);
             cusineClickHolder.textView.setText(model.getName());
-            cusineClickHolder.cardView.setCardBackgroundColor(model.getColour());
+            cusineClickHolder.linearLayout.setBackgroundResource(R.drawable.round_bg_cuisine);
+            GradientDrawable drawable = (GradientDrawable) cusineClickHolder.linearLayout.getBackground();
+            drawable.setColor(Color.parseColor(model.getColour()));
         }
 
 

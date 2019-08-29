@@ -33,9 +33,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -46,13 +44,9 @@ public class HomeActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     RecyclerView homePageMainRecyler;
-    ArrayList<RestaurantListModel> restList;
-    ArrayList<RestaurantBannerModel> banner;
-    ArrayList<CuisineFilterModel> cusinefilter;
-
-    /*
-
-     */
+    ArrayList<RestaurantListModel> restList = new ArrayList<>();
+    ArrayList<RestaurantBannerModel> banner = new ArrayList<>();
+    ArrayList<CuisineFilterModel> cusinefilter = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,26 +71,22 @@ public class HomeActivity extends AppCompatActivity
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
         setHomePage();
-        HashMap<String,String> map = new HashMap<>();
-        map.put("x","y");
     }
 
     public void setHomePage() {
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, VERTICAL, false);
         homePageMainRecyler.setLayoutManager(layoutManager);
-        RestaurantResultPageAdapter restaurantResultPageAdapter = new RestaurantResultPageAdapter(this, banner, cusinefilter, restList);
-        homePageMainRecyler.setAdapter(restaurantResultPageAdapter);
+        setRestaurantResult();
         setBanner();
         setCuisine();
-        setRestaurantResult();
+        RestaurantResultPageAdapter restaurantResultPageAdapter = new RestaurantResultPageAdapter(this, banner, cusinefilter, restList);
+        homePageMainRecyler.setAdapter(restaurantResultPageAdapter);
     }
 
     public void setRestaurantResult() {
-        try {
-            restList = new ArrayList<RestaurantListModel>();
-            String filename = "dummy_rest_list";
-            BufferedReader reader = new BufferedReader(
-                    new InputStreamReader(getAssets().open(filename)));
+         populateList("dummy_rest_list", "rest");
+        /*try {
+            BufferedReader reader = new BufferedReader(new InputStreamReader(getAssets().open("dummy_rest_list")));
             String line = reader.readLine();
             StringBuilder sb = new StringBuilder();
             while (line != null) {
@@ -104,31 +94,132 @@ public class HomeActivity extends AppCompatActivity
                 line = reader.readLine();
             }
             String fileAsString = sb.toString();
-            JSONObject restraunt = new JSONObject(fileAsString);
+            JSONObject jsonObject = new JSONObject(fileAsString);
             Gson gson = new Gson();
-            JSONArray list = restraunt.getJSONArray("restaurants");
-            for (int i = 0; i < list.length(); i++) {
-                JSONObject object = list.getJSONObject(i);
+            JSONArray jsonArray = jsonObject.getJSONArray("restaurants");
+            for (int i = 0; i < jsonArray.length(); i++)
+            {
+                JSONObject object = jsonArray.getJSONObject(i);
                 RestaurantListModel model = gson.fromJson(object.toString(), RestaurantListModel.class);
                 restList.add(model);
             }
-                RestaurantResultPageAdapter restaurantResultPageAdapter = new RestaurantResultPageAdapter(this, banner, cusinefilter, restList);
-            homePageMainRecyler.setAdapter(restaurantResultPageAdapter);
-
-        } catch (IOException e) {
-            System.out.println("sree exp "+e.getMessage());
+            homePageMainRecyler.setAdapter(new RestaurantResultPageAdapter(this, banner, cusinefilter, restList));
+        } catch (IOException | JSONException e) {
+            System.out.println("sree error 1 "+e.toString());
             e.printStackTrace();
-        } catch (JSONException e) {
-            System.out.println("sree exp "+e.getMessage());
-            e.printStackTrace();
-        }
+        }*/
     }
 
     public void setCuisine() {
+        populateList("dummy_cus_list", "cus");
+        /*try {
+            BufferedReader reader = new BufferedReader(new InputStreamReader(getAssets().open("dummy_cus_list")));
+            String line = reader.readLine();
+            StringBuilder sb = new StringBuilder();
+            while (line != null) {
+                sb.append(line).append("\n");
+                line = reader.readLine();
+            }
+            String fileAsString = sb.toString();
+            JSONObject jsonObject = new JSONObject(fileAsString);
+            Gson gson = new Gson();
+            JSONArray jsonArray = jsonObject.getJSONArray("restaurants");
+            for (int i = 0; i < jsonArray.length(); i++)
+            {
+                JSONObject object = jsonArray.getJSONObject(i);
+                RestaurantListModel model = gson.fromJson(object.toString(), RestaurantListModel.class);
+                restList.add(model);
+            }
+            homePageMainRecyler.setAdapter(new RestaurantResultPageAdapter(this, banner, cusinefilter, restList));
+        } catch (IOException | JSONException e) {
+            System.out.println("sree error 1 "+e.toString());
+            e.printStackTrace();
+        }*/
     }
 
     public void setBanner() {
+         populateList("dummy_banner_list", "banner");
+/*        try {
+            BufferedReader reader = new BufferedReader(new InputStreamReader(getAssets().open("dummy_rest_list")));
+            String line = reader.readLine();
+            StringBuilder sb = new StringBuilder();
+            while (line != null) {
+                sb.append(line).append("\n");
+                line = reader.readLine();
+            }
+            String fileAsString = sb.toString();
+            JSONObject jsonObject = new JSONObject(fileAsString);
+            Gson gson = new Gson();
+            JSONArray jsonArray = jsonObject.getJSONArray("restaurants");
+            for (int i = 0; i < jsonArray.length(); i++)
+            {
+                JSONObject object = jsonArray.getJSONObject(i);
+                RestaurantListModel model = gson.fromJson(object.toString(), RestaurantListModel.class);
+                restList.add(model);
+            }
+            homePageMainRecyler.setAdapter(new RestaurantResultPageAdapter(this, banner, cusinefilter, restList));
+        } catch (IOException | JSONException e) {
+            System.out.println("sree error 1 "+e.toString());
+            e.printStackTrace();
+        }*/
     }
+
+   private void populateList(String filename, String key) {
+      try
+      {
+         BufferedReader reader = new BufferedReader(new InputStreamReader(getAssets().open(filename)));
+         String line = reader.readLine();
+         StringBuilder sb = new StringBuilder();
+         while (line != null)
+         {
+            sb.append(line);
+            line = reader.readLine();
+         }
+         String fileAsString = sb.toString();
+         JSONObject jsonObject = new JSONObject(fileAsString);
+         Gson gson = new Gson();
+
+         JSONArray jsonArray = null;
+
+         if (key.equals("rest"))
+         {
+             System.out.println("sree in cus rest");
+             jsonArray = jsonObject.getJSONArray("restaurants");
+            for (int i = 0; i < jsonArray.length(); i++)
+            {
+               JSONObject object = jsonArray.getJSONObject(i);
+               RestaurantListModel model = gson.fromJson(object.toString(), RestaurantListModel.class);
+               restList.add(model);
+            }
+         }
+         else if (key.equals("banner"))
+         {
+             System.out.println("sree in cus banner");
+             jsonArray = jsonObject.getJSONArray("banners");
+            for (int i = 0; i < jsonArray.length(); i++)
+            {
+               JSONObject object = jsonArray.getJSONObject(i);
+               RestaurantBannerModel model = gson.fromJson(object.toString(), RestaurantBannerModel.class);
+               banner.add(model);
+            }
+         }
+         else{
+             System.out.println("sree in cus color");
+             jsonArray = jsonObject.getJSONArray("cuisines");
+             for (int i = 0; i < jsonArray.length(); i++)
+             {
+                 JSONObject object = jsonArray.getJSONObject(i);
+                 CuisineFilterModel model = gson.fromJson(object.toString(), CuisineFilterModel.class);
+                 cusinefilter.add(model);
+             }
+         }
+      }
+      catch (IOException | JSONException e )
+      {
+          System.out.println("sree in this error "+ e.getMessage());
+         e.printStackTrace();
+      }
+   }
 
 
     @Override

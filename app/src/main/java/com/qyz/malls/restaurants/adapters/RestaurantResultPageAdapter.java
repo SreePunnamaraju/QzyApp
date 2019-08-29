@@ -15,6 +15,7 @@ import com.qyz.malls.R;
 import com.qyz.malls.restaurants.holder.BannerHolder;
 import com.qyz.malls.restaurants.holder.CusineFilterHolder;
 import com.qyz.malls.restaurants.holder.RestaurantResultHolder;
+import com.qyz.malls.restaurants.holder.SearchHolder;
 import com.qyz.malls.restaurants.models.CuisineFilterModel;
 import com.qyz.malls.restaurants.models.RestaurantBannerModel;
 import com.qyz.malls.restaurants.models.RestaurantListModel;
@@ -51,8 +52,8 @@ public class RestaurantResultPageAdapter extends RecyclerView.Adapter<RecyclerVi
             return holder;
         }
         else if(viewType == SEARCHBAR_VIEW){
-            View view = LayoutInflater.from(homeActivity).inflate(R.layout.banner,parent,false);
-            BannerHolder holder = new BannerHolder(view);
+            View view = LayoutInflater.from(homeActivity).inflate(R.layout.searchbar,parent,false);
+            SearchHolder holder = new SearchHolder(view);
             return holder;
         }
         else if(viewType == CUSINE_FILTER_TYPE){
@@ -73,8 +74,8 @@ public class RestaurantResultPageAdapter extends RecyclerView.Adapter<RecyclerVi
         System.out.println("sree in this 1 1 1 1");
         if(holder instanceof BannerHolder){
             if(bannerList!=null) {
-                BannerHolder bannerHolder = (BannerHolder) holder;
-                Glide.with(homeActivity)
+               BannerHolder bannerHolder = (BannerHolder) holder;
+                Glide.with(homeActivity.getBaseContext())
                         .load(bannerList.get(0).getImageUrl())
                         .asBitmap()
                         .diskCacheStrategy(DiskCacheStrategy.ALL)
@@ -85,6 +86,7 @@ public class RestaurantResultPageAdapter extends RecyclerView.Adapter<RecyclerVi
         }
         else if(holder instanceof CusineFilterHolder){
             if(cusineFilterList!=null) {
+                System.out.println("sree cusine");
                 CusineFilterHolder cusineFilterHolder = (CusineFilterHolder) holder;
                 LinearLayoutManager layoutManager = new LinearLayoutManager(homeActivity, LinearLayoutManager.HORIZONTAL, false);
                 cusineFilterHolder.recyclerView.setLayoutManager(layoutManager);

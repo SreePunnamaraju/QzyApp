@@ -18,25 +18,25 @@ public class CuisineFilterModel implements Serializable, Parcelable {
         this.name = name;
     }
 
-    public int getColour() {
+    public String getColour() {
         return colour;
     }
 
-    public void setColour(int colour) {
+    public void setColour(String colour) {
         this.colour = colour;
     }
 
-    public int getCusId() {
+    public String getCusId() {
         return cusId;
     }
 
-    public void setCusId(int cusId) {
+    public void setCusId(String cusId) {
         this.cusId = cusId;
     }
 
     @SerializedName("cusid")
     @Expose
-    private int cusId;
+    private String cusId;
 
     @SerializedName("name")
     @Expose
@@ -44,19 +44,19 @@ public class CuisineFilterModel implements Serializable, Parcelable {
 
     @SerializedName("colour")
     @Expose
-    private int colour;
+    private String colour;
 
     protected CuisineFilterModel(Parcel in) {
         name = in.readString();
-        colour = in.readInt();
-        cusId = in.readInt();
+        colour = in.readString();
+        cusId = in.readString();
     }
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(name);
-        dest.writeInt(colour);
-        dest.writeInt(cusId);
+        dest.writeString(colour);
+        dest.writeString(cusId);
     }
 
     @Override

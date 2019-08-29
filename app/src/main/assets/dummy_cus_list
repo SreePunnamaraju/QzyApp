@@ -3,32 +3,32 @@
 	    {
 			"cusid": "1",
 			"name": "SOUTH INDIAN",
-			"colour": "palevioletred"
+			"colour": "#DB7093"
 		},
 		{
 			"cusid": "2",
 			"name": "CHINESE",
-			"colour": "burlywood"
+			"colour": "#DEB887"
 		},
 		{
 			"cusid": "3",
 			"name": "ITALIAN",
-			"colour": "violet"
+			"colour": "#EE82EE"
 		},
 		{
 			"cusid": "4",
 			"name": "NORTH INDIAN",
-			"colour": "yellow"
+			"colour": "#FFFF00"
 		},
 		{
 			"cusid": "5",
 			"name": "MEXICAN",
-			"colour": "lightgreen"
+			"colour": "#90EE90"
 		},
 		{
 			"cusid": "6",
 			"name": "DESSERTS",
-			"colour": "lightskyblue"
+			"colour": "#87CEFA"
 		}
 	]
 }

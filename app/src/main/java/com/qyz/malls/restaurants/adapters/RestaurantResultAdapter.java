@@ -41,13 +41,14 @@ public class RestaurantResultAdapter extends RecyclerView.Adapter<RecyclerView.V
             System.out.println("sree in this rest 2");
             RestaurantListModel model = restList.get(position);
             RestaurantResultSecondaryHolder secondaryHolder = (RestaurantResultSecondaryHolder) holder;
-            /*if(!homeActivity.isFinishing()) {
+            System.out.println("sree url "+ model.getImageUrl());
+            if(!homeActivity.isFinishing()) {
                 Glide.with(homeActivity)
                         .load(model.getImageUrl())
                         .asBitmap()
                         .diskCacheStrategy(DiskCacheStrategy.ALL)
                         .into(secondaryHolder.restImage);
-            }*/
+            }
             secondaryHolder.cusineName.setText(model.getCusine());
             secondaryHolder.price.setText(model.getPrice());
             secondaryHolder.restName.setText(model.getName());

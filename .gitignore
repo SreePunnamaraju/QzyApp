@@ -112,3 +112,8 @@ lint/outputs/
 lint/tmp/
 # lint/reports/
 *.hprof
+
+app/app.iml
+local.properties
+QzyApp.iml
+
