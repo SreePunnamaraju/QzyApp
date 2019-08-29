@@ -33,9 +33,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 
@@ -48,10 +46,6 @@ public class HomeActivity extends AppCompatActivity
     ArrayList<RestaurantListModel> restList;
     ArrayList<RestaurantBannerModel> banner;
     ArrayList<CuisineFilterModel> cusinefilter;
-
-    /*
-
-     */
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,43 +82,94 @@ public class HomeActivity extends AppCompatActivity
         setRestaurantResult();
     }
 
-    public void setRestaurantResult() {
-        try {
-            restList = new ArrayList<RestaurantListModel>();
-            String filename= "dummy_rest_list";
-            BufferedReader reader = new BufferedReader(
-                    new InputStreamReader(getAssets().open(filename)));
-            String line = reader.readLine();
-            StringBuilder sb = new StringBuilder();
-            while (line != null) {
-                sb.append(line).append("\n");
-                line = reader.readLine();
-            }
-            String fileAsString = sb.toString();
-            JSONObject restraunt = new JSONObject(fileAsString);
-            Gson gson = new Gson();
-            JSONArray list = restraunt.getJSONArray("restaurants");
-            for(int i=0;i<list.length();i++){
-                JSONObject object = list.getJSONObject(i);
-                RestaurantListModel model = gson.fromJson(object.toString(),RestaurantListModel.class);
-                restList.add(model);
-            }
-            RestaurantResultPageAdapter restaurantResultPageAdapter = new RestaurantResultPageAdapter(this, banner, cusinefilter, restList);
-            homePageMainRecyler.setAdapter(restaurantResultPageAdapter);
-        } catch (IOException e) {
-            System.out.println("sree exp "+e.getMessage());
-            e.printStackTrace();
-        } catch (JSONException e) {
-            System.out.println("sree exp "+e.getMessage());
-            e.printStackTrace();
-        }
+    public void setRestaurantResult()
+    {
+        populateList("dummy_rest_list", "rest");
     }
 
-    public void setCuisine() {
+    public void setCuisine()
+    {
+        populateList("dummy_cus_list", "cus");
     }
 
-    public void setBanner() {
+    public void setBanner()
+    {
+        populateList("dummy_banner_list", "banner");
     }
+
+   private void populateList(String filename, String key)
+   {
+      try
+      {
+         BufferedReader reader = new BufferedReader(new InputStreamReader(getAssets().open(filename)));
+         String line = reader.readLine();
+         StringBuilder sb = new StringBuilder();
+         while (line != null)
+         {
+            sb.append(line).append("\n");
+            line = reader.readLine();
+         }
+         String fileAsString = sb.toString();
+         JSONObject jsonObject = new JSONObject(fileAsString);
+         Gson gson = new Gson();
+
+         JSONArray jsonArray = null;
+
+          restList = new ArrayList<>();
+          cusinefilter = new ArrayList<>();
+          banner = new ArrayList<>();
+         if (key == "rest")
+         {
+             jsonArray = jsonObject.getJSONArray("restaurants");
+            for (int i = 0; i < jsonArray.length(); i++)
+            {
+
+               JSONObject object = jsonArray.getJSONObject(i);
+               RestaurantListModel model = gson.fromJson(object.toString(), RestaurantListModel.class);
+               restList.add(model);
+            }
+         }
+         else if (key == "cus")
+         {
+
+             jsonArray = jsonObject.getJSONArray("cuisines");
+            for (int i = 0; i < jsonArray.length(); i++)
+            {
+               JSONObject object = jsonArray.getJSONObject(i);
+               CuisineFilterModel model = gson.fromJson(object.toString(), CuisineFilterModel.class);
+               cusinefilter.add(model);
+            }
+         }
+         else if (key == "banner")
+         {
+             jsonArray = jsonObject.getJSONArray("banners");
+            for (int i = 0; i < jsonArray.length(); i++)
+            {
+               JSONObject object = jsonArray.getJSONObject(i);
+               RestaurantBannerModel model = gson.fromJson(object.toString(), RestaurantBannerModel.class);
+               banner.add(model);
+            }
+         }
+
+         if (homePageMainRecyler.getAdapter() != null)
+         {
+            homePageMainRecyler.getAdapter().notifyDataSetChanged();
+         }
+         else
+         {
+            homePageMainRecyler
+               .setAdapter(new RestaurantResultPageAdapter(this, banner, cusinefilter, restList));
+         }
+      }
+      catch (IOException e)
+      {
+         e.printStackTrace();
+      }
+      catch (JSONException e)
+      {
+         e.printStackTrace();
+      }
+   }
 
 
     @Override
