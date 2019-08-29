@@ -13,6 +13,7 @@ import androidx.appcompat.app.ActionBarDrawerToggle;
 import android.view.MenuItem;
 
 import com.google.android.material.navigation.NavigationView;
+import com.google.gson.Gson;
 import com.qyz.malls.restaurants.adapters.RestaurantResultPageAdapter;
 import com.qyz.malls.restaurants.models.CuisineFilterModel;
 import com.qyz.malls.restaurants.models.RestaurantBannerModel;
@@ -27,6 +28,15 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.Menu;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 
 import static androidx.recyclerview.widget.RecyclerView.*;
@@ -37,21 +47,13 @@ public class HomeActivity extends AppCompatActivity
     RecyclerView homePageMainRecyler;
     ArrayList<RestaurantListModel> restList;
     ArrayList<RestaurantBannerModel> banner;
-   ArrayList<CuisineFilterModel> cusinefilter;
+    ArrayList<CuisineFilterModel> cusinefilter;
 
-   /*
-   InputStream is = new FileInputStream(<<filename>>);
-   BufferedReader buf = new BufferedReader(new InputStreamReader(is));
-   String line = buf.readLine();
-   StringBuilder sb = new StringBuilder();while(line!=null)
-   {
-      sb.append(line).append("\n");
-      line = buf.readLine();
-   }
-   String fileAsString = sb.toString();
-   */
+    /*
 
-   @Override
+     */
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
@@ -76,11 +78,53 @@ public class HomeActivity extends AppCompatActivity
         setHomePage();
     }
 
-    public void setHomePage(){
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this,VERTICAL,false);
+    public void setHomePage() {
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this, VERTICAL, false);
         homePageMainRecyler.setLayoutManager(layoutManager);
-        RestaurantResultPageAdapter restaurantResultPageAdapter = new RestaurantResultPageAdapter(this,banner,cusinefilter,restList);
+        RestaurantResultPageAdapter restaurantResultPageAdapter = new RestaurantResultPageAdapter(this, banner, cusinefilter, restList);
         homePageMainRecyler.setAdapter(restaurantResultPageAdapter);
+        setBanner();
+        setCuisine();
+        setRestaurantResult();
+    }
+
+    public void setRestaurantResult() {
+        try {
+            String filename= "dummy_rest_list";
+            BufferedReader reader = new BufferedReader(
+                    new InputStreamReader(getAssets().open(filename)));
+            String line = reader.readLine();
+            StringBuilder sb = new StringBuilder();
+            while (line != null) {
+                sb.append(line).append("\n");
+                line = reader.readLine();
+            }
+            String fileAsString = sb.toString();
+            JSONObject restraunt = new JSONObject(fileAsString);
+            Gson gson = new Gson();
+            JSONArray list = restraunt.getJSONArray("restaurants");
+            for(int i=0;i<list.length();i++){
+                JSONObject object = list.getJSONObject(i);
+                RestaurantListModel model = gson.fromJson(object.toString(),RestaurantListModel.class);
+                restList.add(model);
+            }
+            if(homePageMainRecyler.getAdapter()!=null){
+                homePageMainRecyler.getAdapter().notifyDataSetChanged();
+            }
+            else{
+                homePageMainRecyler.setAdapter(new RestaurantResultPageAdapter(this, banner, cusinefilter, restList));
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void setCuisine() {
+    }
+
+    public void setBanner() {
     }
 
 
