@@ -90,6 +90,7 @@ public class HomeActivity extends AppCompatActivity
 
     public void setRestaurantResult() {
         try {
+            restList = new ArrayList<RestaurantListModel>();
             String filename= "dummy_rest_list";
             BufferedReader reader = new BufferedReader(
                     new InputStreamReader(getAssets().open(filename)));
@@ -108,15 +109,13 @@ public class HomeActivity extends AppCompatActivity
                 RestaurantListModel model = gson.fromJson(object.toString(),RestaurantListModel.class);
                 restList.add(model);
             }
-            if(homePageMainRecyler.getAdapter()!=null){
-                homePageMainRecyler.getAdapter().notifyDataSetChanged();
-            }
-            else{
-                homePageMainRecyler.setAdapter(new RestaurantResultPageAdapter(this, banner, cusinefilter, restList));
-            }
+            RestaurantResultPageAdapter restaurantResultPageAdapter = new RestaurantResultPageAdapter(this, banner, cusinefilter, restList);
+            homePageMainRecyler.setAdapter(restaurantResultPageAdapter);
         } catch (IOException e) {
+            System.out.println("sree exp "+e.getMessage());
             e.printStackTrace();
         } catch (JSONException e) {
+            System.out.println("sree exp "+e.getMessage());
             e.printStackTrace();
         }
     }

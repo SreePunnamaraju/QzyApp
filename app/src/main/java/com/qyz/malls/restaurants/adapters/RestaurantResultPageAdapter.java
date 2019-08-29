@@ -33,6 +33,7 @@ public class RestaurantResultPageAdapter extends RecyclerView.Adapter<RecyclerVi
     private ArrayList<RestaurantListModel> restList;
 
     public RestaurantResultPageAdapter(HomeActivity homeActivity, ArrayList<RestaurantBannerModel> banner, ArrayList<CuisineFilterModel> cusinefilter, ArrayList<RestaurantListModel> restList) {
+        System.out.println("sree in this");
         this.homeActivity = homeActivity;
         this.bannerList = banner;
         this.cusineFilterList= cusinefilter;
@@ -42,13 +43,17 @@ public class RestaurantResultPageAdapter extends RecyclerView.Adapter<RecyclerVi
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+
+        System.out.println("sree in this 1 1 "+viewType);
         if(viewType == BANNER_TYPE){
             View view = LayoutInflater.from(homeActivity).inflate(R.layout.banner,parent,false);
             BannerHolder holder = new BannerHolder(view);
             return holder;
         }
         else if(viewType == SEARCHBAR_VIEW){
-
+            View view = LayoutInflater.from(homeActivity).inflate(R.layout.banner,parent,false);
+            BannerHolder holder = new BannerHolder(view);
+            return holder;
         }
         else if(viewType == CUSINE_FILTER_TYPE){
             View view = LayoutInflater.from(homeActivity).inflate(R.layout.cusine_recylerview,parent,false);
@@ -56,38 +61,47 @@ public class RestaurantResultPageAdapter extends RecyclerView.Adapter<RecyclerVi
             return holder;
         }
         else{
+            System.out.println("sree in this 1");
             View view = LayoutInflater.from(homeActivity).inflate(R.layout.restaurant_result,parent,false);
             RestaurantResultHolder holder = new RestaurantResultHolder(view);
             return holder;
         }
-       return null;
     }
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
+        System.out.println("sree in this 1 1 1 1");
         if(holder instanceof BannerHolder){
-            BannerHolder bannerHolder = (BannerHolder) holder;
-            Glide.with(homeActivity)
-                    .load(bannerList.get(0).getImageUrl())
-                    .asBitmap()
-                    .diskCacheStrategy(DiskCacheStrategy.ALL)
-                    .into(bannerHolder.imageView);
-            //todo click
+            if(bannerList!=null) {
+                BannerHolder bannerHolder = (BannerHolder) holder;
+                Glide.with(homeActivity)
+                        .load(bannerList.get(0).getImageUrl())
+                        .asBitmap()
+                        .diskCacheStrategy(DiskCacheStrategy.ALL)
+                        .into(bannerHolder.imageView);
+                //todo click
+            }
             //make circular
         }
-        if(holder instanceof CusineFilterHolder){
-            CusineFilterHolder cusineFilterHolder = (CusineFilterHolder) holder;
-            LinearLayoutManager layoutManager = new LinearLayoutManager(homeActivity,LinearLayoutManager.HORIZONTAL,false);
-            cusineFilterHolder.recyclerView.setLayoutManager(layoutManager);
-            CusineClickAdapter cusineClickAdapter = new CusineClickAdapter(homeActivity,cusineFilterList);
-            cusineFilterHolder.recyclerView.setAdapter(cusineClickAdapter);
+        else if(holder instanceof CusineFilterHolder){
+            if(cusineFilterList!=null) {
+                CusineFilterHolder cusineFilterHolder = (CusineFilterHolder) holder;
+                LinearLayoutManager layoutManager = new LinearLayoutManager(homeActivity, LinearLayoutManager.HORIZONTAL, false);
+                cusineFilterHolder.recyclerView.setLayoutManager(layoutManager);
+                CusineClickAdapter cusineClickAdapter = new CusineClickAdapter(homeActivity, cusineFilterList);
+                cusineFilterHolder.recyclerView.setAdapter(cusineClickAdapter);
+            }
         }
-        if(holder instanceof RestaurantResultHolder){
-            RestaurantResultHolder restaurantResultHolder = (RestaurantResultHolder) holder;
-            LinearLayoutManager layoutManager = new LinearLayoutManager(homeActivity,RecyclerView.VERTICAL,false);
-            restaurantResultHolder.recyclerView.setLayoutManager(layoutManager);
-            RestaurantResultAdapter restaurantResultAdapter = new RestaurantResultAdapter(homeActivity,restList);
-            restaurantResultHolder.recyclerView.setAdapter(restaurantResultAdapter);
+        else if(holder instanceof RestaurantResultHolder){
+            System.out.println("sree in this 2");
+            if(restList!=null) {
+                System.out.println("sree in this 3");
+                RestaurantResultHolder restaurantResultHolder = (RestaurantResultHolder) holder;
+                LinearLayoutManager layoutManager = new LinearLayoutManager(homeActivity, RecyclerView.VERTICAL, false);
+                restaurantResultHolder.recyclerView.setLayoutManager(layoutManager);
+                RestaurantResultAdapter restaurantResultAdapter = new RestaurantResultAdapter(homeActivity, restList);
+                restaurantResultHolder.recyclerView.setAdapter(restaurantResultAdapter);
+            }
         }
 
     }

@@ -22,7 +22,7 @@ public class RestaurantResultAdapter extends RecyclerView.Adapter<RecyclerView.V
     ArrayList<RestaurantListModel> restList;
 
     public RestaurantResultAdapter(HomeActivity homeActivity, ArrayList<RestaurantListModel> restList) {
-
+        System.out.println("sree in this rest "+ restList.size());
         this.homeActivity = homeActivity;
         this.restList = restList;
     }
@@ -30,6 +30,7 @@ public class RestaurantResultAdapter extends RecyclerView.Adapter<RecyclerView.V
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        System.out.println("sree in this rest 1");
         View view  = LayoutInflater.from(homeActivity).inflate(R.layout.rest_list_lay,parent,false);
         return new RestaurantResultSecondaryHolder(view);
     }
@@ -37,13 +38,16 @@ public class RestaurantResultAdapter extends RecyclerView.Adapter<RecyclerView.V
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         if(holder instanceof RestaurantResultSecondaryHolder){
+            System.out.println("sree in this rest 2");
             RestaurantListModel model = restList.get(position);
             RestaurantResultSecondaryHolder secondaryHolder = (RestaurantResultSecondaryHolder) holder;
-            Glide.with(homeActivity)
-                    .load(model.getImageUrl())
-                    .asBitmap()
-                    .diskCacheStrategy(DiskCacheStrategy.ALL)
-                    .into(secondaryHolder.restImage);
+            /*if(!homeActivity.isFinishing()) {
+                Glide.with(homeActivity)
+                        .load(model.getImageUrl())
+                        .asBitmap()
+                        .diskCacheStrategy(DiskCacheStrategy.ALL)
+                        .into(secondaryHolder.restImage);
+            }*/
             secondaryHolder.cusineName.setText(model.getCusine());
             secondaryHolder.price.setText(model.getPrice());
             secondaryHolder.restName.setText(model.getName());
