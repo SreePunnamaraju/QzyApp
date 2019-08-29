@@ -38,6 +38,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import static androidx.recyclerview.widget.RecyclerView.*;
 
@@ -71,11 +72,13 @@ public class HomeActivity extends AppCompatActivity
         homePageMainRecyler = findViewById(R.id.homerecyler);
         NavigationView navigationView = findViewById(R.id.nav_view);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+                this, drawer, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
         setHomePage();
+        HashMap<String,String> map = new HashMap<>();
+        map.put("x","y");
     }
 
     public void setHomePage() {
@@ -91,7 +94,7 @@ public class HomeActivity extends AppCompatActivity
     public void setRestaurantResult() {
         try {
             restList = new ArrayList<RestaurantListModel>();
-            String filename= "dummy_rest_list";
+            String filename = "dummy_rest_list";
             BufferedReader reader = new BufferedReader(
                     new InputStreamReader(getAssets().open(filename)));
             String line = reader.readLine();
@@ -104,13 +107,14 @@ public class HomeActivity extends AppCompatActivity
             JSONObject restraunt = new JSONObject(fileAsString);
             Gson gson = new Gson();
             JSONArray list = restraunt.getJSONArray("restaurants");
-            for(int i=0;i<list.length();i++){
+            for (int i = 0; i < list.length(); i++) {
                 JSONObject object = list.getJSONObject(i);
-                RestaurantListModel model = gson.fromJson(object.toString(),RestaurantListModel.class);
+                RestaurantListModel model = gson.fromJson(object.toString(), RestaurantListModel.class);
                 restList.add(model);
             }
-            RestaurantResultPageAdapter restaurantResultPageAdapter = new RestaurantResultPageAdapter(this, banner, cusinefilter, restList);
+                RestaurantResultPageAdapter restaurantResultPageAdapter = new RestaurantResultPageAdapter(this, banner, cusinefilter, restList);
             homePageMainRecyler.setAdapter(restaurantResultPageAdapter);
+
         } catch (IOException e) {
             System.out.println("sree exp "+e.getMessage());
             e.printStackTrace();
