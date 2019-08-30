@@ -3,18 +3,18 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/linearview"
     android:orientation="vertical"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
+    android:layout_width="@dimen/dp_190"
+    android:layout_height="@dimen/dp_48"
     android:layout_margin="@dimen/dp_10"
     android:background="@drawable/round_bg_cuisine">
 
         <TextView
-            android:layout_width="150dp"
-            android:layout_height="48dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:id="@+id/cuisineTextView"
             android:layout_gravity="center"
-            android:textColor="@color/white"
             android:textSize="15sp"
+            android:textColor="#ffffff"
             android:letterSpacing="0.08"
             android:lineSpacingExtra="10sp"
             android:gravity="center"

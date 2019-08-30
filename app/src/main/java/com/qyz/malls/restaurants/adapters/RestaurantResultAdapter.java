@@ -55,7 +55,7 @@ public class RestaurantResultAdapter extends RecyclerView.Adapter<RecyclerView.V
             secondaryHolder.rating.setText(model.getRating());
             secondaryHolder.time.setText(model.getTime());
             if(model.getFav()==0){
-                secondaryHolder.fav.setImageDrawable(homeActivity.getDrawable(R.drawable.ic_star));
+                secondaryHolder.fav.setImageDrawable(homeActivity.getDrawable(R.drawable.ic_fav));
             }
             else{
                 secondaryHolder.fav.setImageDrawable(homeActivity.getDrawable(R.drawable.ic_star_red));
