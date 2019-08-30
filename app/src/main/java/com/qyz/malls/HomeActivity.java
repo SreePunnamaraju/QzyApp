@@ -111,12 +111,10 @@ public class HomeActivity extends AppCompatActivity
          JSONObject jsonObject = new JSONObject(fileAsString);
          Gson gson = new Gson();
 
-         JSONArray jsonArray = null;
+         JSONArray jsonArray = jsonObject.getJSONArray(key);;
 
-         if (key.equals("rest"))
+         if (key.equals("restaurants"))
          {
-             System.out.println("sree in cus rest");
-             jsonArray = jsonObject.getJSONArray("restaurants");
             for (int i = 0; i < jsonArray.length(); i++)
             {
                JSONObject object = jsonArray.getJSONObject(i);
@@ -124,7 +122,7 @@ public class HomeActivity extends AppCompatActivity
                restList.add(model);
             }
          }
-         else if (key.equals("banner"))
+         else if (key.equals("banners"))
          {
              System.out.println("sree in cus banner");
              jsonArray = jsonObject.getJSONArray("banners");
@@ -135,9 +133,8 @@ public class HomeActivity extends AppCompatActivity
                banner.add(model);
             }
          }
-         else{
-             System.out.println("sree in cus color");
-             jsonArray = jsonObject.getJSONArray("cuisines");
+         else if (key.equals("cuisines"))
+         {
              for (int i = 0; i < jsonArray.length(); i++)
              {
                  JSONObject object = jsonArray.getJSONObject(i);
