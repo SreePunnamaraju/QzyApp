@@ -36,7 +36,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import static androidx.recyclerview.widget.RecyclerView.*;
 
@@ -84,84 +83,15 @@ public class HomeActivity extends AppCompatActivity
     }
 
     public void setRestaurantResult() {
-         populateList("dummy_rest_list", "rest");
-        /*try {
-            BufferedReader reader = new BufferedReader(new InputStreamReader(getAssets().open("dummy_rest_list")));
-            String line = reader.readLine();
-            StringBuilder sb = new StringBuilder();
-            while (line != null) {
-                sb.append(line).append("\n");
-                line = reader.readLine();
-            }
-            String fileAsString = sb.toString();
-            JSONObject jsonObject = new JSONObject(fileAsString);
-            Gson gson = new Gson();
-            JSONArray jsonArray = jsonObject.getJSONArray("restaurants");
-            for (int i = 0; i < jsonArray.length(); i++)
-            {
-                JSONObject object = jsonArray.getJSONObject(i);
-                RestaurantListModel model = gson.fromJson(object.toString(), RestaurantListModel.class);
-                restList.add(model);
-            }
-            homePageMainRecyler.setAdapter(new RestaurantResultPageAdapter(this, banner, cusinefilter, restList));
-        } catch (IOException | JSONException e) {
-            System.out.println("sree error 1 "+e.toString());
-            e.printStackTrace();
-        }*/
+         populateList("dummy_rest_list", "restaurants");
     }
 
     public void setCuisine() {
-        populateList("dummy_cus_list", "cus");
-        /*try {
-            BufferedReader reader = new BufferedReader(new InputStreamReader(getAssets().open("dummy_cus_list")));
-            String line = reader.readLine();
-            StringBuilder sb = new StringBuilder();
-            while (line != null) {
-                sb.append(line).append("\n");
-                line = reader.readLine();
-            }
-            String fileAsString = sb.toString();
-            JSONObject jsonObject = new JSONObject(fileAsString);
-            Gson gson = new Gson();
-            JSONArray jsonArray = jsonObject.getJSONArray("restaurants");
-            for (int i = 0; i < jsonArray.length(); i++)
-            {
-                JSONObject object = jsonArray.getJSONObject(i);
-                RestaurantListModel model = gson.fromJson(object.toString(), RestaurantListModel.class);
-                restList.add(model);
-            }
-            homePageMainRecyler.setAdapter(new RestaurantResultPageAdapter(this, banner, cusinefilter, restList));
-        } catch (IOException | JSONException e) {
-            System.out.println("sree error 1 "+e.toString());
-            e.printStackTrace();
-        }*/
+        populateList("dummy_cus_list", "cuisines");
     }
 
     public void setBanner() {
-         populateList("dummy_banner_list", "banner");
-/*        try {
-            BufferedReader reader = new BufferedReader(new InputStreamReader(getAssets().open("dummy_rest_list")));
-            String line = reader.readLine();
-            StringBuilder sb = new StringBuilder();
-            while (line != null) {
-                sb.append(line).append("\n");
-                line = reader.readLine();
-            }
-            String fileAsString = sb.toString();
-            JSONObject jsonObject = new JSONObject(fileAsString);
-            Gson gson = new Gson();
-            JSONArray jsonArray = jsonObject.getJSONArray("restaurants");
-            for (int i = 0; i < jsonArray.length(); i++)
-            {
-                JSONObject object = jsonArray.getJSONObject(i);
-                RestaurantListModel model = gson.fromJson(object.toString(), RestaurantListModel.class);
-                restList.add(model);
-            }
-            homePageMainRecyler.setAdapter(new RestaurantResultPageAdapter(this, banner, cusinefilter, restList));
-        } catch (IOException | JSONException e) {
-            System.out.println("sree error 1 "+e.toString());
-            e.printStackTrace();
-        }*/
+         populateList("dummy_banner_list", "banners");
     }
 
    private void populateList(String filename, String key) {
@@ -179,12 +109,10 @@ public class HomeActivity extends AppCompatActivity
          JSONObject jsonObject = new JSONObject(fileAsString);
          Gson gson = new Gson();
 
-         JSONArray jsonArray = null;
+         JSONArray jsonArray = jsonObject.getJSONArray(key);;
 
-         if (key.equals("rest"))
+         if (key.equals("restaurants"))
          {
-             System.out.println("sree in cus rest");
-             jsonArray = jsonObject.getJSONArray("restaurants");
             for (int i = 0; i < jsonArray.length(); i++)
             {
                JSONObject object = jsonArray.getJSONObject(i);
@@ -192,10 +120,8 @@ public class HomeActivity extends AppCompatActivity
                restList.add(model);
             }
          }
-         else if (key.equals("banner"))
+         else if (key.equals("banners"))
          {
-             System.out.println("sree in cus banner");
-             jsonArray = jsonObject.getJSONArray("banners");
             for (int i = 0; i < jsonArray.length(); i++)
             {
                JSONObject object = jsonArray.getJSONObject(i);
@@ -203,9 +129,8 @@ public class HomeActivity extends AppCompatActivity
                banner.add(model);
             }
          }
-         else{
-             System.out.println("sree in cus color");
-             jsonArray = jsonObject.getJSONArray("cuisines");
+         else if (key.equals("cuisines"))
+         {
              for (int i = 0; i < jsonArray.length(); i++)
              {
                  JSONObject object = jsonArray.getJSONObject(i);
@@ -216,7 +141,6 @@ public class HomeActivity extends AppCompatActivity
       }
       catch (IOException | JSONException e )
       {
-          System.out.println("sree in this error "+ e.getMessage());
          e.printStackTrace();
       }
    }
