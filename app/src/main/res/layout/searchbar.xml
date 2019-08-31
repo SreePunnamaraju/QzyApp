@@ -3,8 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_marginTop="@dimen/standard_20"
-    android:layout_marginStart="@dimen/dp_30">
+    android:layout_marginTop="@dimen/dp_20"
+    android:layout_marginStart="@dimen/dp_20">
 
     <RelativeLayout
         android:layout_height="wrap_content"
@@ -13,18 +13,14 @@
         android:background="@drawable/seach_box_layout">
 
     <TextView
-        android:layout_height="50dp"
+        android:layout_height="55dp"
         android:layout_width="match_parent"
         android:ellipsize="end"
-        android:focusableInTouchMode="true"
-        android:focusedByDefault="true"
         android:fontFamily="sans-serif"
-        android:hint="Search"
-        android:imeOptions="actionGo"
-        android:inputType="text"
+        android:text="Search"
         android:lines="1"
         android:maxLines="1"
-        android:paddingStart="@dimen/dp_15"
+        android:paddingStart="@dimen/dp_30"
         android:textSize="17.5sp"
         android:textStyle="normal"
         android:textColor="#7e7e7e"
@@ -49,10 +45,10 @@
         android:layout_height="@dimen/dp_48"
         android:layout_width="@dimen/dp_48"
         android:background="@drawable/round_filter"
-        android:layout_marginEnd="@dimen/dp_25"
+        android:layout_marginEnd="@dimen/dp_15"
         android:layout_alignParentEnd="true"
         android:layout_centerVertical="true"
-        android:layout_marginStart="@dimen/dp_25">
+        android:layout_marginStart="@dimen/dp_15">
         <ImageView
             android:layout_centerInParent="true"
             android:layout_width="wrap_content"

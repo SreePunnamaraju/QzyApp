@@ -2,6 +2,7 @@ package com.qyz.malls.restaurants.holder;
 
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -13,6 +14,7 @@ public class RestaurantResultSecondaryHolder extends RecyclerView.ViewHolder {
 
     public ImageView restImage,fav;
     public TextView rating,restName,cusineName,time,price;
+    public RelativeLayout restResultLay;
 
     public RestaurantResultSecondaryHolder(@NonNull View itemView) {
         super(itemView);
@@ -23,5 +25,6 @@ public class RestaurantResultSecondaryHolder extends RecyclerView.ViewHolder {
         cusineName = itemView.findViewById(R.id.cusineName);
         time = itemView.findViewById(R.id.time);
         price = itemView.findViewById(R.id.price);
+        restResultLay = itemView.findViewById(R.id.restResultLay);
     }
 }

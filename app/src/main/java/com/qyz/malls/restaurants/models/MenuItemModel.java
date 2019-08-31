@@ -34,6 +34,42 @@ public class MenuItemModel implements Serializable, Parcelable {
     @Expose
     private String cuisines;
 
+    protected MenuItemModel(Parcel in) {
+        itemid = in.readString();
+        name = in.readString();
+        price = in.readString();
+        restid = in.readString();
+        mallid = in.readString();
+        cuisines = in.readString();
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(itemid);
+        dest.writeString(name);
+        dest.writeString(price);
+        dest.writeString(restid);
+        dest.writeString(mallid);
+        dest.writeString(cuisines);
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    public static final Creator<MenuItemModel> CREATOR = new Creator<MenuItemModel>() {
+        @Override
+        public MenuItemModel createFromParcel(Parcel in) {
+            return new MenuItemModel(in);
+        }
+
+        @Override
+        public MenuItemModel[] newArray(int size) {
+            return new MenuItemModel[size];
+        }
+    };
+
     public String getItemid() {
         return itemid;
     }
@@ -81,40 +117,5 @@ public class MenuItemModel implements Serializable, Parcelable {
     public void setCuisines(String cuisines) {
         this.cuisines = cuisines;
     }
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel parcel, int i) {
-        parcel.writeString(itemid);
-        parcel.writeString(name);
-        parcel.writeString(price);
-        parcel.writeString(restid);
-        parcel.writeString(mallid);
-        parcel.writeString(cuisines);
-    }
-
-    protected MenuItemModel(Parcel in) {
-        itemid = in.readString();
-        name = in.readString();
-        price = in.readString();
-        restid = in.readString();
-        mallid = in.readString();
-        cuisines = in.readString();
-    }
-
-    public static final Creator<MenuItemModel> CREATOR = new Creator<MenuItemModel>() {
-        @Override
-        public MenuItemModel createFromParcel(Parcel in) {
-            return new MenuItemModel(in);
-        }
-
-        @Override
-        public MenuItemModel[] newArray(int size) {
-            return new MenuItemModel[size];
-        }
-    };
 }
+

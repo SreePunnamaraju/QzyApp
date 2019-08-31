@@ -1,13 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="10dp"
-    android:layout_marginBottom="10dp"
-    android:background="@color/grey">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_marginTop="@dimen/dp_20"
+    android:layout_marginStart="@dimen/dp_20">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/mainView">
+        <RelativeLayout
+            android:id="@+id/searchbox"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_toStartOf="@+id/filterIcon"
+            android:background="@drawable/seach_box_layout">
+            <TextView
+                android:layout_height="55dp"
+                android:layout_width="match_parent"
+                android:ellipsize="end"
+                android:fontFamily="sans-serif"
+                android:text="Search"
+                android:lines="1"
+                android:maxLines="1"
+                android:paddingStart="@dimen/dp_30"
+                android:textSize="17.5sp"
+                android:textStyle="normal"
+                android:textColor="#7e7e7e"
+                android:letterSpacing="0.01"
+                android:lineSpacingExtra="7.5sp"
+                android:id="@+id/search_bar"
+                android:layout_centerVertical="true"
+                android:gravity="center_vertical"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                app:srcCompat="@drawable/ic_magnifying_glass"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="@dimen/dp_15"/>
+
+
+        </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/filterIcon"
+            android:layout_height="@dimen/dp_48"
+            android:layout_width="@dimen/dp_48"
+            android:background="@drawable/round_filter"
+            android:layout_marginEnd="@dimen/dp_15"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="@dimen/dp_15">
+            <ImageView
+                android:layout_centerInParent="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/ic_filter_icon"
+
+                />
+        </RelativeLayout>
+    </RelativeLayout>
+
+
+
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/cusineRecyler"
         android:layout_height="wrap_content"
-        android:layout_width="match_parent" />
+        android:layout_width="match_parent"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="10dp"
+        android:background="@color/grey"
+        android:layout_below="@+id/mainView"/>
 
-</LinearLayout>
+</RelativeLayout>

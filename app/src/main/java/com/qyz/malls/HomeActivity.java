@@ -27,6 +27,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.Menu;
+import android.widget.ImageView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -47,13 +48,15 @@ public class HomeActivity extends AppCompatActivity
     ArrayList<RestaurantListModel> restList = new ArrayList<>();
     ArrayList<RestaurantBannerModel> banner = new ArrayList<>();
     ArrayList<CuisineFilterModel> cusinefilter = new ArrayList<>();
+    ImageView menuicon;
+    public static final String MODEL = "MODEL";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+//        setSupportActionBar(toolbar);
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,15 +65,22 @@ public class HomeActivity extends AppCompatActivity
                         .setAction("Action", null).show();
             }
         });
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        final DrawerLayout drawer = findViewById(R.id.drawer_layout);
         homePageMainRecyler = findViewById(R.id.homerecyler);
-        NavigationView navigationView = findViewById(R.id.nav_view);
+        menuicon = findViewById(R.id.menuicon);
+        final NavigationView navigationView = findViewById(R.id.nav_view);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
         setHomePage();
+        menuicon.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                drawer.openDrawer(navigationView);
+            }
+        });
     }
 
     public void setHomePage() {
@@ -107,14 +117,15 @@ public class HomeActivity extends AppCompatActivity
             sb.append(line);
             line = reader.readLine();
          }
+
          String fileAsString = sb.toString();
          JSONObject jsonObject = new JSONObject(fileAsString);
          Gson gson = new Gson();
+         JSONArray jsonArray;
 
-         JSONArray jsonArray = jsonObject.getJSONArray(key);;
-
-         if (key.equals("restaurants"))
+         if (key.equals("rest"))
          {
+             jsonArray = jsonObject.getJSONArray("restaurants");
             for (int i = 0; i < jsonArray.length(); i++)
             {
                JSONObject object = jsonArray.getJSONObject(i);
@@ -122,7 +133,7 @@ public class HomeActivity extends AppCompatActivity
                restList.add(model);
             }
          }
-         else if (key.equals("banners"))
+         else if (key.equals("banner"))
          {
              System.out.println("sree in cus banner");
              jsonArray = jsonObject.getJSONArray("banners");
@@ -133,8 +144,9 @@ public class HomeActivity extends AppCompatActivity
                banner.add(model);
             }
          }
-         else if (key.equals("cuisines"))
+         else if (key.equals("cus"))
          {
+             jsonArray = jsonObject.getJSONArray("cuisines");
              for (int i = 0; i < jsonArray.length(); i++)
              {
                  JSONObject object = jsonArray.getJSONObject(i);

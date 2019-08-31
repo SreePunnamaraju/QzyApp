@@ -1,8 +1,10 @@
 package com.qyz.malls.restaurants.adapters;
 
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -13,16 +15,20 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.qyz.malls.HomeActivity;
 import com.qyz.malls.R;
 import com.qyz.malls.restaurants.holder.BannerHolder;
+import com.qyz.malls.restaurants.holder.BannerViewPagerHolder;
 import com.qyz.malls.restaurants.holder.CusineFilterHolder;
 import com.qyz.malls.restaurants.holder.RestaurantResultHolder;
 import com.qyz.malls.restaurants.holder.SearchHolder;
+import com.qyz.malls.restaurants.interfaces.FilterListener;
 import com.qyz.malls.restaurants.models.CuisineFilterModel;
 import com.qyz.malls.restaurants.models.RestaurantBannerModel;
 import com.qyz.malls.restaurants.models.RestaurantListModel;
 
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
 
-public class RestaurantResultPageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
+public class RestaurantResultPageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private static final int BANNER_TYPE = 0;
     private static final int SEARCHBAR_VIEW = 1;
@@ -32,6 +38,10 @@ public class RestaurantResultPageAdapter extends RecyclerView.Adapter<RecyclerVi
     private ArrayList<RestaurantBannerModel> bannerList;
     private ArrayList<CuisineFilterModel> cusineFilterList;
     private ArrayList<RestaurantListModel> restList;
+    int currentPage = 0;
+    Timer timer;
+    final long DELAY_MS = 500;
+    final long PERIOD_MS = 3000;
 
     public RestaurantResultPageAdapter(HomeActivity homeActivity, ArrayList<RestaurantBannerModel> banner, ArrayList<CuisineFilterModel> cusinefilter, ArrayList<RestaurantListModel> restList) {
         System.out.println("sree in this");
@@ -47,8 +57,8 @@ public class RestaurantResultPageAdapter extends RecyclerView.Adapter<RecyclerVi
 
         System.out.println("sree in this 1 1 "+viewType);
         if(viewType == BANNER_TYPE){
-            View view = LayoutInflater.from(homeActivity).inflate(R.layout.banner,parent,false);
-            BannerHolder holder = new BannerHolder(view);
+            View view = LayoutInflater.from(homeActivity).inflate(R.layout.banner_view_pager,parent,false);
+            BannerViewPagerHolder holder = new BannerViewPagerHolder(view);
             return holder;
         }
         else if(viewType == SEARCHBAR_VIEW){
@@ -84,13 +94,36 @@ public class RestaurantResultPageAdapter extends RecyclerView.Adapter<RecyclerVi
             }
             //make circular
         }
+        else if(holder instanceof BannerViewPagerHolder){
+            final BannerViewPagerHolder viewPagerHolder = (BannerViewPagerHolder) holder;
+            BannerAdapter bannerAdapter = new BannerAdapter(homeActivity,bannerList,viewPagerHolder.viewPager);
+            viewPagerHolder.viewPager.setAdapter(bannerAdapter);
+            final int NUM_PAGES = bannerList.size();
+            final Handler handler = new Handler();
+            final Runnable Update = new Runnable() {
+                public void run() {
+                    if (currentPage == NUM_PAGES-1) {
+                        currentPage = 0;
+                    }
+                    viewPagerHolder.viewPager.setCurrentItem(currentPage++, true);
+                }
+            };
+
+            timer = new Timer(); // This will create a new Thread
+            timer.schedule(new TimerTask() { // task to be scheduled
+                @Override
+                public void run() {
+                    handler.post(Update);
+                }
+            }, DELAY_MS, PERIOD_MS);
+        }
         else if(holder instanceof CusineFilterHolder){
             if(cusineFilterList!=null) {
                 System.out.println("sree cusine");
                 CusineFilterHolder cusineFilterHolder = (CusineFilterHolder) holder;
                 LinearLayoutManager layoutManager = new LinearLayoutManager(homeActivity, LinearLayoutManager.HORIZONTAL, false);
                 cusineFilterHolder.recyclerView.setLayoutManager(layoutManager);
-                CusineClickAdapter cusineClickAdapter = new CusineClickAdapter(homeActivity, cusineFilterList);
+                CusineClickAdapter cusineClickAdapter = new CusineClickAdapter(homeActivity, cusineFilterList,cusineFilterHolder);
                 cusineFilterHolder.recyclerView.setAdapter(cusineClickAdapter);
             }
         }
@@ -110,7 +143,7 @@ public class RestaurantResultPageAdapter extends RecyclerView.Adapter<RecyclerVi
 
     @Override
     public int getItemCount() {
-        return 4;
+        return 3;
     }
 
     @Override
@@ -118,14 +151,15 @@ public class RestaurantResultPageAdapter extends RecyclerView.Adapter<RecyclerVi
         if(position == 0){
             return BANNER_TYPE;
         }
-        else if(position == 1){
+        /*else if(position == 1){
             return SEARCHBAR_VIEW;
-        }
-        else if(position == 2){
+        }*/
+        else if(position == 1){
             return CUSINE_FILTER_TYPE;
         }
         else {
             return RESTAURANT_RECYLER;
         }
     }
+
 }

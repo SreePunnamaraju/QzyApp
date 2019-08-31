@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/dp_100"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/grey">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/dp_20"
+        android:layout_marginStart="@dimen/dp_30"
+        android:layout_toStartOf="@+id/itemCount">
+        <TextView
+            android:id="@+id/itemName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="22.5sp"
+            android:textColor="#1d1d1d"
+            android:lineSpacingExtra="2.5sp"
+            android:text="Gobi Manchuria"/>
+        <TextView
+            android:layout_below="@+id/itemName"
+            android:layout_marginTop="@dimen/dp_5"
+            android:id="@+id/itemPrice"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20.5sp"
+            android:textColor="#1d1d1d"
+            android:lineSpacingExtra="2.5sp"
+            android:text="Rs.150" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/itemCount"
+        android:layout_width="@dimen/dp_75"
+        android:layout_height="@dimen/dp_30"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="@dimen/dp_30"
+        android:layout_centerVertical="true">
+        <RelativeLayout
+            android:id="@+id/itemCountZero"
+            android:layout_width="@dimen/dp_75"
+            android:layout_height="@dimen/dp_30"
+            android:background="@drawable/round_zero"
+            android:visibility="visible">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="15sp"
+                android:textColor="#4e9840"
+                android:letterSpacing="0.1"
+                android:lineSpacingExtra="10sp"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="@dimen/dp_10"
+                android:text="@string/add"/>
+            <ImageView
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                app:srcCompat="@drawable/ic_plus_green"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="@dimen/dp_13"
+                android:layout_centerVertical="true"/>
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/itemCountNonZero"
+            android:layout_width="@dimen/dp_75"
+            android:layout_height="@dimen/dp_30"
+            android:orientation="horizontal"
+            android:visibility="gone">
+            <RelativeLayout
+                android:id="@+id/decrease"
+                android:background="@drawable/round_item_minimize"
+                android:layout_width="@dimen/dp_25"
+                android:layout_height="match_parent">
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:srcCompat="@drawable/ic_minus_white"
+                    android:layout_centerInParent="true"/>
+            </RelativeLayout>
+            <TextView
+                android:id="@+id/itemVal"
+                android:layout_width="@dimen/dp_25"
+                android:layout_height="match_parent"
+                android:text="1"
+                android:textSize="16.5sp"
+                android:textColor="#454545"
+                android:letterSpacing="0.1"
+                android:lineSpacingExtra="11sp"
+                android:gravity="center"
+                android:background="@color/white"/>
+            <RelativeLayout
+                android:id="@+id/increase"
+                android:background="@drawable/round_item_maximize"
+                android:layout_width="@dimen/dp_25"
+                android:layout_height="match_parent">
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:srcCompat="@drawable/ic_plus_white"
+                    android:layout_centerInParent="true"/>
+            </RelativeLayout>
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</RelativeLayout>
+

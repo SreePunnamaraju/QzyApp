@@ -26,7 +26,7 @@ public class RestaurantListModel implements Parcelable, Serializable {
     @Expose
     private String name;
 
-    @SerializedName("cusine")
+    @SerializedName("cuisine")
     @Expose
     private String cusine;
 

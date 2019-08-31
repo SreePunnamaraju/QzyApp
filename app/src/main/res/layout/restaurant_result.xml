@@ -6,12 +6,12 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dp_30">
+        android:layout_marginTop="@dimen/dp_20">
         <TextView
             android:id="@+id/viewName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/standard_20"
+            android:layout_marginStart="@dimen/dp_20"
             android:layout_marginEnd="10dp"
             android:text="TOP"
             android:layout_centerVertical="true"
@@ -30,10 +30,10 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/restResultRecyler"
-        android:layout_marginTop="@dimen/standard_20"
+        android:layout_marginTop="@dimen/dp_20"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/standard_20"/>
+        android:layout_marginStart="@dimen/dp_20"/>
 
 
 </LinearLayout>
