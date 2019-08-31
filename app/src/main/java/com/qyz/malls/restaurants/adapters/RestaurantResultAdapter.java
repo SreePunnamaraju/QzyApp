@@ -19,7 +19,7 @@ import com.qyz.malls.restaurants.models.RestaurantListModel;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-public class RestaurantResultAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
+public class RestaurantResultAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     HomeActivity homeActivity;
     ArrayList<RestaurantListModel> restList;
@@ -98,4 +98,5 @@ public class RestaurantResultAdapter extends RecyclerView.Adapter<RecyclerView.V
     public int getItemCount() {
         return restList.size();
     }
+
 }

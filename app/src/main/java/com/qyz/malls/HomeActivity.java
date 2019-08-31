@@ -50,6 +50,7 @@ public class HomeActivity extends AppCompatActivity
     ArrayList<CuisineFilterModel> cusinefilter = new ArrayList<>();
     ImageView menuicon;
     public static final String MODEL = "MODEL";
+    RestaurantResultPageAdapter restaurantResultPageAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,7 +90,7 @@ public class HomeActivity extends AppCompatActivity
         setRestaurantResult();
         setBanner();
         setCuisine();
-        RestaurantResultPageAdapter restaurantResultPageAdapter = new RestaurantResultPageAdapter(this, banner, cusinefilter, restList);
+        restaurantResultPageAdapter = new RestaurantResultPageAdapter(this, banner, cusinefilter, restList);
         homePageMainRecyler.setAdapter(restaurantResultPageAdapter);
     }
 
@@ -165,11 +166,17 @@ public class HomeActivity extends AppCompatActivity
 
     @Override
     public void onBackPressed() {
+
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
+        }else {
+            if(restaurantResultPageAdapter !=null && !restaurantResultPageAdapter.searchText.equalsIgnoreCase(getString(R.string.search))){
+                restaurantResultPageAdapter.filterResult(null);
+            }
+            else {
+                super.onBackPressed();
+            }
         }
     }
 

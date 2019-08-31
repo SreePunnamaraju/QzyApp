@@ -22,12 +22,14 @@ public class CusineClickAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     HomeActivity homeActivity;
     ArrayList<CuisineFilterModel> cusineFilterList;
     FilterListener mCallBack;
+    RestaurantFilter restaurantFilter;
 
-    public CusineClickAdapter(HomeActivity homeActivity, ArrayList<CuisineFilterModel> cusineFilterList,FilterListener filterListener) {
+    public CusineClickAdapter(HomeActivity homeActivity, ArrayList<CuisineFilterModel> cusineFilterList,FilterListener filterListener,RestaurantFilter restaurantFilter) {
         System.out.println("sree cusine 1 " +cusineFilterList.size());
         this.homeActivity = homeActivity;
         this.cusineFilterList = cusineFilterList;
         this.mCallBack= filterListener;
+        this.restaurantFilter = restaurantFilter;
     }
 
     @NonNull
@@ -44,16 +46,18 @@ public class CusineClickAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         if(holder instanceof CusineClickHolder) {
             CusineClickHolder cusineClickHolder = (CusineClickHolder) holder;
             final CuisineFilterModel model = cusineFilterList.get(position);
-            cusineClickHolder.textView.setText(model.getName());
+            cusineClickHolder.textView.setText(model.getName().toUpperCase());
             cusineClickHolder.linearLayout.setBackgroundResource(R.drawable.round_bg_cuisine);
             GradientDrawable drawable = (GradientDrawable) cusineClickHolder.linearLayout.getBackground();
             drawable.setColor(Color.parseColor(model.getColour()));
             cusineClickHolder.linearLayout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    restaurantFilter.filterResult(model);
                     mCallBack.onCuisineClick(model);
                 }
             });
+
         }
 
 

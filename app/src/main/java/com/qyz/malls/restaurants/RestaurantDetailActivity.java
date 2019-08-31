@@ -47,7 +47,7 @@ public class RestaurantDetailActivity extends AppCompatActivity {
         if (getSupportActionBar() != null) {
             getSupportActionBar().hide();
         }
-        setContentView(R.layout.activity_restaurant_detail);
+       setContentView(R.layout.activity_restaurant_detail);
         //if(getIntent()!=null && getIntent().hasExtra(HomeActivity.MODEL))
        restaurantListModel =(RestaurantListModel) getIntent().getSerializableExtra(HomeActivity.MODEL);
         restDetailRecyler = findViewById(R.id.restDetailRecyler);
