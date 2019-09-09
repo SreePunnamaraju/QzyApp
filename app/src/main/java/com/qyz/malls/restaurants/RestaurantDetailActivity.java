@@ -2,7 +2,6 @@ package com.qyz.malls.restaurants;
 
 import android.os.Bundle;
 import android.view.View;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -15,6 +14,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.google.gson.Gson;
 import com.qyz.malls.HomeActivity;
+import com.qyz.malls.Preference;
 import com.qyz.malls.R;
 import com.qyz.malls.restaurants.adapters.MenuPrimaryAdapter;
 import com.qyz.malls.restaurants.models.MenuItemModel;
@@ -29,16 +29,19 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.HashMap;
 
-public class RestaurantDetailActivity extends AppCompatActivity {
+public class RestaurantDetailActivity extends AppCompatActivity implements CartListener {
 
-    View itemView;
     ArrayList<MenuModel> menuModels = new ArrayList<>();
     RestaurantListModel restaurantListModel;
     RecyclerView restDetailRecyler;
     ImageView backIcon,restImage,favIcon;
     TextView rating,restName,cusineName,time,price;
     RelativeLayout fav;
+    CheckoutCart cart;
+    TextView  cartCount;
+    String[] shoppingCart;
 
 
     @Override
@@ -66,9 +69,16 @@ public class RestaurantDetailActivity extends AppCompatActivity {
         time = findViewById(R.id.time);
         price = findViewById(R.id.price);
         favIcon =findViewById(R.id.favIcon);
+        cartCount = findViewById(R.id.cart_count);
        System.out.println("sree in this "+restaurantListModel.getName());
         setDetailPage();
         setMenu();
+        if(Preference.cart == null) {
+            cart = new CheckoutCart();
+        }
+        else{
+            cart =Preference.cart;
+        }
     }
     public void setDetailPage() {
         Glide.with(this)
@@ -145,9 +155,78 @@ public class RestaurantDetailActivity extends AppCompatActivity {
 
     private void setMenuData() {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this,RecyclerView.VERTICAL,false);
-        MenuPrimaryAdapter menuPrimaryAdapter = new MenuPrimaryAdapter(this,menuModels);
+        MenuPrimaryAdapter menuPrimaryAdapter = new MenuPrimaryAdapter(this,menuModels,this);
         restDetailRecyler.setLayoutManager(linearLayoutManager);
         restDetailRecyler.setAdapter(menuPrimaryAdapter);
     }
 
+    @Override
+    public void removeItemFromCart(MenuItemModel model) {
+        if(cart.mallId.equals("-1") ){
+            cart.mallId = model.getMallid();
+            cart.restId = model.getRestid();
+        }
+        HashMap<String,Integer> shopCart = cart.getCart();
+        if(cart.mallId.equals(model.getMallid())&& cart.restId.equals(model.getRestid())){
+           int count = shopCart.get(model.getItemid())-1;
+           if(count == 0){
+               shopCart.remove(model.getItemid());
+           }
+           else{
+               shopCart.put(model.getItemid(),count);
+           }
+        }
+        cart.setCount(cart.getCount()-1);
+        cart.setCart(shopCart);
+        updateMainCart(cart.getCount());
+    }
+
+    @Override
+    public void addItemToCart(MenuItemModel model) {
+        if(cart.getMallId().equals("-1") ){
+            cart.setMallId(model.getMallid());
+            cart.setMallId(model.getRestid());
+        }
+        HashMap<String,Integer> shopCart = cart.getCart();
+        System.out.println("sree id "+cart.getRestId()+" "+model.getRestid() );
+        if(cart.getMallId().equals(model.getMallid()) && cart.getRestId().equals(model.getRestid())){
+            if(shopCart.containsKey(model.getItemid())){
+                int c = shopCart.get(model.getItemid())+1;
+                shopCart.put(model.getItemid(),c);
+            }
+            else{
+                shopCart.put(model.getItemid(),1);
+            }
+        }
+        cart.setCount(cart.getCount()+1);
+        cart.setCart(shopCart);
+        updateMainCart(cart.getCount());
+    }
+
+    public void updateMainCart(int count){
+        if(count == 0){
+            cartCount.setVisibility(View.GONE);
+        } else{
+            cartCount.setText(count+"");
+            cartCount.setVisibility(View.VISIBLE);
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        Preference.cart = cart;
+      //  setCart();
+        super.onBackPressed();
+    }
+    private void setCart() {
+        StringBuilder set = new StringBuilder();
+        if (cart != null && cart.getCart()!=null) {
+            for (String s : cart.getCart().keySet()) {
+                    set.append(s).append(Preference.CART_SEPARATOR);
+            }
+        }
+        Preference.setStrPref(this, Preference.CART, set.toString());
+        System.out.println("sree cart set x"+ Preference.getStrPref(this,Preference.CART).toString());
+
+    }
 }

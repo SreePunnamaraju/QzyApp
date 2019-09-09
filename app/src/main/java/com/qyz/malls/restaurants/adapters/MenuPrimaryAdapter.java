@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.qyz.malls.R;
+import com.qyz.malls.restaurants.CartListener;
 import com.qyz.malls.restaurants.RestaurantDetailActivity;
 import com.qyz.malls.restaurants.holder.MenuPrimaryHolder;
 import com.qyz.malls.restaurants.models.MenuModel;
@@ -18,10 +19,16 @@ import java.util.ArrayList;
 public class MenuPrimaryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
     RestaurantDetailActivity mActivity;
     ArrayList<MenuModel> menuModels;
+    CartListener listener;
 
     public MenuPrimaryAdapter(RestaurantDetailActivity restaurantDetailActivity, ArrayList<MenuModel> menuModels) {
         this.mActivity=restaurantDetailActivity;
         this.menuModels=menuModels;
+    }
+    public MenuPrimaryAdapter(RestaurantDetailActivity restaurantDetailActivity, ArrayList<MenuModel> menuModels, CartListener cartListener) {
+        this.mActivity=restaurantDetailActivity;
+        this.menuModels=menuModels;
+        this.listener = cartListener;
     }
 
     @NonNull
@@ -39,7 +46,11 @@ public class MenuPrimaryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
             final MenuPrimaryHolder primaryHolder = (MenuPrimaryHolder) holder;
             primaryHolder.categoryName.setText(menuModel.getName());
             LinearLayoutManager layoutManager = new LinearLayoutManager(mActivity,RecyclerView.VERTICAL,false);
-            MenuSecondaryAdapter secondaryAdapter = new MenuSecondaryAdapter(mActivity,menuModel.getMenuItemList());
+            for (int i=0;i<menuModel.getMenuItemList().size();i++){
+                menuModel.getMenuItemList().get(i).setRestid(position+"");
+            }
+            MenuSecondaryAdapter secondaryAdapter = new MenuSecondaryAdapter(mActivity,menuModel.getMenuItemList(),listener);
+
             primaryHolder.categoryRecylerView.setAdapter(secondaryAdapter);
             primaryHolder.categoryRecylerView.setLayoutManager(layoutManager);
             primaryHolder.categoryMinimizeIcon.setOnClickListener(new View.OnClickListener() {

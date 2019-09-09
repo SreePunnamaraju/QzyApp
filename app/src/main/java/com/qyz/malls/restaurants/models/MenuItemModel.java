@@ -34,6 +34,16 @@ public class MenuItemModel implements Serializable, Parcelable {
     @Expose
     private String cuisines;
 
+    public int getCount() {
+        return count;
+    }
+
+    public void setCount(int count) {
+        this.count = count;
+    }
+
+    public int count = 0;
+
     protected MenuItemModel(Parcel in) {
         itemid = in.readString();
         name = in.readString();

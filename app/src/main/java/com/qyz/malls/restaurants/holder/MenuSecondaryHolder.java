@@ -15,6 +15,8 @@ public class MenuSecondaryHolder  extends RecyclerView.ViewHolder{
     public TextView itemName,itemPrice,itemVal;
     public RelativeLayout itemCountZero;
     public LinearLayout itemCountNonZero;
+    public RelativeLayout decreaseCount,increaseCount;
+
     public MenuSecondaryHolder(@NonNull View itemView) {
         super(itemView);
         itemName =itemView.findViewById(R.id.itemName);
@@ -22,5 +24,7 @@ public class MenuSecondaryHolder  extends RecyclerView.ViewHolder{
         itemVal =itemView.findViewById(R.id.itemVal);
         itemCountZero =itemView.findViewById(R.id.itemCountZero);
         itemCountNonZero =itemView.findViewById(R.id.itemCountNonZero);
+        decreaseCount = itemView.findViewById(R.id.decrease);
+        increaseCount = itemView.findViewById(R.id.increase);
     }
 }

@@ -14,8 +14,10 @@ import android.view.MenuItem;
 
 import com.google.android.material.navigation.NavigationView;
 import com.google.gson.Gson;
+import com.qyz.malls.restaurants.CheckoutCart;
 import com.qyz.malls.restaurants.adapters.RestaurantResultPageAdapter;
 import com.qyz.malls.restaurants.models.CuisineFilterModel;
+import com.qyz.malls.restaurants.models.MenuItemModel;
 import com.qyz.malls.restaurants.models.RestaurantBannerModel;
 import com.qyz.malls.restaurants.models.RestaurantListModel;
 
@@ -28,6 +30,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.Menu;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -51,6 +54,8 @@ public class HomeActivity extends AppCompatActivity
     ImageView menuicon;
     public static final String MODEL = "MODEL";
     RestaurantResultPageAdapter restaurantResultPageAdapter;
+    public  CheckoutCart checkoutCart;
+    TextView cartCount;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,6 +74,7 @@ public class HomeActivity extends AppCompatActivity
         final DrawerLayout drawer = findViewById(R.id.drawer_layout);
         homePageMainRecyler = findViewById(R.id.homerecyler);
         menuicon = findViewById(R.id.menuicon);
+        cartCount = findViewById(R.id.cart_count);
         final NavigationView navigationView = findViewById(R.id.nav_view);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -76,12 +82,55 @@ public class HomeActivity extends AppCompatActivity
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
         setHomePage();
+        updateCart();
         menuicon.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
                 drawer.openDrawer(navigationView);
             }
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        updateCart();
+    }
+
+    private void updateCart() {
+        int count =0;
+        Gson gson = new Gson();
+        checkoutCart = new CheckoutCart();
+       /*if(Preference.getStrPref(this,Preference.CART)!=null){
+           String [] cartSet = Preference.getStrPref(this,Preference.CART).split(Preference.CART_SEPARATOR);
+           System.out.println("sree cart set "+ Preference.getStrPref(this,Preference.CART).toString());
+           for(String str:cartSet){
+               if(str.trim().length()>0){
+                   MenuItemModel itemModel = gson.fromJson(str, MenuItemModel.class);
+                   checkoutCart.setMallId(itemModel.getMallid());
+                   checkoutCart.setRestId(itemModel.getRestid());
+                   HashMap<String,Integer> map = new HashMap<String, Integer>();
+                   map.put(itemModel.getItemid(),itemModel.getCount());
+                   count+=itemModel.getCount();
+                   checkoutCart.setCart(map);
+               }
+           }
+           checkoutCart.setCount(count);
+       }*/
+       if(Preference.cart!=null){
+           checkoutCart = Preference.cart;
+       }
+        updateCartCount();
+    }
+    public void updateCartCount(){
+        System.out.println("sree count "+checkoutCart.getCount()+checkoutCart.getCart().size());
+        if(checkoutCart!=null && checkoutCart.getCount()>0){
+            cartCount.setText(checkoutCart.getCount()+"");
+            cartCount.setVisibility(View.VISIBLE);
+        }
+        else{
+            cartCount.setVisibility(View.GONE);
+        }
     }
 
     public void setHomePage() {
@@ -226,4 +275,5 @@ public class HomeActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
 }
