@@ -183,6 +183,7 @@ public class RestaurantDetailActivity extends AppCompatActivity implements CartL
 
     @Override
     public void addItemToCart(MenuItemModel model) {
+        System.out.println("sree bool "+ cart.getMallId().equals("-1"));
         if(cart.getMallId().equals("-1") ){
             cart.setMallId(model.getMallid());
             cart.setMallId(model.getRestid());

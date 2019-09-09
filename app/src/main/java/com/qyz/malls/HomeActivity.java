@@ -100,7 +100,6 @@ public class HomeActivity extends AppCompatActivity
     private void updateCart() {
         int count =0;
         Gson gson = new Gson();
-        checkoutCart = new CheckoutCart();
        /*if(Preference.getStrPref(this,Preference.CART)!=null){
            String [] cartSet = Preference.getStrPref(this,Preference.CART).split(Preference.CART_SEPARATOR);
            System.out.println("sree cart set "+ Preference.getStrPref(this,Preference.CART).toString());
@@ -119,6 +118,9 @@ public class HomeActivity extends AppCompatActivity
        }*/
        if(Preference.cart!=null){
            checkoutCart = Preference.cart;
+       }
+       else {
+           checkoutCart = new CheckoutCart();
        }
         updateCartCount();
     }
