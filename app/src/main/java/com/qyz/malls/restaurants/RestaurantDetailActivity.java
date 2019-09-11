@@ -41,6 +41,7 @@ public class RestaurantDetailActivity extends AppCompatActivity implements CartL
     RelativeLayout fav;
     CheckoutCart cart;
     TextView  cartCount;
+    TextView textCart;
     String[] shoppingCart;
 
 
@@ -70,6 +71,7 @@ public class RestaurantDetailActivity extends AppCompatActivity implements CartL
         price = findViewById(R.id.price);
         favIcon =findViewById(R.id.favIcon);
         cartCount = findViewById(R.id.cart_count);
+        textCart = findViewById(R.id.textCart);
        System.out.println("sree in this "+restaurantListModel.getName());
         setDetailPage();
         setMenu();
@@ -207,9 +209,21 @@ public class RestaurantDetailActivity extends AppCompatActivity implements CartL
     public void updateMainCart(int count){
         if(count == 0){
             cartCount.setVisibility(View.GONE);
-        } else{
+            textCart.setVisibility(View.GONE);
+        }
+        else
+        {
+            if(count == 1)
+            {
+                textCart.setText(cart.getCount() + " item in the cart");
+            }
+            else
+            {
+                textCart.setText(cart.getCount() + " items in the cart");
+            }
             cartCount.setText(count+"");
             cartCount.setVisibility(View.VISIBLE);
+            textCart.setVisibility(View.VISIBLE);
         }
     }
 

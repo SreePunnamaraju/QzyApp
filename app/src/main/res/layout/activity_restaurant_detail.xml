@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -8,6 +8,7 @@
     >
 
     <RelativeLayout
+        android:id="@+id/mainViewContent"
         android:layout_width="match_parent"
         android:layout_height="80dp"
         android:background="@color/white">
@@ -82,6 +83,7 @@
 
     <RelativeLayout
         android:id="@+id/mainView"
+        android:layout_below="@+id/mainViewContent"
         android:layout_height="@dimen/dp_100"
         android:layout_width="match_parent"
         android:layout_marginTop="@dimen/dp_20"
@@ -222,13 +224,13 @@
             android:layout_alignParentEnd="true"
             android:layout_marginEnd="20dp"
             android:shape="ring"
-           android:background="@drawable/ic_heart_background">
+            android:background="@drawable/ic_heart_background">
 
             <ImageView
                 android:id="@+id/favIcon"
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
-              android:layout_centerInParent="true"
+                android:layout_centerInParent="true"
                 app:srcCompat ="@drawable/ic_heart_red"
                 />
 
@@ -237,6 +239,8 @@
     </RelativeLayout>
 
     <TextView
+        android:id="@+id/menu"
+        android:layout_below="@+id/mainView"
         android:layout_marginTop="@dimen/dp_20"
         android:layout_height="@dimen/dp_30"
         android:layout_width="match_parent"
@@ -248,11 +252,21 @@
         android:gravity="center"/>
 
     <androidx.recyclerview.widget.RecyclerView
+        android:layout_below="@+id/menu"
         android:id="@+id/restDetailRecyler"
         android:layout_marginTop="@dimen/dp_20"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/white"/>
 
+    <TextView
+        android:id="@+id/textCart"
+        android:textSize="@dimen/dp_20"
+        android:textAlignment="center"
+        android:layout_width="match_parent"
+        android:layout_height="85dp"
+        android:background="@color/green"
+        android:layout_alignParentBottom="true"
+        android:visibility="gone"/>
 
-</LinearLayout>
+</RelativeLayout>
