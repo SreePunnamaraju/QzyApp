@@ -90,6 +90,7 @@ public class RestaurantResultAdapter extends RecyclerView.Adapter<RecyclerView.V
     private void launchRestDetailsPage(int position) {
         Intent intent = new Intent(homeActivity, RestaurantDetailActivity.class);
         intent.putExtra(HomeActivity.MODEL, (Serializable) restList.get(position));
+        intent.putExtra("pos",position);
         intent.putExtra("frm","HOMEACTIVITY");
         homeActivity.startActivity(intent);
     }

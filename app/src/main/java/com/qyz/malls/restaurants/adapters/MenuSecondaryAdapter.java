@@ -22,7 +22,7 @@ class MenuSecondaryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     RestaurantDetailActivity mActivity;
     ArrayList<MenuItemModel> menuItemList;
     CartListener callBack;
-
+    int pos;
 
     public MenuSecondaryAdapter(RestaurantDetailActivity mActivity, ArrayList<MenuItemModel> menuItemList) {
         this.mActivity=mActivity;
@@ -33,6 +33,13 @@ class MenuSecondaryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         this.mActivity=mActivity;
         this.menuItemList=menuItemList;
         this.callBack = listener;
+    }
+
+    public MenuSecondaryAdapter(RestaurantDetailActivity mActivity, ArrayList<MenuItemModel> menuItemList,CartListener listener,int pos) {
+        this.mActivity=mActivity;
+        this.menuItemList=menuItemList;
+        this.callBack = listener;
+        this.pos =pos;
     }
 
     @NonNull
@@ -50,6 +57,7 @@ class MenuSecondaryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             final MenuSecondaryHolder holder =(MenuSecondaryHolder) menuHolder;
             holder.itemName.setText(menuModel.getName());
             holder.itemPrice.setText(menuModel.getPrice());
+            menuModel.setRestid(String.valueOf(pos+1));
             if (menuModel.getCount() == 0 ){
                 holder.itemCountNonZero.setVisibility(View.GONE);
                 holder.itemCountZero.setVisibility(View.VISIBLE);

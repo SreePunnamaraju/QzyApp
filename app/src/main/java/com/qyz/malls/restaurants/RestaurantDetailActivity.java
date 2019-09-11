@@ -43,7 +43,9 @@ public class RestaurantDetailActivity extends AppCompatActivity implements CartL
     RelativeLayout fav;
     CheckoutCart cart;
     TextView  cartCount;
+    TextView textCart;
     String[] shoppingCart;
+    int pos;
 
 
     @Override
@@ -72,7 +74,9 @@ public class RestaurantDetailActivity extends AppCompatActivity implements CartL
         price = findViewById(R.id.price);
         favIcon =findViewById(R.id.favIcon);
         cartCount = findViewById(R.id.cart_count);
-       System.out.println("sree rest id 123 "+restaurantListModel.getName()+ Preference.cart);
+        textCart = findViewById(R.id.textCart);
+        pos = getIntent().getIntExtra("pos",0);
+        System.out.println("sree in this "+restaurantListModel.getName());
         setDetailPage();
         setMenu();
         if(Preference.cart == null) {
@@ -159,7 +163,7 @@ public class RestaurantDetailActivity extends AppCompatActivity implements CartL
 
     private void setMenuData() {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this,RecyclerView.VERTICAL,false);
-        MenuPrimaryAdapter menuPrimaryAdapter = new MenuPrimaryAdapter(this,menuModels,this);
+        MenuPrimaryAdapter menuPrimaryAdapter = new MenuPrimaryAdapter(this,menuModels,this,pos);
         restDetailRecyler.setLayoutManager(linearLayoutManager);
         restDetailRecyler.setAdapter(menuPrimaryAdapter);
     }
@@ -210,6 +214,7 @@ public class RestaurantDetailActivity extends AppCompatActivity implements CartL
                     new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
                             cart= new CheckoutCart();
+                            System.out.println("sree cart "+cart.getRestId()+" "+cart.getMallId()+" "+cart.getCount());
                             addItem(model);
                             dialog.cancel();
                         }
@@ -230,7 +235,7 @@ public class RestaurantDetailActivity extends AppCompatActivity implements CartL
     public void addItem(MenuItemModel model){
         if(cart.getMallId().equals("-1") ){
             cart.setMallId(model.getMallid());
-            cart.setMallId(model.getRestid());
+            cart.setRestId(model.getRestid());
         }
         final HashMap<String,Integer> shopCart = cart.getCart();
         if(shopCart.containsKey(model.getItemid())){
@@ -248,9 +253,21 @@ public class RestaurantDetailActivity extends AppCompatActivity implements CartL
     public void updateMainCart(int count){
         if(count == 0){
             cartCount.setVisibility(View.GONE);
-        } else{
+            textCart.setVisibility(View.GONE);
+        }
+        else
+        {
+            if(count == 1)
+            {
+                textCart.setText(cart.getCount() + " item in the cart");
+            }
+            else
+            {
+                textCart.setText(cart.getCount() + " items in the cart");
+            }
             cartCount.setText(count+"");
             cartCount.setVisibility(View.VISIBLE);
+            textCart.setVisibility(View.VISIBLE);
         }
     }
 
