@@ -1,11 +1,13 @@
 package com.qyz.malls.restaurants;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -70,15 +72,17 @@ public class RestaurantDetailActivity extends AppCompatActivity implements CartL
         price = findViewById(R.id.price);
         favIcon =findViewById(R.id.favIcon);
         cartCount = findViewById(R.id.cart_count);
-       System.out.println("sree in this "+restaurantListModel.getName());
+       System.out.println("sree rest id 123 "+restaurantListModel.getName()+ Preference.cart);
         setDetailPage();
         setMenu();
         if(Preference.cart == null) {
             cart = new CheckoutCart();
         }
         else{
-            cart =Preference.cart;
+            cart = Preference.cart;
         }
+        System.out.println("sree rest id 1234 "+ cart.getRestId()+" "+restaurantListModel.getRestid());
+        updateMainCart(cart.getCount());
     }
     public void setDetailPage() {
         Glide.with(this)
@@ -182,22 +186,59 @@ public class RestaurantDetailActivity extends AppCompatActivity implements CartL
     }
 
     @Override
-    public void addItemToCart(MenuItemModel model) {
+    public void addItemToCart(final MenuItemModel model) {
         System.out.println("sree bool "+ cart.getMallId().equals("-1"));
+        if(cart.getMallId().equals("-1") ){
+            System.out.println("sree id in this "+cart.getMallId());
+            cart.setMallId(model.getMallid());
+            System.out.println("sree id in this 1"+cart.getMallId()+" "+cart.getRestId());
+            cart.setRestId(model.getRestid());
+            System.out.println("sree id in this 2"+cart.getRestId());
+        }
+        System.out.println("sree id "+cart.getRestId()+" "+model.getRestid() );
+        if(cart.getMallId().equals(model.getMallid()) && cart.getRestId().equals(model.getRestid())){
+            System.out.println("sree id in this if");
+            addItem(model);
+        }
+        else{
+            System.out.println("sree id in this else");
+            AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
+            builder1.setMessage("You already have items in your cart.Do you want to discard them?");
+            builder1.setCancelable(true);
+            builder1.setPositiveButton(
+                    "Yes",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            cart= new CheckoutCart();
+                            addItem(model);
+                            dialog.cancel();
+                        }
+                    });
+
+            builder1.setNegativeButton(
+                    "No",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            dialog.cancel();
+                        }
+                    });
+
+            AlertDialog alert11 = builder1.create();
+            alert11.show();
+        }
+    }
+    public void addItem(MenuItemModel model){
         if(cart.getMallId().equals("-1") ){
             cart.setMallId(model.getMallid());
             cart.setMallId(model.getRestid());
         }
-        HashMap<String,Integer> shopCart = cart.getCart();
-        System.out.println("sree id "+cart.getRestId()+" "+model.getRestid() );
-        if(cart.getMallId().equals(model.getMallid()) && cart.getRestId().equals(model.getRestid())){
-            if(shopCart.containsKey(model.getItemid())){
-                int c = shopCart.get(model.getItemid())+1;
-                shopCart.put(model.getItemid(),c);
-            }
-            else{
-                shopCart.put(model.getItemid(),1);
-            }
+        final HashMap<String,Integer> shopCart = cart.getCart();
+        if(shopCart.containsKey(model.getItemid())){
+            int c = shopCart.get(model.getItemid())+1;
+            shopCart.put(model.getItemid(),c);
+        }
+        else{
+            shopCart.put(model.getItemid(),1);
         }
         cart.setCount(cart.getCount()+1);
         cart.setCart(shopCart);

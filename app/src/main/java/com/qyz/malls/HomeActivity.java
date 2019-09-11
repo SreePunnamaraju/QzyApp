@@ -116,6 +116,7 @@ public class HomeActivity extends AppCompatActivity
            }
            checkoutCart.setCount(count);
        }*/
+       System.out.println("sree pref cart "+ Preference.cart);
        if(Preference.cart!=null){
            checkoutCart = Preference.cart;
        }
