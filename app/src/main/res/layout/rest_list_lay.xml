@@ -101,8 +101,8 @@
             android:layout_marginTop="@dimen/dp_10">
             <ImageView
                 android:id="@+id/clock"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="@dimen/dp_16"
+                android:layout_height="@dimen/dp_16"
                 app:srcCompat="@drawable/ic_clock"
                 android:layout_centerVertical="true"/>
 
@@ -113,7 +113,6 @@
             android:text="25-30 MIN"
             android:textSize="12sp"
             android:textColor="#535353"
-            android:lineSpacingExtra="16sp"
             android:layout_marginStart="@dimen/dp_8"
             android:layout_toEndOf="@id/clock"/>
         </RelativeLayout>
@@ -123,14 +122,14 @@
             android:layout_toEndOf="@+id/timeName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/dp_20"
+            android:layout_marginStart="@dimen/_10sdp"
             android:layout_marginTop="@dimen/dp_10">
             <ImageView
                 android:id="@+id/rupee"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="@dimen/dp_16"
                 app:srcCompat="@drawable/ic_rupee"
-                android:layout_centerVertical="true"/>
+                android:layout_centerVertical="true" />
             <TextView
                 android:id="@+id/price"
                 android:layout_width="wrap_content"
@@ -138,9 +137,10 @@
                 android:text="300 for 2"
                 android:textSize="12sp"
                 android:textColor="#535353"
-                android:lineSpacingExtra="16sp"
                 android:layout_marginStart="@dimen/dp_8"
-                android:layout_toEndOf="@id/rupee"/>
+                android:layout_toEndOf="@id/rupee"
+                android:maxLines="1"
+                android:ellipsize="end"/>
         </RelativeLayout>
 
 
