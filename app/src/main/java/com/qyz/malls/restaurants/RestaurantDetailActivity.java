@@ -236,23 +236,20 @@ public class RestaurantDetailActivity extends AppCompatActivity implements CartL
 
     @Override
     public void updateMainCart(int count){
-        if(count == 0){
-            cartCount.setVisibility(View.GONE);
-            footerCart.setVisibility(View.GONE);
-        }
-        else
-        {
-            if(count == 1)
-            {
-                textCart.setText(cart.getCount() + " Item Added to cart");
+        if(cart.getRestId().equals(restaurantListModel.getRestid())) {
+            if (count == 0) {
+                cartCount.setVisibility(View.GONE);
+                footerCart.setVisibility(View.GONE);
+            } else {
+                if (count == 1) {
+                    textCart.setText(cart.getCount() + " Item Added to cart");
+                } else {
+                    textCart.setText(cart.getCount() + " Items Added to cart");
+                }
+                cartCount.setText(count + "");
+                cartCount.setVisibility(View.VISIBLE);
+                footerCart.setVisibility(View.VISIBLE);
             }
-            else
-            {
-                textCart.setText(cart.getCount() + " Items Added to cart");
-            }
-            cartCount.setText(count+"");
-            cartCount.setVisibility(View.VISIBLE);
-            footerCart.setVisibility(View.VISIBLE);
         }
     }
 

@@ -62,6 +62,11 @@ class MenuSecondaryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             holder.itemName.setText(menuModel.getName());
             holder.itemPrice.setText(menuModel.getPrice());
             menuModel.setRestid(String.valueOf(pos+1));
+            System.out.println("sree in cart "+mActivity.cart.getCart().containsKey(menuModel.getItemid()));
+            if(mActivity!=null && mActivity.cart!=null && mActivity.cart.getRestId().equals(menuModel.getRestid())
+            &&mActivity.cart.getCart()!=null && mActivity.cart.getCart().containsKey(menuModel.getItemid())){
+                menuModel.setCount(mActivity.cart.getCart().get(menuModel.getItemid()));
+            }
             if (menuModel.getCount() == 0 ){
                 holder.itemCountNonZero.setVisibility(View.GONE);
                 holder.itemCountZero.setVisibility(View.VISIBLE);
