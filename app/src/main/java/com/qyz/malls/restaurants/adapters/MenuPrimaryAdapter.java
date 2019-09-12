@@ -62,9 +62,11 @@ public class MenuPrimaryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                 @Override
                 public void onClick(View view) {
                     if(primaryHolder.categoryRecylerView.getVisibility() == View.VISIBLE){
+                        primaryHolder.categoryMinimizeIcon.setImageDrawable(mActivity.getDrawable(R.drawable.ic_up_icon));
                         primaryHolder.categoryRecylerView.setVisibility(View.GONE);
                     }
                     else{
+                        primaryHolder.categoryMinimizeIcon.setImageDrawable(mActivity.getDrawable(R.drawable.ic_down_icon));
                         primaryHolder.categoryRecylerView.setVisibility(View.VISIBLE);
                     }
                 }
