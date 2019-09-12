@@ -46,6 +46,7 @@ public class RestaurantDetailActivity extends AppCompatActivity implements CartL
     TextView textCart;
     String[] shoppingCart;
     int pos;
+    MenuPrimaryAdapter menuPrimaryAdapter;
 
 
     @Override

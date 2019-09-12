@@ -16,7 +16,7 @@ import com.qyz.malls.restaurants.models.MenuModel;
 
 import java.util.ArrayList;
 
-public class MenuPrimaryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
+public class MenuPrimaryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     RestaurantDetailActivity mActivity;
     ArrayList<MenuModel> menuModels;
     CartListener listener;

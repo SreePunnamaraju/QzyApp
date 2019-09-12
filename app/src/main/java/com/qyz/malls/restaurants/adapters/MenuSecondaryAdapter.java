@@ -85,7 +85,7 @@ class MenuSecondaryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                 @Override
                 public void onClick(View view) {
                     menuModel.setCount(menuModel.getCount()+1);
-                    updateCount(holder,menuModel);
+                  //  updateCount(holder,menuModel);
                     callBack.addItemToCart(menuModel);
                 }
             });
