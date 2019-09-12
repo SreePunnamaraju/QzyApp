@@ -41,10 +41,11 @@ public class RestaurantDetailActivity extends AppCompatActivity implements CartL
     ImageView backIcon,restImage,favIcon;
     TextView rating,restName,cusineName,time,price;
     RelativeLayout fav;
-    CheckoutCart cart;
+    public CheckoutCart cart;
     TextView  cartCount;
     TextView textCart;
     String[] shoppingCart;
+    RelativeLayout footerCart;
     int pos;
     MenuPrimaryAdapter menuPrimaryAdapter;
 
@@ -76,6 +77,7 @@ public class RestaurantDetailActivity extends AppCompatActivity implements CartL
         favIcon =findViewById(R.id.favIcon);
         cartCount = findViewById(R.id.cart_count);
         textCart = findViewById(R.id.textCart);
+        footerCart = findViewById(R.id.footer_cart);
         pos = getIntent().getIntExtra("pos",0);
         System.out.println("sree in this "+restaurantListModel.getName());
         setDetailPage();
@@ -169,28 +171,7 @@ public class RestaurantDetailActivity extends AppCompatActivity implements CartL
         restDetailRecyler.setAdapter(menuPrimaryAdapter);
     }
 
-    @Override
-    public void removeItemFromCart(MenuItemModel model) {
-        if(cart.mallId.equals("-1") ){
-            cart.mallId = model.getMallid();
-            cart.restId = model.getRestid();
-        }
-        HashMap<String,Integer> shopCart = cart.getCart();
-        if(cart.mallId.equals(model.getMallid())&& cart.restId.equals(model.getRestid())){
-           int count = shopCart.get(model.getItemid())-1;
-           if(count == 0){
-               shopCart.remove(model.getItemid());
-           }
-           else{
-               shopCart.put(model.getItemid(),count);
-           }
-        }
-        cart.setCount(cart.getCount()-1);
-        cart.setCart(shopCart);
-        updateMainCart(cart.getCount());
-    }
 
-    @Override
     public void addItemToCart(final MenuItemModel model) {
         System.out.println("sree bool "+ cart.getMallId().equals("-1"));
         if(cart.getMallId().equals("-1") ){
@@ -233,6 +214,8 @@ public class RestaurantDetailActivity extends AppCompatActivity implements CartL
             alert11.show();
         }
     }
+
+
     public void addItem(MenuItemModel model){
         if(cart.getMallId().equals("-1") ){
             cart.setMallId(model.getMallid());
@@ -251,24 +234,25 @@ public class RestaurantDetailActivity extends AppCompatActivity implements CartL
         updateMainCart(cart.getCount());
     }
 
+    @Override
     public void updateMainCart(int count){
         if(count == 0){
             cartCount.setVisibility(View.GONE);
-            textCart.setVisibility(View.GONE);
+            footerCart.setVisibility(View.GONE);
         }
         else
         {
             if(count == 1)
             {
-                textCart.setText(cart.getCount() + " item in the cart");
+                textCart.setText(cart.getCount() + " Item Added to cart");
             }
             else
             {
-                textCart.setText(cart.getCount() + " items in the cart");
+                textCart.setText(cart.getCount() + " Items Added to cart");
             }
             cartCount.setText(count+"");
             cartCount.setVisibility(View.VISIBLE);
-            textCart.setVisibility(View.VISIBLE);
+            footerCart.setVisibility(View.VISIBLE);
         }
     }
 

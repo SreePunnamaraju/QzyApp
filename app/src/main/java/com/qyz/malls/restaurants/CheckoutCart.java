@@ -36,10 +36,10 @@ public class CheckoutCart {
         this.cart = cart;
     }
 
-    String mallId;
-    String restId;
-    int count;
-    HashMap<String,Integer> cart;
+    public String mallId;
+    public String restId;
+    public int count;
+    public HashMap<String,Integer> cart;
 
     public CheckoutCart(){
         mallId ="-1";
