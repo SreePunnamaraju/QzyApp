@@ -36,7 +36,7 @@
             android:textColor="#de000000"
             android:textSize="25sp"
             android:textStyle="normal"
-            android:visibility="gone"/>
+            android:visibility="gone" />
 
         <RelativeLayout
             android:layout_height="@dimen/dp_60"
@@ -151,18 +151,22 @@
                 android:text="Shoalin Work"
                 android:textSize="22.5sp"
                 android:textColor="#1d1d1d"
-                android:lineSpacingExtra="2.5sp"/>
+                android:lineSpacingExtra="2.5sp"
+                android:maxLines="1"
+                android:ellipsize="end"/>
 
             <TextView
                 android:layout_below="@+id/restName"
                 android:id="@+id/cusineName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Chinese"
+                android:text="Chinese Chinese Chinese Chinese Chinese Chinese"
                 android:textSize="20sp"
                 android:textColor="#1d1d1d"
                 android:lineSpacingExtra="2.5sp"
-                android:layout_marginTop="5dp"/>
+                android:layout_marginTop="5dp"
+                android:maxLines="1"
+                android:ellipsize="end"/>
             <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
