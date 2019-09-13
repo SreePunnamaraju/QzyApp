@@ -28,11 +28,11 @@ public class CheckoutCart {
         this.count = count;
     }
 
-    public HashMap<String, Integer> getCart() {
+    public HashMap<MenuItemModel, Integer> getCart() {
         return cart;
     }
 
-    public void setCart(HashMap<String, Integer> cart) {
+    public void setCart(HashMap<MenuItemModel, Integer> cart) {
         this.cart = cart;
     }
 
@@ -40,7 +40,7 @@ public class CheckoutCart {
     public String mallId;
     public String restId;
     int count;
-    HashMap<String,Integer> cart;
+    HashMap<MenuItemModel,Integer> cart;
 
     public RestaurantListModel getRestaurantListModel() {
         return restaurantListModel;
@@ -56,7 +56,7 @@ public class CheckoutCart {
         mallId ="-1";
         restId ="-1";
         count =0;
-        cart = new HashMap<String, Integer>();
+        cart = new HashMap<MenuItemModel, Integer>();
         restaurantListModel = null;
     }
 }

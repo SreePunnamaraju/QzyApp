@@ -18,6 +18,7 @@ import com.qyz.malls.restaurants.models.MenuItemModel;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 
 class MenuSecondaryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
@@ -25,10 +26,12 @@ class MenuSecondaryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     ArrayList<MenuItemModel> menuItemList;
     CartListener callBack;
     int pos;
+    HashMap<String,MenuItemModel> map;
 
     public MenuSecondaryAdapter(RestaurantDetailActivity mActivity, ArrayList<MenuItemModel> menuItemList) {
         this.mActivity=mActivity;
         this.menuItemList=menuItemList;
+
     }
 
     public MenuSecondaryAdapter(RestaurantDetailActivity mActivity, ArrayList<MenuItemModel> menuItemList,CartListener listener) {
@@ -42,6 +45,12 @@ class MenuSecondaryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         this.menuItemList=menuItemList;
         this.callBack = listener;
         this.pos =pos;
+        map = new HashMap<>();
+        if(mActivity!=null && mActivity.cart!=null && mActivity.cart.getCart()!=null){
+            for(MenuItemModel menuItemModel : mActivity.cart.getCart().keySet()){
+                map.put(menuItemModel.getItemid(),menuItemModel);
+            }
+        }
     }
 
     @NonNull
@@ -60,10 +69,12 @@ class MenuSecondaryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             holder.itemName.setText(menuModel.getName());
             holder.itemPrice.setText(menuModel.getPrice());
             menuModel.setRestid(String.valueOf(pos+1));
-            System.out.println("sree in cart "+mActivity.cart.getCart().containsKey(menuModel.getItemid()));
-            if(mActivity!=null && mActivity.cart!=null && mActivity.cart.getRestId().equals(menuModel.getRestid())
-            &&mActivity.cart.getCart()!=null && mActivity.cart.getCart().containsKey(menuModel.getItemid())){
-                menuModel.setCount(mActivity.cart.getCart().get(menuModel.getItemid()));
+            System.out.println("sree in cart "+mActivity.cart.getCart().containsKey(menuModel));
+            if(map.containsKey(menuModel.getItemid())){
+                if(menuModel.getRestid().equals(mActivity.cart.restId)) {
+                    int val = mActivity.cart.getCart().get(map.get(menuModel.getItemid()));
+                    menuModel.setCount(val);
+                }
             }
             if (menuModel.getCount() == 0 ){
                 holder.itemCountNonZero.setVisibility(View.GONE);
@@ -115,14 +126,14 @@ class MenuSecondaryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             mActivity.cart.mallId = model.getMallid();
             mActivity.cart.restId = model.getRestid();
         }
-        HashMap<String,Integer> shopCart = mActivity.cart.getCart();
+        HashMap<MenuItemModel,Integer> shopCart = mActivity.cart.getCart();
         if(mActivity.cart.mallId.equals(model.getMallid())&& mActivity.cart.restId.equals(model.getRestid())){
-            int count = shopCart.get(model.getItemid())-1;
+            int count = shopCart.get(model)-1;
             if(count == 0){
-                shopCart.remove(model.getItemid());
+                shopCart.remove(model);
             }
             else{
-                shopCart.put(model.getItemid(),count);
+                shopCart.put(model,count);
             }
         }
         mActivity.cart.setCount(mActivity.cart.getCount()-1);
@@ -179,13 +190,13 @@ class MenuSecondaryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             mActivity.cart.setMallId(model.getMallid());
             mActivity.cart.setRestId(model.getRestid());
         }
-        final HashMap<String,Integer> shopCart = mActivity.cart.getCart();
-        if(shopCart.containsKey(model.getItemid())){
-            int c = shopCart.get(model.getItemid())+1;
-            shopCart.put(model.getItemid(),c);
+        final HashMap<MenuItemModel,Integer> shopCart = mActivity.cart.getCart();
+        if(shopCart.containsKey(model)){
+            int c = shopCart.get(model)+1;
+            shopCart.put(model,c);
         }
         else{
-            shopCart.put(model.getItemid(),1);
+            shopCart.put(model,1);
         }
         mActivity.cart.setCount(mActivity.cart.getCount()+1);
         mActivity.cart.setCart(shopCart);

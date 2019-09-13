@@ -42,7 +42,7 @@ public class RestaurantDetailActivity extends AppCompatActivity implements CartL
     RecyclerView restDetailRecyler;
     ImageView backIcon,restImage,favIcon;
     TextView rating,restName,cusineName,time,price;
-    RelativeLayout fav;
+    RelativeLayout fav,shoppingCartIcon;
     public CheckoutCart cart;
     TextView  cartCount;
     TextView textCart;
@@ -54,6 +54,7 @@ public class RestaurantDetailActivity extends AppCompatActivity implements CartL
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        System.out.println("sree in this on create");
         super.onCreate(savedInstanceState);
         if (getSupportActionBar() != null) {
             getSupportActionBar().hide();
@@ -80,6 +81,7 @@ public class RestaurantDetailActivity extends AppCompatActivity implements CartL
         cartCount = findViewById(R.id.cart_count);
         textCart = findViewById(R.id.textCart);
         footerCart = findViewById(R.id.footer_cart);
+        shoppingCartIcon = findViewById(R.id.shopping_cart);
         pos = getIntent().getIntExtra("pos",0);
         System.out.println("sree in this "+restaurantListModel.getName());
         setDetailPage();
@@ -91,14 +93,19 @@ public class RestaurantDetailActivity extends AppCompatActivity implements CartL
             cart = UserDetails.cart;
         }
         System.out.println("sree rest id 1234 "+ cart.getRestId()+" "+restaurantListModel.getRestid());
-        updateMainCart(cart.getCount());
         footerCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(RestaurantDetailActivity.this,CheckOutPageActivity.class);
-                startActivity(intent);
+                launchCart();
             }
         });
+        shoppingCartIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                launchCart();
+            }
+        });
+
     }
     public void setDetailPage() {
         Glide.with(this)
@@ -230,13 +237,13 @@ public class RestaurantDetailActivity extends AppCompatActivity implements CartL
             cart.setMallId(model.getMallid());
             cart.setRestId(model.getRestid());
         }
-        final HashMap<String,Integer> shopCart = cart.getCart();
-        if(shopCart.containsKey(model.getItemid())){
-            int c = shopCart.get(model.getItemid())+1;
-            shopCart.put(model.getItemid(),c);
+        final HashMap<MenuItemModel,Integer> shopCart = cart.getCart();
+        if(shopCart.containsKey(model)){
+            int c = shopCart.get(model)+1;
+            shopCart.put(model,c);
         }
         else{
-            shopCart.put(model.getItemid(),1);
+            shopCart.put(model,1);
         }
         cart.setCount(cart.getCount()+1);
         cart.setCart(shopCart);
@@ -271,15 +278,29 @@ public class RestaurantDetailActivity extends AppCompatActivity implements CartL
       //  setCart();
         super.onBackPressed();
     }
-    private void setCart() {
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        System.out.println("sree in this on resume");
+        if(restDetailRecyler.getAdapter()!=null){
+            restDetailRecyler.getAdapter().notifyDataSetChanged();
+        }
+        updateMainCart(cart.getCount());
+    }
+    /* private void setCart() {
         StringBuilder set = new StringBuilder();
         if (cart != null && cart.getCart()!=null) {
-            for (String s : cart.getCart().keySet()) {
+            for (MenuItemModel s : cart.getCart().keySet()) {
                     set.append(s).append(UserDetails.CART_SEPARATOR);
             }
         }
         UserDetails.setStrPref(this, UserDetails.CART, set.toString());
         System.out.println("sree cart set x"+ UserDetails.getStrPref(this, UserDetails.CART).toString());
 
+    }*/
+    private void launchCart() {
+        Intent intent = new Intent(this,CheckOutPageActivity.class);
+        startActivity(intent);
     }
 }

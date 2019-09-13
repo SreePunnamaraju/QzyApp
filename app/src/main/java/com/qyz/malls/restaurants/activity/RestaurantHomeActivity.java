@@ -1,5 +1,6 @@
 package com.qyz.malls.restaurants.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -31,6 +32,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.Menu;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import org.json.JSONArray;
@@ -56,6 +58,7 @@ public class RestaurantHomeActivity extends AppCompatActivity
     RestaurantResultPageAdapter restaurantResultPageAdapter;
     public  CheckoutCart checkoutCart;
     TextView cartCount;
+    RelativeLayout shoppingCart;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,6 +92,18 @@ public class RestaurantHomeActivity extends AppCompatActivity
                 drawer.openDrawer(navigationView);
             }
         });
+        shoppingCart = findViewById(R.id.shopping_cart);
+       shoppingCart.setOnClickListener(new OnClickListener() {
+           @Override
+           public void onClick(View view) {
+                launchCart();
+           }
+       });
+    }
+
+    private void launchCart() {
+        Intent intent = new Intent(this,CheckOutPageActivity.class);
+        startActivity(intent);
     }
 
     @Override

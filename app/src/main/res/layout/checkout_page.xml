@@ -23,7 +23,7 @@
         android:layout_height="match_parent"
         android:layout_below="@+id/order_summary"
         android:layout_marginTop="@dimen/dp_20"
-        android:visibility="gone"
+        android:visibility="visible"
         android:id="@+id/itemsInCart">
 
         <RelativeLayout
@@ -97,7 +97,8 @@
                 android:layout_toEndOf="@+id/imageView"
                 android:text="Sujana Mall"
                 android:textColor="@color/gray"
-                android:textSize="20sp" />
+                android:textSize="20sp"
+                android:visibility="gone"/>
 
         </RelativeLayout>
 
@@ -107,7 +108,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/rest_mall_layout"
-            android:layout_marginTop="15dp" />
+            android:layout_marginTop="15dp"
+            android:layout_centerVertical="true"/>
 
         <RelativeLayout
             android:id="@+id/coupon"
