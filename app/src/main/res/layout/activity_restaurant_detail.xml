@@ -278,7 +278,7 @@
             android:layout_centerVertical="true"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:layout_marginStart="@dimen/dp_20"
+            android:layout_marginStart="@dimen/dp_40"
             app:srcCompat="@drawable/ic_shopping_cart_white" />
 
         <TextView
@@ -298,7 +298,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
-            android:layout_marginEnd="@dimen/dp_20"
+            android:layout_marginEnd="@dimen/dp_30"
             app:srcCompat="@drawable/ic_up_icon_white" />
 
 
