@@ -36,15 +36,27 @@ public class CheckoutCart {
         this.cart = cart;
     }
 
+
     public String mallId;
     public String restId;
-    public int count;
-    public HashMap<String,Integer> cart;
+    int count;
+    HashMap<String,Integer> cart;
+
+    public RestaurantListModel getRestaurantListModel() {
+        return restaurantListModel;
+    }
+
+    public void setRestaurantListModel(RestaurantListModel restaurantListModel) {
+        this.restaurantListModel = restaurantListModel;
+    }
+
+    public RestaurantListModel restaurantListModel;
 
     public CheckoutCart(){
         mallId ="-1";
         restId ="-1";
         count =0;
         cart = new HashMap<String, Integer>();
+        restaurantListModel = null;
     }
 }

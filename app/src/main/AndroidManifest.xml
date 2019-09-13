@@ -17,7 +17,11 @@
             tools:ignore="GoogleAppIndexingWarning">
            <activity android:name=".LoginActivity"
                android:label="@string/app_name">
+               <intent-filter>
+                   <action android:name="android.intent.action.MAIN" />
 
+                   <category android:name="android.intent.category.LAUNCHER" />
+               </intent-filter>
            </activity>
             <activity
                 android:name=".restaurants.activity.RestaurantHomeActivity"
@@ -26,13 +30,7 @@
             </activity>
             <activity android:name=".restaurants.activity.RestaurantDetailActivity" />
             <activity android:name=".restaurants.activity.RestaurantSearchActivity" />
-            <activity android:name=".SplishScreenActivity">
-                <intent-filter>
-                    <action android:name="android.intent.action.MAIN" />
-
-                    <category android:name="android.intent.category.LAUNCHER" />
-                </intent-filter>
-            </activity>
+            <activity android:name=".restaurants.activity.CheckOutPageActivity"/>
         </application>
 
 

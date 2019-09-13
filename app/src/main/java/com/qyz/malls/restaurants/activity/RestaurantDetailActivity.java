@@ -1,6 +1,7 @@
 package com.qyz.malls.restaurants.activity;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -91,6 +92,13 @@ public class RestaurantDetailActivity extends AppCompatActivity implements CartL
         }
         System.out.println("sree rest id 1234 "+ cart.getRestId()+" "+restaurantListModel.getRestid());
         updateMainCart(cart.getCount());
+        footerCart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(RestaurantDetailActivity.this,CheckOutPageActivity.class);
+                startActivity(intent);
+            }
+        });
     }
     public void setDetailPage() {
         Glide.with(this)
@@ -237,7 +245,9 @@ public class RestaurantDetailActivity extends AppCompatActivity implements CartL
 
     @Override
     public void updateMainCart(int count){
+
         if(cart.getRestId().equals(restaurantListModel.getRestid())) {
+            cart.setRestaurantListModel(restaurantListModel);
             if (count == 0) {
                 cartCount.setVisibility(View.GONE);
                 footerCart.setVisibility(View.GONE);
@@ -250,6 +260,7 @@ public class RestaurantDetailActivity extends AppCompatActivity implements CartL
                 cartCount.setText(count + "");
                 cartCount.setVisibility(View.VISIBLE);
                 footerCart.setVisibility(View.VISIBLE);
+                UserDetails.cart = cart;
             }
         }
     }
