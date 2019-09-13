@@ -1,35 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:dist="http://schemas.android.com/apk/distribution"
-    xmlns:tools="http://schemas.android.com/tools"
-    package="com.qyz.malls">
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.RECEIVE_SMS" />
-    <uses-permission android:name="android.permission.READ_SMS" />
+        xmlns:dist="http://schemas.android.com/apk/distribution"
+        xmlns:tools="http://schemas.android.com/tools"
+        package="com.qyz.malls">
+        <uses-permission android:name="android.permission.INTERNET" />
+        <uses-permission android:name="android.permission.RECEIVE_SMS" />
+        <uses-permission android:name="android.permission.READ_SMS" />
 
-    <application
-        android:icon="@drawable/ic_icon_hurr"
-        android:label="@string/app_name"
-        android:roundIcon="@drawable/ic_icon_hurr"
-        android:supportsRtl="true"
-        android:theme="@style/AppTheme"
-        tools:ignore="GoogleAppIndexingWarning">
-       <activity android:name=".LoginActivity"
-           android:label="@string/app_name">
-           <intent-filter>
-               <action android:name="android.intent.action.MAIN" />
-
-               <category android:name="android.intent.category.LAUNCHER" />
-           </intent-filter>
-       </activity>
-        <activity
-            android:name=".restaurants.activity.RestaurantHomeActivity"
+        <application
+            android:icon="@drawable/ic_icon_hurr"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar">
-        </activity>
-        <activity android:name=".restaurants.activity.RestaurantDetailActivity" />
-        <activity android:name=".restaurants.activity.RestaurantSearchActivity" />
-    </application>
+            android:roundIcon="@drawable/ic_icon_hurr"
+            android:supportsRtl="true"
+            android:theme="@style/AppTheme"
+            tools:ignore="GoogleAppIndexingWarning">
+           <activity android:name=".LoginActivity"
+               android:label="@string/app_name">
+
+           </activity>
+            <activity
+                android:name=".restaurants.activity.RestaurantHomeActivity"
+                android:label="@string/app_name"
+                android:theme="@style/AppTheme.NoActionBar">
+            </activity>
+            <activity android:name=".restaurants.activity.RestaurantDetailActivity" />
+            <activity android:name=".restaurants.activity.RestaurantSearchActivity" />
+            <activity android:name=".SplishScreenActivity">
+                <intent-filter>
+                    <action android:name="android.intent.action.MAIN" />
+
+                    <category android:name="android.intent.category.LAUNCHER" />
+                </intent-filter>
+            </activity>
+        </application>
 
 
-</manifest>
+    </manifest>

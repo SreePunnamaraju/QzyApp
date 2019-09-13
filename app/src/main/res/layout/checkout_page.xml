@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/grey">
   
   
@@ -10,7 +11,99 @@
       android:layout_height="wrap_content"
       android:layout_marginTop="@dimen/dp_35"
       android:layout_marginStart="@dimen/dp_35"
-      android:text="@string/order_summary"/>
+      android:text="@string/order_summary"
+      android:textSize="22.5sp"
+      android:textColor="#070707"
+      android:lineSpacingExtra="15sp"
+      android:id="@+id/order_summary"/>
+
+  <RelativeLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="@dimen/dp_20"
+      android:layout_marginStart="@dimen/dp_35"
+      android:layout_below="@+id/order_summary"
+      android:id="@+id/rest_mall_layout">
+    <RelativeLayout
+        android:id="@+id/imageView"
+        android:layout_height="@dimen/dp_95"
+        android:layout_width="@dimen/dp_120">
+      <ImageView
+          android:id="@+id/restImage"
+          android:layout_width="@dimen/dp_95"
+          android:layout_height="@dimen/dp_95"
+          app:srcCompat="@drawable/no_image"
+          android:scaleType="fitXY"
+          android:background="@drawable/round_bg"
+          />
+
+      <RelativeLayout
+          android:layout_height="@dimen/dp_24"
+          android:layout_width="@dimen/dp_50"
+          android:background="@drawable/round_bg_rating"
+          android:layout_alignParentBottom="true"
+          android:layout_alignParentEnd="true"
+          android:layout_marginBottom="2dp"
+          android:layout_marginStart="@dimen/dp_75"
+          android:elevation="@dimen/dp_10">
+        <TextView
+            android:id="@+id/rating"
+            android:text="4.2"
+            android:textColor="@color/white"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="6dp"
+            android:textSize="15sp"
+            android:lineSpacingExtra="10sp"
+            />
+        <ImageView
+            android:id="@+id/star"
+            android:layout_toEndOf="@+id/rating"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="@dimen/dp_3"
+            android:layout_marginEnd="@dimen/dp_6"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_centerVertical="true"
+            app:srcCompat="@drawable/ic_star_white"/>
+      </RelativeLayout>
+    </RelativeLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@+id/imageView"
+        android:textSize="22.5sp"
+        android:textColor="#414141"
+        android:id="@+id/rest_name"
+        android:text="Shaolin Wok"/>
+
+    <TextView
+        android:layout_below="@+id/rest_name"
+        android:layout_marginTop="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@+id/imageView"
+        android:textSize="20sp"
+        android:textColor="@color/gray"
+        android:id="@+id/mall_name"
+        android:text="Sujana Mall"/>
+
+  </RelativeLayout>
+
+
+  <androidx.recyclerview.widget.RecyclerView
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:id="@+id/menu_cart_list"
+      android:layout_below="@id/rest_mall_layout"
+      android:layout_marginTop="15dp"
+      >
+
+
+
+  </androidx.recyclerview.widget.RecyclerView>
   
   
   
