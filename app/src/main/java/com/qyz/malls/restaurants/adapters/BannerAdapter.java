@@ -4,7 +4,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -13,7 +12,7 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.qyz.malls.HomeActivity;
+import com.qyz.malls.restaurants.activity.RestaurantHomeActivity;
 import com.qyz.malls.R;
 import com.qyz.malls.restaurants.models.RestaurantBannerModel;
 
@@ -21,12 +20,12 @@ import java.util.ArrayList;
 
 class BannerAdapter extends PagerAdapter {
 
-    HomeActivity homeActivity;
+    RestaurantHomeActivity restaurantHomeActivity;
     ArrayList<RestaurantBannerModel> bannerList;
     ViewPager viewPager;
 
-    public BannerAdapter(HomeActivity homeActivity, ArrayList<RestaurantBannerModel> bannerList,ViewPager viewPager) {
-        this.homeActivity=homeActivity;
+    public BannerAdapter(RestaurantHomeActivity restaurantHomeActivity, ArrayList<RestaurantBannerModel> bannerList, ViewPager viewPager) {
+        this.restaurantHomeActivity = restaurantHomeActivity;
         this.bannerList=bannerList;
         this.viewPager=viewPager;
     }
@@ -35,11 +34,11 @@ class BannerAdapter extends PagerAdapter {
     public Object instantiateItem(ViewGroup container, int position) {
 
 
-        View viewItem = LayoutInflater.from(homeActivity).inflate(R.layout.banner, container, false);
+        View viewItem = LayoutInflater.from(restaurantHomeActivity).inflate(R.layout.banner, container, false);
         ImageView imageView = viewItem.findViewById(R.id.banner);
         TextView bannerName = viewItem.findViewById(R.id.bannerName);
         TextView bannerOffer = viewItem.findViewById(R.id.bannerOffer);
-        Glide.with(homeActivity.getBaseContext())
+        Glide.with(restaurantHomeActivity.getBaseContext())
                 .load(bannerList.get(position).getImageUrl())
                 .asBitmap()
                 .diskCacheStrategy(DiskCacheStrategy.ALL)

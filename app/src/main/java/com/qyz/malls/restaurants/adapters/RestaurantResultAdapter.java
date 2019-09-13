@@ -10,9 +10,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.qyz.malls.HomeActivity;
+import com.qyz.malls.restaurants.activity.RestaurantHomeActivity;
 import com.qyz.malls.R;
-import com.qyz.malls.restaurants.RestaurantDetailActivity;
+import com.qyz.malls.restaurants.activity.RestaurantDetailActivity;
 import com.qyz.malls.restaurants.holder.RestaurantResultSecondaryHolder;
 import com.qyz.malls.restaurants.models.RestaurantListModel;
 
@@ -21,12 +21,12 @@ import java.util.ArrayList;
 
 public class RestaurantResultAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-    HomeActivity homeActivity;
+    RestaurantHomeActivity restaurantHomeActivity;
     ArrayList<RestaurantListModel> restList;
 
-    public RestaurantResultAdapter(HomeActivity homeActivity, ArrayList<RestaurantListModel> restList) {
+    public RestaurantResultAdapter(RestaurantHomeActivity restaurantHomeActivity, ArrayList<RestaurantListModel> restList) {
         System.out.println("sree in this rest "+ restList.size());
-        this.homeActivity = homeActivity;
+        this.restaurantHomeActivity = restaurantHomeActivity;
         this.restList = restList;
     }
 
@@ -34,7 +34,7 @@ public class RestaurantResultAdapter extends RecyclerView.Adapter<RecyclerView.V
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         System.out.println("sree in this rest 1");
-        View view  = LayoutInflater.from(homeActivity).inflate(R.layout.rest_list_lay,parent,false);
+        View view  = LayoutInflater.from(restaurantHomeActivity).inflate(R.layout.rest_list_lay,parent,false);
         return new RestaurantResultSecondaryHolder(view);
     }
 
@@ -45,8 +45,8 @@ public class RestaurantResultAdapter extends RecyclerView.Adapter<RecyclerView.V
             final RestaurantListModel model = restList.get(position);
             final RestaurantResultSecondaryHolder secondaryHolder = (RestaurantResultSecondaryHolder) holder;
             System.out.println("sree url "+ model.getImageUrl());
-            if(!homeActivity.isFinishing()) {
-                Glide.with(homeActivity)
+            if(!restaurantHomeActivity.isFinishing()) {
+                Glide.with(restaurantHomeActivity)
                         .load(model.getImageUrl())
                         .asBitmap()
                         .diskCacheStrategy(DiskCacheStrategy.ALL)
@@ -58,21 +58,21 @@ public class RestaurantResultAdapter extends RecyclerView.Adapter<RecyclerView.V
             secondaryHolder.rating.setText(model.getRating());
             secondaryHolder.time.setText(model.getTime());
             if(model.getFav()==0){
-                secondaryHolder.fav.setImageDrawable(homeActivity.getDrawable(R.drawable.ic_heart_grey));
+                secondaryHolder.fav.setImageDrawable(restaurantHomeActivity.getDrawable(R.drawable.ic_heart_grey));
             }
             else{
-                secondaryHolder.fav.setImageDrawable(homeActivity.getDrawable(R.drawable.ic_heart_red));
+                secondaryHolder.fav.setImageDrawable(restaurantHomeActivity.getDrawable(R.drawable.ic_heart_red));
             }
 
             secondaryHolder.fav.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     if(model.getFav()==0){
-                        secondaryHolder.fav.setImageDrawable(homeActivity.getDrawable(R.drawable.ic_heart_red));
+                        secondaryHolder.fav.setImageDrawable(restaurantHomeActivity.getDrawable(R.drawable.ic_heart_red));
                         model.setFav(1);
                     }
                     else{
-                        secondaryHolder.fav.setImageDrawable(homeActivity.getDrawable(R.drawable.ic_heart_grey));
+                        secondaryHolder.fav.setImageDrawable(restaurantHomeActivity.getDrawable(R.drawable.ic_heart_grey));
                         model.setFav(0);
                     }
                 }
@@ -88,11 +88,11 @@ public class RestaurantResultAdapter extends RecyclerView.Adapter<RecyclerView.V
     }
 
     private void launchRestDetailsPage(int position) {
-        Intent intent = new Intent(homeActivity, RestaurantDetailActivity.class);
-        intent.putExtra(HomeActivity.MODEL, (Serializable) restList.get(position));
+        Intent intent = new Intent(restaurantHomeActivity, RestaurantDetailActivity.class);
+        intent.putExtra(RestaurantHomeActivity.MODEL, (Serializable) restList.get(position));
         intent.putExtra("pos",position);
         intent.putExtra("frm","HOMEACTIVITY");
-        homeActivity.startActivity(intent);
+        restaurantHomeActivity.startActivity(intent);
     }
 
     @Override

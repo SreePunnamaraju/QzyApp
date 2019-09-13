@@ -1,4 +1,4 @@
-package com.qyz.malls.restaurants;
+package com.qyz.malls.restaurants.models;
 
 import java.util.HashMap;
 

@@ -9,8 +9,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.qyz.malls.R;
-import com.qyz.malls.restaurants.CartListener;
-import com.qyz.malls.restaurants.RestaurantDetailActivity;
+import com.qyz.malls.restaurants.interfaces.CartListener;
+import com.qyz.malls.restaurants.activity.RestaurantDetailActivity;
 import com.qyz.malls.restaurants.holder.MenuPrimaryHolder;
 import com.qyz.malls.restaurants.models.MenuModel;
 

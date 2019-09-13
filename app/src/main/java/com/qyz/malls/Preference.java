@@ -3,10 +3,9 @@ package com.qyz.malls;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-import com.qyz.malls.restaurants.CheckoutCart;
+import com.qyz.malls.restaurants.models.CheckoutCart;
 
 import java.io.File;
-import java.util.Set;
 
 public class Preference {
 

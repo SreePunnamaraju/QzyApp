@@ -1,4 +1,4 @@
-package com.qyz.malls.restaurants;
+package com.qyz.malls.restaurants.activity;
 
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -15,10 +15,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.google.gson.Gson;
-import com.qyz.malls.HomeActivity;
 import com.qyz.malls.Preference;
 import com.qyz.malls.R;
 import com.qyz.malls.restaurants.adapters.MenuPrimaryAdapter;
+import com.qyz.malls.restaurants.interfaces.CartListener;
+import com.qyz.malls.restaurants.models.CheckoutCart;
 import com.qyz.malls.restaurants.models.MenuItemModel;
 import com.qyz.malls.restaurants.models.MenuModel;
 import com.qyz.malls.restaurants.models.RestaurantListModel;
@@ -57,8 +58,8 @@ public class RestaurantDetailActivity extends AppCompatActivity implements CartL
             getSupportActionBar().hide();
         }
        setContentView(R.layout.activity_restaurant_detail);
-        //if(getIntent()!=null && getIntent().hasExtra(HomeActivity.MODEL))
-       restaurantListModel =(RestaurantListModel) getIntent().getSerializableExtra(HomeActivity.MODEL);
+        //if(getIntent()!=null && getIntent().hasExtra(RestaurantHomeActivity.MODEL))
+       restaurantListModel =(RestaurantListModel) getIntent().getSerializableExtra(RestaurantHomeActivity.MODEL);
         restDetailRecyler = findViewById(R.id.restDetailRecyler);
         backIcon = findViewById(R.id.backIcon);
         backIcon.setOnClickListener(new View.OnClickListener() {

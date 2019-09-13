@@ -1,4 +1,4 @@
-package com.qyz.malls.restaurants;
+package com.qyz.malls.restaurants.activity;
 
 import android.os.Bundle;
 

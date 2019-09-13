@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.qyz.malls.HomeActivity;
+import com.qyz.malls.restaurants.activity.RestaurantHomeActivity;
 import com.qyz.malls.R;
 import com.qyz.malls.restaurants.holder.CusineClickHolder;
 import com.qyz.malls.restaurants.interfaces.FilterListener;
@@ -19,14 +19,14 @@ import java.util.ArrayList;
 
 public class CusineClickAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-    HomeActivity homeActivity;
+    RestaurantHomeActivity restaurantHomeActivity;
     ArrayList<CuisineFilterModel> cusineFilterList;
     FilterListener mCallBack;
     RestaurantFilter restaurantFilter;
 
-    public CusineClickAdapter(HomeActivity homeActivity, ArrayList<CuisineFilterModel> cusineFilterList,FilterListener filterListener,RestaurantFilter restaurantFilter) {
+    public CusineClickAdapter(RestaurantHomeActivity restaurantHomeActivity, ArrayList<CuisineFilterModel> cusineFilterList, FilterListener filterListener, RestaurantFilter restaurantFilter) {
         System.out.println("sree cusine 1 " +cusineFilterList.size());
-        this.homeActivity = homeActivity;
+        this.restaurantHomeActivity = restaurantHomeActivity;
         this.cusineFilterList = cusineFilterList;
         this.mCallBack= filterListener;
         this.restaurantFilter = restaurantFilter;
@@ -35,7 +35,7 @@ public class CusineClickAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(homeActivity).inflate(R.layout.cuisine_layout,parent,false);
+        View view = LayoutInflater.from(restaurantHomeActivity).inflate(R.layout.cuisine_layout,parent,false);
         CusineClickHolder cusineClickAdapter = new CusineClickHolder(view);
         return cusineClickAdapter;
     }

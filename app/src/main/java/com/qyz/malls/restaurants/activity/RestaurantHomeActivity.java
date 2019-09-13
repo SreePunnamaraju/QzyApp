@@ -1,4 +1,4 @@
-package com.qyz.malls;
+package com.qyz.malls.restaurants.activity;
 
 import android.os.Bundle;
 
@@ -14,10 +14,11 @@ import android.view.MenuItem;
 
 import com.google.android.material.navigation.NavigationView;
 import com.google.gson.Gson;
-import com.qyz.malls.restaurants.CheckoutCart;
+import com.qyz.malls.Preference;
+import com.qyz.malls.R;
+import com.qyz.malls.restaurants.models.CheckoutCart;
 import com.qyz.malls.restaurants.adapters.RestaurantResultPageAdapter;
 import com.qyz.malls.restaurants.models.CuisineFilterModel;
-import com.qyz.malls.restaurants.models.MenuItemModel;
 import com.qyz.malls.restaurants.models.RestaurantBannerModel;
 import com.qyz.malls.restaurants.models.RestaurantListModel;
 
@@ -40,11 +41,10 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import static androidx.recyclerview.widget.RecyclerView.*;
 
-public class HomeActivity extends AppCompatActivity
+public class RestaurantHomeActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     RecyclerView homePageMainRecyler;

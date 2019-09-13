@@ -4,17 +4,15 @@ import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.qyz.malls.HomeActivity;
 import com.qyz.malls.R;
-import com.qyz.malls.restaurants.CartListener;
-import com.qyz.malls.restaurants.CheckoutCart;
-import com.qyz.malls.restaurants.RestaurantDetailActivity;
+import com.qyz.malls.restaurants.interfaces.CartListener;
+import com.qyz.malls.restaurants.models.CheckoutCart;
+import com.qyz.malls.restaurants.activity.RestaurantDetailActivity;
 import com.qyz.malls.restaurants.holder.MenuSecondaryHolder;
 import com.qyz.malls.restaurants.models.MenuItemModel;
 
