@@ -15,7 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.google.gson.Gson;
-import com.qyz.malls.Preference;
+import com.qyz.malls.UserDetails;
 import com.qyz.malls.R;
 import com.qyz.malls.restaurants.adapters.MenuPrimaryAdapter;
 import com.qyz.malls.restaurants.interfaces.CartListener;
@@ -83,11 +83,11 @@ public class RestaurantDetailActivity extends AppCompatActivity implements CartL
         System.out.println("sree in this "+restaurantListModel.getName());
         setDetailPage();
         setMenu();
-        if(Preference.cart == null) {
+        if(UserDetails.cart == null) {
             cart = new CheckoutCart();
         }
         else{
-            cart = Preference.cart;
+            cart = UserDetails.cart;
         }
         System.out.println("sree rest id 1234 "+ cart.getRestId()+" "+restaurantListModel.getRestid());
         updateMainCart(cart.getCount());
@@ -256,7 +256,7 @@ public class RestaurantDetailActivity extends AppCompatActivity implements CartL
 
     @Override
     public void onBackPressed() {
-        Preference.cart = cart;
+        UserDetails.cart = cart;
       //  setCart();
         super.onBackPressed();
     }
@@ -264,11 +264,11 @@ public class RestaurantDetailActivity extends AppCompatActivity implements CartL
         StringBuilder set = new StringBuilder();
         if (cart != null && cart.getCart()!=null) {
             for (String s : cart.getCart().keySet()) {
-                    set.append(s).append(Preference.CART_SEPARATOR);
+                    set.append(s).append(UserDetails.CART_SEPARATOR);
             }
         }
-        Preference.setStrPref(this, Preference.CART, set.toString());
-        System.out.println("sree cart set x"+ Preference.getStrPref(this,Preference.CART).toString());
+        UserDetails.setStrPref(this, UserDetails.CART, set.toString());
+        System.out.println("sree cart set x"+ UserDetails.getStrPref(this, UserDetails.CART).toString());
 
     }
 }

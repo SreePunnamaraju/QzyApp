@@ -14,7 +14,7 @@ import android.view.MenuItem;
 
 import com.google.android.material.navigation.NavigationView;
 import com.google.gson.Gson;
-import com.qyz.malls.Preference;
+import com.qyz.malls.UserDetails;
 import com.qyz.malls.R;
 import com.qyz.malls.restaurants.models.CheckoutCart;
 import com.qyz.malls.restaurants.adapters.RestaurantResultPageAdapter;
@@ -100,9 +100,9 @@ public class RestaurantHomeActivity extends AppCompatActivity
     private void updateCart() {
         int count =0;
         Gson gson = new Gson();
-       /*if(Preference.getStrPref(this,Preference.CART)!=null){
-           String [] cartSet = Preference.getStrPref(this,Preference.CART).split(Preference.CART_SEPARATOR);
-           System.out.println("sree cart set "+ Preference.getStrPref(this,Preference.CART).toString());
+       /*if(UserDetails.getStrPref(this,UserDetails.CART)!=null){
+           String [] cartSet = UserDetails.getStrPref(this,UserDetails.CART).split(UserDetails.CART_SEPARATOR);
+           System.out.println("sree cart set "+ UserDetails.getStrPref(this,UserDetails.CART).toString());
            for(String str:cartSet){
                if(str.trim().length()>0){
                    MenuItemModel itemModel = gson.fromJson(str, MenuItemModel.class);
@@ -116,9 +116,9 @@ public class RestaurantHomeActivity extends AppCompatActivity
            }
            checkoutCart.setCount(count);
        }*/
-       System.out.println("sree pref cart "+ Preference.cart);
-       if(Preference.cart!=null){
-           checkoutCart = Preference.cart;
+       System.out.println("sree pref cart "+ UserDetails.cart);
+       if(UserDetails.cart!=null){
+           checkoutCart = UserDetails.cart;
        }
        else {
            checkoutCart = new CheckoutCart();

@@ -7,12 +7,12 @@ import com.qyz.malls.restaurants.models.CheckoutCart;
 
 import java.io.File;
 
-public class Preference {
+public class UserDetails {
 
     public static final String CART_SEPARATOR = "xxxxxCartSeparatorxxxxx";
     private static final String DEF_VAL = "";
     public static String CART ="shopping_cart";
-    private static String QZY_PREF = "justdialPref";
+    private static String QZY_PREF = "qzypref";
     private static Boolean DEF_BOOL = false;
     public static CheckoutCart cart;
 
