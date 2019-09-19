@@ -6,6 +6,7 @@ import android.os.Bundle;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
+import android.os.SystemClock;
 import android.view.View;
 
 import androidx.core.view.GravityCompat;
@@ -59,6 +60,7 @@ public class RestaurantHomeActivity extends AppCompatActivity
     public  CheckoutCart checkoutCart;
     TextView cartCount;
     RelativeLayout shoppingCart;
+    long mLastClickTime=0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,6 +98,10 @@ public class RestaurantHomeActivity extends AppCompatActivity
        shoppingCart.setOnClickListener(new OnClickListener() {
            @Override
            public void onClick(View view) {
+               if (SystemClock.elapsedRealtime() - mLastClickTime < 2000) {
+                   return;
+               }
+               mLastClickTime = SystemClock.elapsedRealtime();
                 launchCart();
            }
        });

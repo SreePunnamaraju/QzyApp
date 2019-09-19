@@ -22,4 +22,10 @@
     <string name="add_coupon">+  ADD COUPON</string>
     <string name="total">TOTAL</string>
     <string name="rs">Rs.</string>
+    <string name="bill_details">BILL DETAILS</string>
+    <string name="rs_221">Rs 221</string>
+    <string name="item_total">Item total</string>
+    <string name="taxes">Taxes</string>
+    <string name="to_pay">To Pay</string>
+    <string name="proceed_to_payment">PROCEED TO PAYMENT</string>
 </resources>

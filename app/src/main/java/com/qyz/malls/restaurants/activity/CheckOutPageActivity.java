@@ -27,11 +27,14 @@ public class CheckOutPageActivity extends AppCompatActivity implements TotalCost
 
 
     public CheckoutCart checkoutCart;
-    ImageView restImage,noItemsInCart;
-    TextView rating,restName,mallName,finalPrice;
+    ImageView restImage,noItemsInCart,backButton;
+    TextView rating,restName,mallName,finalPrice,priceToPay,taxPrice;
     RecyclerView itemListRecyler;
-    RelativeLayout coupon,itemsInCart;
+    RelativeLayout coupon,itemsInCart,proceedPayment;
     RestaurantListModel restaurantListModel;
+    int tax  =20;
+    int dist =50;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -44,12 +47,23 @@ public class CheckOutPageActivity extends AppCompatActivity implements TotalCost
         restName = findViewById(R.id.rest_name);
         mallName = findViewById(R.id.mall_name);
         finalPrice = findViewById(R.id.final_price);
+        priceToPay = findViewById(R.id.final_price_total);
+        taxPrice = findViewById(R.id.final_price_charges);
         itemListRecyler = findViewById(R.id.menu_cart_list);
         coupon = findViewById(R.id.coupon);
         checkoutCart = UserDetails.cart;
+        proceedPayment=findViewById(R.id.proceedToPay);
+        backButton = findViewById(R.id.back);
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
         System.out.println("sree user detail "+checkoutCart);
         if(checkoutCart == null || checkoutCart.getCart()==null || checkoutCart.getCart().size()==0){
             itemsInCart.setVisibility(View.GONE);
+            proceedPayment.setVisibility(View.GONE);
             noItemsInCart.setVisibility(View.VISIBLE);
         }else{
             restaurantListModel = checkoutCart.getRestaurantListModel();
@@ -57,6 +71,7 @@ public class CheckOutPageActivity extends AppCompatActivity implements TotalCost
             itemsInCart.setVisibility(View.VISIBLE);
             updateList();
             setRecyler();
+            proceedPayment.setVisibility(View.VISIBLE);
         }
     }
 
@@ -88,7 +103,16 @@ public class CheckOutPageActivity extends AppCompatActivity implements TotalCost
 
     @Override
     public void updateTotalPrice(int price) {
-        finalPrice.setText(getResources().getString(R.string.rs)+price);
+        if(price == 0){
+            itemsInCart.setVisibility(View.GONE);
+            noItemsInCart.setVisibility(View.VISIBLE);
+            proceedPayment.setVisibility(View.GONE);
+        }else {
+            finalPrice.setText(getResources().getString(R.string.rs) + price);
+            taxPrice.setText(getResources().getString(R.string.rs) + 20);
+            int tot = price + 20;
+            priceToPay.setText(getResources().getString(R.string.rs) + tot);
+        }
     }
 
     @Override

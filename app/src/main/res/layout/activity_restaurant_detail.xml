@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
     android:background="@color/white"
-    >
+    android:orientation="vertical">
+
+
     <RelativeLayout
         android:id="@+id/mainViewContent"
         android:layout_width="match_parent"
@@ -38,12 +39,13 @@
             android:visibility="gone" />
 
         <RelativeLayout
-            android:layout_height="@dimen/dp_60"
+            android:id="@+id/shopping_cart"
             android:layout_width="@dimen/dp_60"
-            android:layout_marginEnd="@dimen/dp_10"
+            android:layout_height="@dimen/dp_60"
             android:layout_centerVertical="true"
-            android:layout_toStartOf="@+id/userIcon"
-            android:id="@+id/shopping_cart">
+            android:layout_marginEnd="@dimen/dp_10"
+            android:layout_toStartOf="@+id/searchIcon">
+
             <RelativeLayout
                 android:layout_width="50dp"
                 android:layout_height="50dp"
@@ -51,9 +53,9 @@
                 android:background="@drawable/round_shop">
 
                 <ImageView
-                    android:layout_centerInParent="true"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
                     app:srcCompat="@drawable/ic_shopping_cart" />
 
             </RelativeLayout>
@@ -62,75 +64,84 @@
                 android:id="@+id/cart_count"
                 android:layout_width="@dimen/dp_30"
                 android:layout_height="@dimen/dp_30"
-                android:background="@drawable/round_shopping"
                 android:layout_alignParentEnd="true"
-                android:textColor="@color/white"
+                android:background="@drawable/round_shopping"
                 android:gravity="center"
-                android:visibility="gone"/>
+                android:textColor="@color/white"
+                android:visibility="gone" />
         </RelativeLayout>
 
-
-        <ImageView
-            android:id="@+id/userIcon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+        <RelativeLayout
+            android:id="@+id/searchIcon"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
             android:layout_marginEnd="@dimen/dp_20"
-            app:srcCompat="@drawable/user_icon" />
+            android:background="@drawable/round_shop">
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_centerInParent="true"
+                app:srcCompat="@drawable/ic_magnifying_glass_white" />
+
+        </RelativeLayout>
+
     </RelativeLayout>
 
     <RelativeLayout
         android:id="@+id/mainView"
-        android:layout_below="@+id/mainViewContent"
-        android:layout_height="@dimen/dp_100"
         android:layout_width="match_parent"
-        android:layout_marginTop="@dimen/dp_20"
-        android:layout_marginStart="@dimen/dp_20">
+        android:layout_height="@dimen/dp_100"
+        android:layout_below="@+id/mainViewContent"
+        android:layout_marginStart="@dimen/dp_20"
+        android:layout_marginTop="@dimen/dp_20">
 
         <RelativeLayout
             android:id="@+id/imageView"
-            android:layout_height="@dimen/dp_95"
-            android:layout_width="@dimen/dp_120">
+            android:layout_width="@dimen/dp_120"
+            android:layout_height="@dimen/dp_95">
+
             <ImageView
                 android:id="@+id/restImage"
                 android:layout_width="@dimen/dp_95"
                 android:layout_height="@dimen/dp_95"
-                app:srcCompat="@drawable/no_image"
-                android:scaleType="fitXY"
                 android:background="@drawable/round_bg"
-                />
+                android:scaleType="fitXY"
+                app:srcCompat="@drawable/no_image" />
 
             <RelativeLayout
-                android:layout_height="@dimen/dp_24"
                 android:layout_width="@dimen/dp_50"
-                android:background="@drawable/round_bg_rating"
-                android:layout_alignParentBottom="true"
+                android:layout_height="@dimen/dp_24"
                 android:layout_alignParentEnd="true"
-                android:layout_marginBottom="2dp"
+                android:layout_alignParentBottom="true"
                 android:layout_marginStart="@dimen/dp_75"
+                android:layout_marginBottom="2dp"
+                android:background="@drawable/round_bg_rating"
                 android:elevation="@dimen/dp_10">
+
                 <TextView
                     android:id="@+id/rating"
-                    android:text="4.2"
-                    android:textColor="@color/white"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_marginStart="6dp"
-                    android:textSize="15sp"
                     android:lineSpacingExtra="10sp"
-                    />
+                    android:text="4.2"
+                    android:textColor="@color/white"
+                    android:textSize="15sp" />
+
                 <ImageView
                     android:id="@+id/star"
-                    android:layout_toEndOf="@+id/rating"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
                     android:layout_marginStart="@dimen/dp_3"
                     android:layout_marginEnd="@dimen/dp_6"
-                    android:layout_height="wrap_content"
-                    android:layout_width="wrap_content"
-                    android:layout_centerVertical="true"
-                    app:srcCompat="@drawable/ic_star_white"/>
+                    android:layout_toEndOf="@+id/rating"
+                    app:srcCompat="@drawable/ic_star_white" />
             </RelativeLayout>
         </RelativeLayout>
 
@@ -138,84 +149,87 @@
             android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_toEndOf="@+id/imageView"
-            android:layout_marginStart="20dp"
             android:layout_centerVertical="true"
-            android:layout_toStartOf="@+id/fav">
+            android:layout_marginStart="20dp"
+            android:layout_toStartOf="@+id/fav"
+            android:layout_toEndOf="@+id/imageView">
 
             <TextView
                 android:id="@+id/restName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Shoalin Work"
-                android:textSize="22.5sp"
-                android:textColor="#1d1d1d"
+                android:ellipsize="end"
                 android:lineSpacingExtra="2.5sp"
                 android:maxLines="1"
-                android:ellipsize="end"/>
+                android:text="Shoalin Work"
+                android:textColor="#1d1d1d"
+                android:textSize="22.5sp" />
 
             <TextView
-                android:layout_below="@+id/restName"
                 android:id="@+id/cusineName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Chinese Chinese Chinese Chinese Chinese Chinese"
-                android:textSize="20sp"
-                android:textColor="#1d1d1d"
-                android:lineSpacingExtra="2.5sp"
+                android:layout_below="@+id/restName"
                 android:layout_marginTop="5dp"
+                android:ellipsize="end"
+                android:lineSpacingExtra="2.5sp"
                 android:maxLines="1"
-                android:ellipsize="end"/>
+                android:text="Chinese Chinese Chinese Chinese Chinese Chinese"
+                android:textColor="#1d1d1d"
+                android:textSize="20sp" />
+
             <RelativeLayout
+                android:id="@+id/timeName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/timeName"
                 android:layout_below="@+id/cusineName"
                 android:layout_marginTop="@dimen/dp_5">
+
                 <ImageView
                     android:id="@+id/clock"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:srcCompat="@drawable/ic_clock"
-                    android:layout_centerVertical="true"/>
+                    android:layout_centerVertical="true"
+                    app:srcCompat="@drawable/ic_clock" />
 
                 <TextView
                     android:id="@+id/time"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="25-30 MIN"
-                    android:textSize="10.5sp"
-                    android:textColor="#535353"
-                    android:lineSpacingExtra="16sp"
                     android:layout_marginStart="@dimen/dp_5"
-                    android:layout_toEndOf="@id/clock"/>
+                    android:layout_toEndOf="@id/clock"
+                    android:lineSpacingExtra="16sp"
+                    android:text="25-30 MIN"
+                    android:textColor="#535353"
+                    android:textSize="10.5sp" />
             </RelativeLayout>
 
             <RelativeLayout
-                android:layout_below="@+id/cusineName"
-                android:layout_toEndOf="@+id/timeName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_below="@+id/cusineName"
                 android:layout_marginStart="@dimen/dp_10"
-                android:layout_marginTop="@dimen/dp_5">
+                android:layout_marginTop="@dimen/dp_5"
+                android:layout_toEndOf="@+id/timeName">
+
                 <ImageView
                     android:id="@+id/rupee"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:srcCompat="@drawable/ic_rupee"
-                    android:layout_centerVertical="true"/>
+                    android:layout_centerVertical="true"
+                    app:srcCompat="@drawable/ic_rupee" />
+
                 <TextView
                     android:id="@+id/price"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="300 for 2"
-                    android:textSize="10.5sp"
-                    android:textColor="#535353"
-                    android:lineSpacingExtra="16sp"
                     android:layout_marginStart="@dimen/dp_5"
-                    android:layout_toEndOf="@id/rupee"/>
+                    android:layout_toEndOf="@id/rupee"
+                    android:lineSpacingExtra="16sp"
+                    android:text="300 for 2"
+                    android:textColor="#535353"
+                    android:textSize="10.5sp" />
             </RelativeLayout>
-
 
 
         </RelativeLayout>
@@ -226,16 +240,15 @@
             android:layout_height="50dp"
             android:layout_alignParentEnd="true"
             android:layout_marginEnd="20dp"
-            android:shape="ring"
-            android:background="@drawable/ic_heart_background">
+            android:background="@drawable/ic_heart_background"
+            android:shape="ring">
 
             <ImageView
                 android:id="@+id/favIcon"
-                android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                app:srcCompat ="@drawable/ic_heart_red"
-                />
+                app:srcCompat="@drawable/ic_heart_red" />
 
         </RelativeLayout>
 
@@ -243,54 +256,54 @@
 
     <TextView
         android:id="@+id/menu"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_30"
         android:layout_below="@+id/mainView"
         android:layout_marginTop="@dimen/dp_20"
-        android:layout_height="@dimen/dp_30"
-        android:layout_width="match_parent"
-        android:textSize="15sp"
-        android:textColor="#d01d1d1d"
+        android:gravity="center"
         android:letterSpacing="0.15"
         android:lineSpacingExtra="10sp"
         android:text="@string/menu"
-        android:gravity="center"/>
+        android:textColor="#d01d1d1d"
+        android:textSize="15sp" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:layout_below="@+id/menu"
         android:id="@+id/restDetailRecyler"
-        android:layout_marginTop="@dimen/dp_20"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_below="@+id/menu"
+        android:layout_marginTop="@dimen/dp_20"
         android:background="@color/white"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
+        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
     <RelativeLayout
-        android:layout_alignParentBottom="true"
         android:id="@+id/footer_cart"
         android:layout_width="match_parent"
         android:layout_height="80dp"
+        android:layout_alignParentBottom="true"
         android:background="@color/green"
         android:visibility="gone">
 
         <ImageView
             android:id="@+id/shop_icon"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:layout_alignParentStart="true"
             android:layout_centerInParent="true"
             android:layout_centerVertical="true"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
             android:layout_marginStart="@dimen/dp_40"
             app:srcCompat="@drawable/ic_shopping_cart_white" />
 
         <TextView
             android:id="@+id/textCart"
-            android:layout_toEndOf="@id/shop_icon"
-            android:textSize="@dimen/dp_20"
-            android:gravity="center"
-            android:textColor="@color/white"
             android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_toStartOf="@id/up_icon"
-            android:layout_height="wrap_content"/>
+            android:layout_toEndOf="@id/shop_icon"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:textSize="20sp" />
 
         <ImageView
             android:id="@+id/up_icon"
@@ -301,7 +314,16 @@
             android:layout_marginEnd="@dimen/dp_30"
             app:srcCompat="@drawable/ic_up_icon_white" />
 
-
     </RelativeLayout>
 
+    <FrameLayout
+        android:id="@+id/fragment_place"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#CC000000"
+        android:visibility="gone"/>
+
 </RelativeLayout>
+
+
+

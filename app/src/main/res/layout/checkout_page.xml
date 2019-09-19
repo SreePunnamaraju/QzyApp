@@ -5,18 +5,33 @@
     android:layout_height="match_parent"
     android:background="@color/white">
 
-
-    <TextView
-        android:id="@+id/order_summary"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/dp_35"
+        android:id="@+id/order_summary"
         android:layout_marginTop="@dimen/dp_35"
-        android:lineSpacingExtra="15sp"
-        android:text="@string/order_summary"
-        android:textColor="#070707"
-        android:textSize="22.5sp"
-        android:textStyle="bold" />
+        android:layout_marginBottom="10dp">
+        <ImageView
+            android:layout_marginStart="@dimen/dp_20"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/ic_back_icon"
+            android:layout_centerVertical="true"
+            android:id="@+id/back"/>
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:lineSpacingExtra="15sp"
+            android:text="@string/order_summary"
+            android:textColor="#070707"
+            android:textSize="22.5sp"
+            android:textStyle="bold"
+            android:gravity="center_horizontal"/>
+
+    </RelativeLayout>
+
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -111,15 +126,23 @@
             android:layout_marginTop="15dp"
             android:layout_centerVertical="true"/>
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:background="@color/grey"
+            android:layout_below="@+id/menu_cart_list"
+            android:id="@+id/greyview_one"
+            android:layout_marginTop="10dp"/>
+
         <RelativeLayout
             android:id="@+id/coupon"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:layout_below="@+id/menu_cart_list"
             android:layout_marginLeft="35dp"
             android:layout_marginTop="10dp"
             android:layout_marginRight="35dp"
-            android:background="@drawable/round_bg">
+            android:background="@drawable/round_bg"
+            android:layout_below="@+id/greyview_one">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -137,44 +160,132 @@
         <View
             android:id="@+id/view"
             android:layout_width="match_parent"
-            android:layout_height="1dp"
+            android:layout_height="20dp"
             android:layout_below="@+id/coupon"
-            android:layout_marginLeft="@dimen/dp_35"
             android:layout_marginTop="@dimen/dp_20"
-            android:layout_marginRight="@dimen/dp_35"
-            android:background="#707070" />
+            android:background="@color/grey" />
 
-        <RelativeLayout
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/view"
-            android:layout_alignParentEnd="true"
             android:layout_marginTop="20dp"
-            android:layout_marginEnd="@dimen/dp_35">
+            android:layout_below="@+id/view"
+            android:orientation="vertical">
+          <TextView
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:text="@string/bill_details"
+              android:textColor="@color/black"
+              android:layout_marginStart="@dimen/dp_35"
+              android:textSize="18sp"
+              android:textStyle="bold"/>
 
-            <TextView
-                android:id="@+id/final_price"
-                android:layout_width="wrap_content"
+            <RelativeLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:lineSpacingExtra="20sp"
-                android:text="Rs 221"
-                android:textColor="#414141"
-                android:textSize="17.5sp"
-                android:textStyle="bold" />
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="@dimen/dp_35">
 
-            <TextView
-                android:layout_width="wrap_content"
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/item_total"
+                    android:textColor="#414141"
+                    android:textSize="17.5sp"
+                    android:layout_marginLeft="@dimen/dp_35"/>
+
+                <TextView
+                    android:id="@+id/final_price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:lineSpacingExtra="20sp"
+                    android:text="@string/rs_221"
+                    android:textColor="#414141"
+                    android:textSize="17.5sp" />
+
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="10dp"
-                android:layout_toStartOf="@+id/final_price"
-                android:lineSpacingExtra="20sp"
-                android:text="@string/total"
-                android:textColor="#414141"
-                android:textSize="17.5sp"
-                android:textStyle="bold" />
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="@dimen/dp_35">
 
-        </RelativeLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Taxes"
+                    android:textColor="#414141"
+                    android:textSize="17.5sp"
+                    android:layout_marginStart="@dimen/dp_35"/>
+
+                <TextView
+                    android:id="@+id/final_price_charges"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:lineSpacingExtra="20sp"
+                    android:text="Rs 20"
+                    android:textColor="#414141"
+                    android:textSize="17.5sp" />
+
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#707070"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="@dimen/dp_35"
+                android:layout_marginRight="@dimen/dp_35"/>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="@dimen/dp_35">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/to_pay"
+                    android:textColor="#414141"
+                    android:textSize="17.5sp"
+                    android:layout_marginStart="@dimen/dp_35"
+                    android:textStyle="bold"/>
+
+                <TextView
+                    android:id="@+id/final_price_total"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:lineSpacingExtra="20sp"
+                    android:text="Rs 221"
+                    android:textColor="#414141"
+                    android:textSize="17.5sp" />
+
+            </RelativeLayout>
+
+        </LinearLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/green"
+        android:visibility="visible"
+        android:id="@+id/proceedToPay">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/proceed_to_payment"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:textSize="20sp"/>
+
     </RelativeLayout>
 
     <ImageView

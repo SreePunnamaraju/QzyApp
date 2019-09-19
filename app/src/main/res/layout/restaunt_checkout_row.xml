@@ -33,7 +33,8 @@
             android:text="Rs 200"
             android:layout_centerVertical="true"
             android:layout_marginEnd="35dp"
-            android:id="@+id/price_total"/>
+            android:id="@+id/price_total"
+            android:gravity="end"/>
 
         <RelativeLayout
             android:id="@+id/itemCount"

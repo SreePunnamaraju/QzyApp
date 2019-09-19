@@ -3,13 +3,18 @@ package com.qyz.malls.restaurants.activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -19,6 +24,7 @@ import com.google.gson.Gson;
 import com.qyz.malls.UserDetails;
 import com.qyz.malls.R;
 import com.qyz.malls.restaurants.adapters.MenuPrimaryAdapter;
+import com.qyz.malls.restaurants.fragment.MenuItemSearchFragment;
 import com.qyz.malls.restaurants.interfaces.CartListener;
 import com.qyz.malls.restaurants.models.CheckoutCart;
 import com.qyz.malls.restaurants.models.MenuItemModel;
@@ -35,14 +41,14 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class RestaurantDetailActivity extends AppCompatActivity implements CartListener {
+public class RestaurantDetailActivity extends BaseActivity implements CartListener {
 
     ArrayList<MenuModel> menuModels = new ArrayList<>();
     RestaurantListModel restaurantListModel;
     RecyclerView restDetailRecyler;
     ImageView backIcon,restImage,favIcon;
     TextView rating,restName,cusineName,time,price;
-    RelativeLayout fav,shoppingCartIcon;
+    RelativeLayout fav,shoppingCartIcon,searchIcon;
     public CheckoutCart cart;
     TextView  cartCount;
     TextView textCart;
@@ -50,6 +56,8 @@ public class RestaurantDetailActivity extends AppCompatActivity implements CartL
     RelativeLayout footerCart;
     int pos;
     MenuPrimaryAdapter menuPrimaryAdapter;
+    long mLastClickTime=0;
+    FrameLayout frame;
 
 
     @Override
@@ -59,7 +67,8 @@ public class RestaurantDetailActivity extends AppCompatActivity implements CartL
         if (getSupportActionBar() != null) {
             getSupportActionBar().hide();
         }
-       setContentView(R.layout.activity_restaurant_detail);
+        frame =   findViewById(R.id.container_main);
+        getLayoutInflater().inflate(R.layout.activity_restaurant_detail,frame);
         //if(getIntent()!=null && getIntent().hasExtra(RestaurantHomeActivity.MODEL))
        restaurantListModel =(RestaurantListModel) getIntent().getSerializableExtra(RestaurantHomeActivity.MODEL);
         restDetailRecyler = findViewById(R.id.restDetailRecyler);
@@ -83,6 +92,13 @@ public class RestaurantDetailActivity extends AppCompatActivity implements CartL
         footerCart = findViewById(R.id.footer_cart);
         shoppingCartIcon = findViewById(R.id.shopping_cart);
         pos = getIntent().getIntExtra("pos",0);
+        searchIcon = findViewById(R.id.searchIcon);
+        searchIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                launchSearchPage();
+            }
+        });
         System.out.println("sree in this "+restaurantListModel.getName());
         setDetailPage();
         setMenu();
@@ -96,17 +112,43 @@ public class RestaurantDetailActivity extends AppCompatActivity implements CartL
         footerCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if (SystemClock.elapsedRealtime() - mLastClickTime < 2000) {
+                    return;
+                }
+                mLastClickTime = SystemClock.elapsedRealtime();
                 launchCart();
             }
         });
         shoppingCartIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if (SystemClock.elapsedRealtime() - mLastClickTime < 2000) {
+                    return;
+                }
+                mLastClickTime = SystemClock.elapsedRealtime();
                 launchCart();
             }
         });
 
     }
+
+    private void launchSearchPage() {
+        Bundle bundle = new Bundle();
+        bundle.putParcelableArrayList("list",menuModels);
+        for(int i=0;i<menuModels.size();i++){
+            System.out.println("sree check 1"+menuModels.get(i).getMenuItemList().size());
+        }
+        findViewById(R.id.fragment_place).setVisibility(View.VISIBLE);
+        Fragment fragment = new MenuItemSearchFragment();
+        fragment.setArguments(bundle);
+        FragmentManager manager = getSupportFragmentManager();
+        FragmentTransaction transaction = manager.beginTransaction();
+        transaction.add(R.id.fragment_place,fragment,"MenuItemSearchFragment");
+        transaction.addToBackStack("MenuItemSearchFragment");
+        transaction.commit();
+
+    }
+
     public void setDetailPage() {
         Glide.with(this)
                 .load(restaurantListModel.getImageUrl())
@@ -275,8 +317,11 @@ public class RestaurantDetailActivity extends AppCompatActivity implements CartL
     @Override
     public void onBackPressed() {
         UserDetails.cart = cart;
-      //  setCart();
-        super.onBackPressed();
+        if( findViewById(R.id.fragment_place).getVisibility()==View.VISIBLE){
+            findViewById(R.id.fragment_place).setVisibility(View.GONE);
+        }else {
+            super.onBackPressed();
+        }
     }
 
     @Override

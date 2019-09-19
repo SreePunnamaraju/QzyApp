@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -37,6 +38,7 @@ public class LoginActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     String number="";
     LoginActivity mActivity;
+    TextView skip;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +49,7 @@ public class LoginActivity extends AppCompatActivity {
         otpButton=findViewById(R.id.get_otp);
         mAuth=FirebaseAuth.getInstance();
         progressBar=findViewById(R.id.progressBar);
+        skip = findViewById(R.id.skip);
         mActivity = this;
         mVerificationId="";
         //  sendVerificationCode(number);
@@ -87,6 +90,14 @@ public class LoginActivity extends AppCompatActivity {
             }
 
 
+        });
+        skip.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(LoginActivity.this, RestaurantHomeActivity.class);
+                startActivity(intent);
+                finish();
+            }
         });
 
     }

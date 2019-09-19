@@ -39,13 +39,13 @@ public class CartMenuAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder1, int position) {
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder1, final int position) {
         final MenuItemModel menuModel = menuItemModels.get(position);
         final CartItemHolder holder = (CartItemHolder) holder1;
         holder.itemName.setText(menuModel.getName());
         if (menuModel.getCount() == 0 ){
             holder.itemCountNonZero.setVisibility(View.GONE);
-            holder.itemCountZero.setVisibility(View.VISIBLE);
+            holder.itemCountZero.setVisibility(View.GONE);
         }
         else{
             holder.itemCountZero.setVisibility(View.GONE);
@@ -60,15 +60,19 @@ public class CartMenuAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         holder.decreaseCount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(menuModel.count>1) {
-                    menuModel.setCount(menuModel.getCount()-1);
-                    setItemPriceVal(holder,price,menuModel.getCount(),-1);
+                if(menuModel.count>0) {
+                    if (menuModel.count > 1) {
+                        menuModel.setCount(menuModel.getCount() - 1);
+                        setItemPriceVal(holder, price, menuModel.getCount(), -1);
+                    } else {
+                        menuModel.setCount(menuModel.getCount() - 1);
+                        setItemPriceVal(holder, price, menuModel.getCount(), -1);
+                        menuItemModels.remove(menuModel);
+                        CartMenuAdapter.this.notifyDataSetChanged();
+                        totalPrice=0;
+                    }
+                    updateCart(menuModel, -1);
                 }
-                else{
-                    menuItemModels.remove(menuModel);
-                    CartMenuAdapter.this.notifyDataSetChanged();
-                }
-                updateCart(menuModel,0);
             }
         });
         holder.increaseCount.setOnClickListener(new View.OnClickListener() {
@@ -91,7 +95,7 @@ public class CartMenuAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         else{
             shopCart.put(model,count);
         }
-        if(val == 0) {
+        if(val == -1) {
             mActivity.checkoutCart.setCount(mActivity.checkoutCart.getCount() - 1);
         }else{
             mActivity.checkoutCart.setCount(mActivity.checkoutCart.getCount() + 1);
@@ -109,7 +113,7 @@ public class CartMenuAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         }else if(change == -1){
             totalPrice -=price;
         }else if(change == 1){
-            totalPrice+=price;
+            totalPrice +=price;
         }
         System.out.println("sree total price "+totalPrice);
         mActivity.updateTotalPrice(totalPrice);

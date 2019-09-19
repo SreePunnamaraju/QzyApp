@@ -1,6 +1,7 @@
 package com.qyz.malls.restaurants.adapters;
 
 import android.content.Intent;
+import android.os.SystemClock;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,6 +24,7 @@ public class RestaurantResultAdapter extends RecyclerView.Adapter<RecyclerView.V
 
     RestaurantHomeActivity restaurantHomeActivity;
     ArrayList<RestaurantListModel> restList;
+    long mLastClickTime=0;
 
     public RestaurantResultAdapter(RestaurantHomeActivity restaurantHomeActivity, ArrayList<RestaurantListModel> restList) {
         System.out.println("sree in this rest "+ restList.size());
@@ -80,6 +82,10 @@ public class RestaurantResultAdapter extends RecyclerView.Adapter<RecyclerView.V
             secondaryHolder.restResultLay.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    if (SystemClock.elapsedRealtime() - mLastClickTime < 2000) {
+                        return;
+                    }
+                    mLastClickTime = SystemClock.elapsedRealtime();
                     launchRestDetailsPage(position);
                 }
             });
