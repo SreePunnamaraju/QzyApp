@@ -18,6 +18,9 @@ import com.google.android.material.navigation.NavigationView;
 import com.google.gson.Gson;
 import com.qyz.malls.UserDetails;
 import com.qyz.malls.R;
+import com.qyz.malls.apicall.ApiCallBackInterface;
+import com.qyz.malls.apicall.ApiCallResponse;
+import com.qyz.malls.apicall.ApiInstanceClass;
 import com.qyz.malls.restaurants.models.CheckoutCart;
 import com.qyz.malls.restaurants.adapters.RestaurantResultPageAdapter;
 import com.qyz.malls.restaurants.models.CuisineFilterModel;
@@ -44,11 +47,12 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 
 import static androidx.recyclerview.widget.RecyclerView.*;
 
 public class RestaurantHomeActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener, ApiCallBackInterface {
 
     RecyclerView homePageMainRecyler;
     ArrayList<RestaurantListModel> restList = new ArrayList<>();
@@ -161,14 +165,13 @@ public class RestaurantHomeActivity extends AppCompatActivity
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, VERTICAL, false);
         homePageMainRecyler.setLayoutManager(layoutManager);
         setRestaurantResult();
-        setBanner();
-        setCuisine();
-        restaurantResultPageAdapter = new RestaurantResultPageAdapter(this, banner, cusinefilter, restList);
-        homePageMainRecyler.setAdapter(restaurantResultPageAdapter);
     }
 
     public void setRestaurantResult() {
-         populateList("dummy_rest_list", "rest");
+      //   populateList("dummy_rest_list", "rest");
+        LinkedHashMap<String, String> apiCallMap = new LinkedHashMap<>();
+        apiCallMap.put("mall","SCCP_HYD");
+        ApiInstanceClass.getInstance().getRestaurantList(ApiInstanceClass.getBaseInterface(),apiCallMap,this,"dummy_rest_list");
     }
 
     public void setCuisine() {
@@ -300,4 +303,30 @@ public class RestaurantHomeActivity extends AppCompatActivity
         return true;
     }
 
+    @Override
+    public void onResponseSuccess(JSONObject json, String requestTag) throws JSONException {
+
+        System.out.println("sree json "+ json.toString()+" tag "+ requestTag);
+        Gson gson = new Gson();
+        JSONArray jsonArray;
+        if(requestTag.equals("dummy_rest_list")){
+            jsonArray = json.getJSONArray("restaurants");
+            for (int i = 0; i < jsonArray.length(); i++)
+            {
+                JSONObject object = jsonArray.getJSONObject(i);
+                RestaurantListModel model = gson.fromJson(object.toString(), RestaurantListModel.class);
+                restList.add(model);
+                    System.out.println("sree rest "+model.toString());
+            }
+            setBanner();
+            setCuisine();
+            restaurantResultPageAdapter = new RestaurantResultPageAdapter(this, banner, cusinefilter, restList);
+            homePageMainRecyler.setAdapter(restaurantResultPageAdapter);
+        }
+    }
+
+    @Override
+    public void onResponseFailure(String requestTag) {
+
+    }
 }

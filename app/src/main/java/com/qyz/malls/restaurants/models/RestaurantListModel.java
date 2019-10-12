@@ -12,17 +12,17 @@ public class RestaurantListModel implements Parcelable, Serializable {
 
     @SerializedName("fav")
     @Expose
-    private int fav;
+    private int fav=0;
 
-    @SerializedName("restid")
+    @SerializedName("sort")
     @Expose
     private String restid;
 
-    @SerializedName("mallid")
+    @SerializedName("partition")
     @Expose
     private String mallid;
 
-    @SerializedName("name")
+    @SerializedName("restaurant_name")
     @Expose
     private String name;
 
@@ -34,11 +34,11 @@ public class RestaurantListModel implements Parcelable, Serializable {
     @Expose
     private String rating;
 
-    @SerializedName("time")
+    @SerializedName("avg_time")
     @Expose
     private String time;
 
-    @SerializedName("imageUrl")
+    @SerializedName("picture")
     @Expose
     private String imageUrl;
 
@@ -46,7 +46,7 @@ public class RestaurantListModel implements Parcelable, Serializable {
     @Expose
     private String offer;
 
-    @SerializedName("price")
+    @SerializedName("cost_for_two")
     @Expose
     private String price;
 
