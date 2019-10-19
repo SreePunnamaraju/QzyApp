@@ -1,21 +1,21 @@
 {
   "project_info": {
-    "project_number": "416173152072",
-    "firebase_url": "https://qzyapp-6caf5.firebaseio.com",
-    "project_id": "qzyapp-6caf5",
-    "storage_bucket": "qzyapp-6caf5.appspot.com"
+    "project_number": "880215740712",
+    "firebase_url": "https://qzyapp-de0e0.firebaseio.com",
+    "project_id": "qzyapp-de0e0",
+    "storage_bucket": "qzyapp-de0e0.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:416173152072:android:f61a271a0bbb4b71fa857d",
+        "mobilesdk_app_id": "1:880215740712:android:e3d3cf1f185e792303001d",
         "android_client_info": {
           "package_name": "com.qyz.malls"
         }
       },
       "oauth_client": [
         {
-          "client_id": "416173152072-smutfpuanvh8pn6fk5k7gbpf2o2hjl0l.apps.googleusercontent.com",
+          "client_id": "880215740712-4ductschgljt9vb4talgi3tukuiq56bh.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.qyz.malls",
@@ -23,20 +23,20 @@
           }
         },
         {
-          "client_id": "416173152072-is45burlnbbdej6orhu50lbv4vikev3f.apps.googleusercontent.com",
+          "client_id": "880215740712-4tgoek1473enuta4dh1cnovcdpthtcp9.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDiXcHpsbQOPMnhn_dJqEhARoiWDjto7e4"
+          "current_key": "AIzaSyBydi_fa15g7E6Zy0Ki06cTnIosSOL5FkE"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "416173152072-is45burlnbbdej6orhu50lbv4vikev3f.apps.googleusercontent.com",
+              "client_id": "880215740712-4tgoek1473enuta4dh1cnovcdpthtcp9.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

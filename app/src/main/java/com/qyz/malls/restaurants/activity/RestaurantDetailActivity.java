@@ -224,7 +224,7 @@ public class RestaurantDetailActivity extends BaseActivity implements CartListen
 
     private void setMenuData() {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this,RecyclerView.VERTICAL,false);
-        MenuPrimaryAdapter menuPrimaryAdapter = new MenuPrimaryAdapter(this,menuModels,this,pos);
+        MenuPrimaryAdapter menuPrimaryAdapter = new MenuPrimaryAdapter(this,menuModels,this,restaurantListModel.getRestid());
         restDetailRecyler.setLayoutManager(linearLayoutManager);
         restDetailRecyler.setAdapter(menuPrimaryAdapter);
     }

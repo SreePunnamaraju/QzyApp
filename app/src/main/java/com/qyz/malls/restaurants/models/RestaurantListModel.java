@@ -6,7 +6,11 @@ import android.os.Parcelable;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public class RestaurantListModel implements Parcelable, Serializable {
 
@@ -26,9 +30,7 @@ public class RestaurantListModel implements Parcelable, Serializable {
     @Expose
     private String name;
 
-    @SerializedName("cuisine")
-    @Expose
-    private String cusine;
+    private String cusine="";
 
     @SerializedName("rating")
     @Expose
@@ -49,6 +51,8 @@ public class RestaurantListModel implements Parcelable, Serializable {
     @SerializedName("cost_for_two")
     @Expose
     private String price;
+
+    private ArrayList<String> cusines;
 
     public String getRestid() {
         return restid;
@@ -135,7 +139,6 @@ public class RestaurantListModel implements Parcelable, Serializable {
         restid = in.readString();
         mallid = in.readString();
         name = in.readString();
-        cusine = in.readString();
         rating = in.readString();
         time = in.readString();
         imageUrl = in.readString();
@@ -166,11 +169,35 @@ public class RestaurantListModel implements Parcelable, Serializable {
         parcel.writeString(restid);
         parcel.writeString(mallid);
         parcel.writeString(name);
-        parcel.writeString(cusine);
         parcel.writeString(rating);
         parcel.writeString(time);
         parcel.writeString(imageUrl);
         parcel.writeString(offer);
         parcel.writeString(price);
+    }
+
+    public ArrayList<String> getCusines() {
+        return cusines;
+    }
+
+    public void setCusines(JSONArray stringcus) {
+        ArrayList<String> cusines = new ArrayList<>();
+        System.out.println("sree cus string "+cusine);
+        try {
+        for(int i =0;i<stringcus.length();i++){
+            System.out.println("sree cus "+stringcus.get(i).toString());
+                cusines.add(stringcus.get(i).toString());
+                 }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        StringBuilder builder = new StringBuilder();
+        for(int i=0;i<cusines.size()-1;i++){
+           builder.append(cusines.get(i).toString());
+           builder.append(",");
+        }
+        builder.append(cusines.get(cusines.size()-1).toString());
+        cusine = builder.toString();
+        System.out.println("sree cus string 1"+cusine);
     }
 }

@@ -20,7 +20,7 @@ public class MenuPrimaryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     RestaurantDetailActivity mActivity;
     ArrayList<MenuModel> menuModels;
     CartListener listener;
-    int pos;
+    String pos;
 
     public MenuPrimaryAdapter(RestaurantDetailActivity restaurantDetailActivity, ArrayList<MenuModel> menuModels) {
         this.mActivity=restaurantDetailActivity;
@@ -32,7 +32,7 @@ public class MenuPrimaryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         this.listener = cartListener;
     }
 
-    public MenuPrimaryAdapter(RestaurantDetailActivity restaurantDetailActivity, ArrayList<MenuModel> menuModels, CartListener cartListener,int pos) {
+    public MenuPrimaryAdapter(RestaurantDetailActivity restaurantDetailActivity, ArrayList<MenuModel> menuModels, CartListener cartListener,String pos) {
         this.mActivity=restaurantDetailActivity;
         this.menuModels=menuModels;
         this.listener = cartListener;

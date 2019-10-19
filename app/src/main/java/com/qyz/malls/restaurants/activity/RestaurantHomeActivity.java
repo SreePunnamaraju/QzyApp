@@ -315,6 +315,7 @@ public class RestaurantHomeActivity extends AppCompatActivity
             {
                 JSONObject object = jsonArray.getJSONObject(i);
                 RestaurantListModel model = gson.fromJson(object.toString(), RestaurantListModel.class);
+                model.setCusines(object.getJSONArray("cusines"));
                 restList.add(model);
                     System.out.println("sree rest "+model.toString());
             }

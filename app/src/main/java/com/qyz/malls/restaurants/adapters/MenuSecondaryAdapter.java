@@ -25,7 +25,7 @@ class MenuSecondaryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     RestaurantDetailActivity mActivity;
     ArrayList<MenuItemModel> menuItemList;
     CartListener callBack;
-    int pos;
+    String pos;
     HashMap<String,MenuItemModel> map;
 
     public MenuSecondaryAdapter(RestaurantDetailActivity mActivity, ArrayList<MenuItemModel> menuItemList) {
@@ -40,7 +40,7 @@ class MenuSecondaryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         this.callBack = listener;
     }
 
-    public MenuSecondaryAdapter(RestaurantDetailActivity mActivity, ArrayList<MenuItemModel> menuItemList,CartListener listener,int pos) {
+    public MenuSecondaryAdapter(RestaurantDetailActivity mActivity, ArrayList<MenuItemModel> menuItemList,CartListener listener,String pos) {
         this.mActivity=mActivity;
         this.menuItemList=menuItemList;
         this.callBack = listener;
@@ -68,7 +68,7 @@ class MenuSecondaryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             final MenuSecondaryHolder holder =(MenuSecondaryHolder) menuHolder;
             holder.itemName.setText(menuModel.getName());
             holder.itemPrice.setText(menuModel.getPrice());
-            menuModel.setRestid(String.valueOf(pos+1));
+            menuModel.setRestid(pos);
             System.out.println("sree in cart "+mActivity.cart.getCart().containsKey(menuModel));
             if(map.containsKey(menuModel.getItemid())){
                 if(menuModel.getRestid().equals(mActivity.cart.restId)) {

@@ -47,6 +47,7 @@ public class RestaurantResultAdapter extends RecyclerView.Adapter<RecyclerView.V
             final RestaurantListModel model = restList.get(position);
             final RestaurantResultSecondaryHolder secondaryHolder = (RestaurantResultSecondaryHolder) holder;
             System.out.println("sree url "+ model.getImageUrl());
+            System.out.println("sree model "+ model.getRestid());
             if(!restaurantHomeActivity.isFinishing()) {
                 Glide.with(restaurantHomeActivity)
                         .load(model.getImageUrl())
@@ -55,10 +56,12 @@ public class RestaurantResultAdapter extends RecyclerView.Adapter<RecyclerView.V
                         .into(secondaryHolder.restImage);
             }
             secondaryHolder.cusineName.setText(model.getCusine());
-            secondaryHolder.price.setText(model.getPrice());
+            String price =restaurantHomeActivity.getString(R.string.rs)+model.getPrice()+" "+restaurantHomeActivity.getString(R.string.fortwo);
+          //  secondaryHolder.price.setText(restaurantHomeActivity.getString(R.string.rs)+model.getPrice()+restaurantHomeActivity.getString(R.string.fortwo));
+            secondaryHolder.price.setText(price);
             secondaryHolder.restName.setText(model.getName());
             secondaryHolder.rating.setText(model.getRating());
-            secondaryHolder.time.setText(model.getTime());
+            secondaryHolder.time.setText(model.getTime() +" "+ restaurantHomeActivity.getString(R.string.min));
             if(model.getFav()==0){
                 secondaryHolder.fav.setImageDrawable(restaurantHomeActivity.getDrawable(R.drawable.ic_heart_grey));
             }

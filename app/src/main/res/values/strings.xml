@@ -28,4 +28,6 @@
     <string name="taxes">Taxes</string>
     <string name="to_pay">To Pay</string>
     <string name="proceed_to_payment">PROCEED TO PAYMENT</string>
+    <string name="fortwo">for two</string>
+    <string name="min">min</string>
 </resources>

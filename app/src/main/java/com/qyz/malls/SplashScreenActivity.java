@@ -21,12 +21,13 @@ public class SplashScreenActivity extends AppCompatActivity {
         setContentView(R.layout.splash_screen_activity);
         mAuth= FirebaseAuth.getInstance();
         final Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
+        checkIfLoggedIn();
+       /* handler.postDelayed(new Runnable() {
             @Override
             public void run() {
                 checkIfLoggedIn();
             }
-        }, 2000);
+        }, 2000);*/
     }
 
     private void checkIfLoggedIn() {

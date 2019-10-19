@@ -2,17 +2,17 @@
 	"cuisines": [
 	    {
 			"cusid": "1",
-			"name": "South Indian",
+			"name": "FastFood",
 			"colour": "#DB7093"
 		},
 		{
 			"cusid": "2",
-			"name": "Chinese",
+			"name": "QuickBites",
 			"colour": "#DEB887"
 		},
 		{
 			"cusid": "3",
-			"name": "Italian",
+			"name": "Indian",
 			"colour": "#EE82EE"
 		},
 		{
