@@ -1,5 +1,6 @@
 package com.qyz.malls;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.InputType;
@@ -24,9 +25,16 @@ import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthProvider;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.qyz.malls.apicall.ApiInstanceClass;
 import com.qyz.malls.restaurants.activity.RestaurantHomeActivity;
 
+import org.json.JSONObject;
+
+import java.util.LinkedHashMap;
 import java.util.concurrent.TimeUnit;
+
+import okhttp3.RequestBody;
 
 public class LoginActivity extends AppCompatActivity {
     private static final String TAG = "sree";
@@ -203,16 +211,41 @@ public class LoginActivity extends AppCompatActivity {
                     }
                 });
     }
+
+    public static void sendPostCred(FirebaseAuth mAuth, Activity mActivity) {
+        LinkedHashMap<String,String> params = new LinkedHashMap<>();
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        params.put("partition",currentUser.getPhoneNumber());
+        params.put("sort",currentUser.getUid());
+        params.put("passkey",FirebaseInstanceId.getInstance().getToken());
+        System.out.println("sree id "+currentUser.getPhoneNumber()+" "+
+                currentUser.getProviderId()+"  "+params.get("passkey"));
+        RequestBody body = RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"),(new JSONObject(params)).toString());
+        /*  FirebaseInstanceId.getInstance().getInstanceId().addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
+            @Override
+            public void onComplete(@NonNull Task<InstanceIdResult> task) {
+
+            }
+        })*/
+
+        ApiInstanceClass.getInstance().postUsedCred(ApiInstanceClass.getBaseInterface(),body,mActivity);
+
+    }
+
     @Override
     public void onStart() {
         super.onStart();
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if(currentUser!=null) {
+            sendPostCred(mAuth,this);
             Intent intent = new Intent(this, RestaurantHomeActivity.class);
             startActivity(intent);
             finish();
         }
     }
 
-
+    @Override
+    protected void onResume() {
+        super.onResume();
+    }
 }

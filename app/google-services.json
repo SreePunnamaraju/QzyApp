@@ -15,11 +15,19 @@
       },
       "oauth_client": [
         {
-          "client_id": "880215740712-4ductschgljt9vb4talgi3tukuiq56bh.apps.googleusercontent.com",
+          "client_id": "880215740712-0q7o70vhrte3b7i81pe2ogesr71t531h.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.qyz.malls",
             "certificate_hash": "a0b6a3e78f7cfd2551b3c83df8947f2364677c96"
+          }
+        },
+        {
+          "client_id": "880215740712-ahg9m5jglhel2mbqrpu1a3e0quafm58j.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.qyz.malls",
+            "certificate_hash": "6566a6ece849a73c669004228cdcdd02336ee6cd"
           }
         },
         {

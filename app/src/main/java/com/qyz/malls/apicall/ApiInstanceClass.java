@@ -1,11 +1,15 @@
 package com.qyz.malls.apicall;
 
+import android.app.Activity;
+import android.util.Log;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.LinkedHashMap;
 import java.util.concurrent.TimeUnit;
 
+import okhttp3.RequestBody;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -70,5 +74,20 @@ public class ApiInstanceClass {
             }
         });
 
+    }
+
+    public void postUsedCred(ApiInterfaceClass apiInstanceClass, RequestBody params, Activity mActivity) {
+        apiInstanceClass.postUser(params).enqueue(new Callback<JSONObject>() {
+            @Override
+            public void onResponse(Call<JSONObject> call, Response<JSONObject> response) {
+                Log.e("Sree on response ",response.toString());
+                Log.e("Sree on response call",call.request().toString());
+            }
+
+            @Override
+            public void onFailure(Call<JSONObject> call, Throwable t) {
+                Log.e("Sree on response fail",call.toString());
+            }
+        });
     }
 }
