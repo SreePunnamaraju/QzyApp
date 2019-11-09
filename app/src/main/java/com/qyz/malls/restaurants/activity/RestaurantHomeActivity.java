@@ -60,6 +60,7 @@ public class RestaurantHomeActivity extends AppCompatActivity
     ArrayList<CuisineFilterModel> cusinefilter = new ArrayList<>();
     ImageView menuicon;
     public static final String MODEL = "MODEL";
+    public static final String RESTAURANTID = "RESTAURANTID";
     RestaurantResultPageAdapter restaurantResultPageAdapter;
     public  CheckoutCart checkoutCart;
     TextView cartCount;
@@ -99,7 +100,7 @@ public class RestaurantHomeActivity extends AppCompatActivity
             }
         });
         shoppingCart = findViewById(R.id.shopping_cart);
-       shoppingCart.setOnClickListener(new OnClickListener() {
+        shoppingCart.setOnClickListener(new OnClickListener() {
            @Override
            public void onClick(View view) {
                if (SystemClock.elapsedRealtime() - mLastClickTime < 2000) {
@@ -171,7 +172,7 @@ public class RestaurantHomeActivity extends AppCompatActivity
       //   populateList("dummy_rest_list", "rest");
         LinkedHashMap<String, String> apiCallMap = new LinkedHashMap<>();
         apiCallMap.put("mall","SCCP_HYD");
-        ApiInstanceClass.getInstance().getRestaurantList(ApiInstanceClass.getBaseInterface(),apiCallMap,this,"dummy_rest_list");
+        ApiInstanceClass.getInstance().submitGetRequest(ApiInstanceClass.getBaseInterface(),apiCallMap,this,"restaurant_list");
     }
 
     public void setCuisine() {
@@ -304,25 +305,28 @@ public class RestaurantHomeActivity extends AppCompatActivity
     }
 
     @Override
-    public void onResponseSuccess(JSONObject json, String requestTag) throws JSONException {
+    public void onResponseSuccess(JSONObject json, String requestTag) {
 
-        System.out.println("sree json "+ json.toString()+" tag "+ requestTag);
+        System.out.println("sree json " + json.toString() + " tag " + requestTag);
         Gson gson = new Gson();
         JSONArray jsonArray;
-        if(requestTag.equals("dummy_rest_list")){
-            jsonArray = json.getJSONArray("restaurants");
-            for (int i = 0; i < jsonArray.length(); i++)
-            {
-                JSONObject object = jsonArray.getJSONObject(i);
-                RestaurantListModel model = gson.fromJson(object.toString(), RestaurantListModel.class);
-                model.setCusines(object.getJSONArray("cusines"));
-                restList.add(model);
-                    System.out.println("sree rest "+model.toString());
+        if (requestTag.equals("restaurant_list")) {
+            try {
+                jsonArray = json.getJSONArray("restaurants");
+                for (int i = 0; i < jsonArray.length(); i++) {
+                    JSONObject object = jsonArray.getJSONObject(i);
+                    RestaurantListModel model = gson.fromJson(object.toString(), RestaurantListModel.class);
+                    model.setCusines(object.getJSONArray("cusines"));
+                    restList.add(model);
+                    System.out.println("sree rest " + model.toString());
+                }
+                setBanner();
+                setCuisine();
+                restaurantResultPageAdapter = new RestaurantResultPageAdapter(this, banner, cusinefilter, restList);
+                homePageMainRecyler.setAdapter(restaurantResultPageAdapter);
+            } catch (JSONException e) {
+                e.printStackTrace();
             }
-            setBanner();
-            setCuisine();
-            restaurantResultPageAdapter = new RestaurantResultPageAdapter(this, banner, cusinefilter, restList);
-            homePageMainRecyler.setAdapter(restaurantResultPageAdapter);
         }
     }
 

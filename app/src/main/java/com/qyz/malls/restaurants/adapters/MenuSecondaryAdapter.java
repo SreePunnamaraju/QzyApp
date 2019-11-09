@@ -122,12 +122,15 @@ class MenuSecondaryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     }
 
     private void removeItemFromCart(MenuItemModel model,MenuSecondaryHolder menuSecondaryHolder) {
-        if(mActivity.cart.mallId.equals("-1") ){
-            mActivity.cart.mallId = model.getMallid();
+//        if(mActivity.cart.mallId.equals("-1") ){
+//            mActivity.cart.mallId = model.getMallid();
+//            mActivity.cart.restId = model.getRestid();
+//        }
+        if(mActivity.cart.restId.equals("-1")){
             mActivity.cart.restId = model.getRestid();
         }
         HashMap<MenuItemModel,Integer> shopCart = mActivity.cart.getCart();
-        if(mActivity.cart.mallId.equals(model.getMallid())&& mActivity.cart.restId.equals(model.getRestid())){
+        if(/*mActivity.cart.mallId.equals(model.getMallid())&&*/ mActivity.cart.restId.equals(model.getRestid())){
             int count = shopCart.get(model)-1;
             if(count == 0){
                 shopCart.remove(model);
@@ -143,16 +146,21 @@ class MenuSecondaryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     }
 
     public void addItemToCart(final MenuItemModel model, final MenuSecondaryHolder holder) {
-        System.out.println("sree bool "+ mActivity.cart.getMallId().equals("-1"));
-        if(mActivity.cart.getMallId().equals("-1") ){
-            System.out.println("sree id in this "+mActivity.cart.getMallId());
-            mActivity.cart.setMallId(model.getMallid());
-            System.out.println("sree id in this 1"+mActivity.cart.getMallId()+" "+mActivity.cart.getRestId());
+//        System.out.println("sree bool "+ mActivity.cart.getMallId().equals("-1"));
+//        if(mActivity.cart.getMallId().equals("-1") ){
+//            System.out.println("sree id in this "+mActivity.cart.getMallId());
+//            mActivity.cart.setMallId(model.getMallid());
+//            System.out.println("sree id in this 1"+mActivity.cart.getMallId()+" "+mActivity.cart.getRestId());
+//            mActivity.cart.setRestId(model.getRestid());
+//            System.out.println("sree id in this 2"+mActivity.cart.getRestId());
+//        }
+        System.out.println("sree bool "+ mActivity.cart.getRestId().equals("-1"));
+        if(mActivity.cart.getRestId().equals("-1") ){
             mActivity.cart.setRestId(model.getRestid());
             System.out.println("sree id in this 2"+mActivity.cart.getRestId());
         }
         System.out.println("sree id "+mActivity.cart.getRestId()+" "+model.getRestid() );
-        if(mActivity.cart.getMallId().equals(model.getMallid()) && mActivity.cart.getRestId().equals(model.getRestid())){
+        if(/*mActivity.cart.getMallId().equals(model.getMallid()) &&*/ mActivity.cart.getRestId().equals(model.getRestid())){
             System.out.println("sree id in this if");
             addItem(model,holder);
         }
@@ -166,7 +174,7 @@ class MenuSecondaryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                     new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
                             mActivity.cart= new CheckoutCart();
-                            System.out.println("sree cart "+mActivity.cart.getRestId()+" "+mActivity.cart.getMallId()+" "+mActivity.cart.getCount());
+                            System.out.println("sree cart "+mActivity.cart.getRestId()+" "+mActivity.cart.getCount());
                             addItem(model,holder);
                             dialog.cancel();
                         }
@@ -186,8 +194,8 @@ class MenuSecondaryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     }
 
     public void addItem(MenuItemModel model,MenuSecondaryHolder holder){
-        if(mActivity.cart.getMallId().equals("-1") ){
-            mActivity.cart.setMallId(model.getMallid());
+        if(mActivity.cart.getRestId().equals("-1") ){
+//            mActivity.cart.setMallId(model.getMallid());
             mActivity.cart.setRestId(model.getRestid());
         }
         final HashMap<MenuItemModel,Integer> shopCart = mActivity.cart.getCart();

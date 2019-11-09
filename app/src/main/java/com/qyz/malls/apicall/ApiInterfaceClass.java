@@ -16,9 +16,13 @@ public interface ApiInterfaceClass {
     @GET("restaurants")
     Call<JSONObject> getRestaurants(@QueryMap LinkedHashMap<String, String> params);
 
+    @GET("items")
+    Call<JSONObject> getItems(@QueryMap LinkedHashMap<String, String> params);
+
     @POST("users")
     Call<JSONObject> postUser(@Body RequestBody body);
 
-
+    @POST("sequence")
+    Call<JSONObject> getSequenceNumber(@QueryMap LinkedHashMap<String, String> params);
 
 }

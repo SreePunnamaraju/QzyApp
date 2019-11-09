@@ -4,13 +4,21 @@ import java.util.HashMap;
 
 public class CheckoutCart {
 
-    public String getMallId() {
-        return mallId;
-    }
+    //    public String mallId;
+    public String restId;
 
-    public void setMallId(String mallId) {
-        this.mallId = mallId;
-    }
+    public String orderId;
+    int count;
+    HashMap<MenuItemModel,Integer> cartItems;
+    public RestaurantListModel restaurantListModel;
+
+//    public String getMallId() {
+//        return mallId;
+//    }
+
+//    public void setMallId(String mallId) {
+//        this.mallId = mallId;
+//    }
 
     public String getRestId() {
         return restId;
@@ -29,18 +37,12 @@ public class CheckoutCart {
     }
 
     public HashMap<MenuItemModel, Integer> getCart() {
-        return cart;
+        return cartItems;
     }
 
     public void setCart(HashMap<MenuItemModel, Integer> cart) {
-        this.cart = cart;
+        this.cartItems = cart;
     }
-
-
-    public String mallId;
-    public String restId;
-    int count;
-    HashMap<MenuItemModel,Integer> cart;
 
     public RestaurantListModel getRestaurantListModel() {
         return restaurantListModel;
@@ -49,14 +51,21 @@ public class CheckoutCart {
     public void setRestaurantListModel(RestaurantListModel restaurantListModel) {
         this.restaurantListModel = restaurantListModel;
     }
+    public String getOrderId() {
+        return orderId;
+    }
 
-    public RestaurantListModel restaurantListModel;
+    public void setOrderId(String orderId) {
+        this.orderId = orderId;
+    }
+
+
 
     public CheckoutCart(){
-        mallId ="-1";
+//        mallId ="-1";
         restId ="-1";
         count =0;
-        cart = new HashMap<MenuItemModel, Integer>();
+        cartItems = new HashMap<MenuItemModel, Integer>();
         restaurantListModel = null;
     }
 }

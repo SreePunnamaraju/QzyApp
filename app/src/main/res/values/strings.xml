@@ -30,4 +30,9 @@
     <string name="proceed_to_payment">PROCEED TO PAYMENT</string>
     <string name="fortwo">for two</string>
     <string name="min">min</string>
+    <string name="default_notification_channel_id" translatable="false">fcm_default_channel</string>
+    <string name="no_ph_no">Phone number not found in database</string>
+    <string name="msg_token_fmt" translatable="false">InstanceID Token: %s</string>
+    <string name="fcm_message">FCM Message</string>
+    <string name="default_notification_channel_name" translatable="true">Orders</string>
 </resources>

@@ -1,7 +1,10 @@
 package com.qyz.malls;
 
 import android.app.Activity;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.InputType;
 import android.util.Log;
@@ -26,18 +29,23 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthProvider;
 import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.iid.InstanceIdResult;
 import com.qyz.malls.apicall.ApiInstanceClass;
+import com.qyz.malls.db.LocalDatabase;
+import com.qyz.malls.db.User;
+import com.qyz.malls.db.UserDao;
 import com.qyz.malls.restaurants.activity.RestaurantHomeActivity;
 
 import org.json.JSONObject;
 
 import java.util.LinkedHashMap;
+import java.util.concurrent.Executor;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.RequestBody;
 
 public class LoginActivity extends AppCompatActivity {
-    private static final String TAG = "sree";
+    private static final String TAG = "Qzy/LoginActivity";
     EditText editText;
     EditText phoneNumber;
     ProgressBar progressBar;
@@ -196,6 +204,8 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
+                            sendPostCred(mAuth,mActivity);
+                            createNotificationChannel();
                             Intent intent=new Intent(mActivity, RestaurantHomeActivity.class);
                             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                             startActivity(intent);
@@ -212,24 +222,77 @@ public class LoginActivity extends AppCompatActivity {
                 });
     }
 
-    public static void sendPostCred(FirebaseAuth mAuth, Activity mActivity) {
-        LinkedHashMap<String,String> params = new LinkedHashMap<>();
-        FirebaseUser currentUser = mAuth.getCurrentUser();
+    public static void sendPostCred(FirebaseAuth mAuth, final Activity mActivity) {
+        Log.d(TAG, "sendPostCred:");
+        final LinkedHashMap<String,String> params = new LinkedHashMap<>();
+        final FirebaseUser currentUser = mAuth.getCurrentUser();
         params.put("partition",currentUser.getPhoneNumber());
         params.put("sort",currentUser.getUid());
-        params.put("passkey",FirebaseInstanceId.getInstance().getToken());
-        System.out.println("sree id "+currentUser.getPhoneNumber()+" "+
-                currentUser.getProviderId()+"  "+params.get("passkey"));
-        RequestBody body = RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"),(new JSONObject(params)).toString());
-        /*  FirebaseInstanceId.getInstance().getInstanceId().addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
-            @Override
-            public void onComplete(@NonNull Task<InstanceIdResult> task) {
+//        params.put("passkey",FirebaseInstanceId.getInstance().getToken());
+        FirebaseInstanceId.getInstance().getInstanceId()
+                .addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<InstanceIdResult> task) {
+                        if (!task.isSuccessful()) {
+                            Log.w(TAG, "getInstanceId failed", task.getException());
+                            return;
+                        }
 
+                        // Get new Instance ID token
+                        String token = task.getResult().getToken();
+                        params.put("passkey",token);
+
+                        // Log and toast
+                        String msg =  "Instance ID: "+token;
+                        Log.d(TAG, msg);
+                        Toast.makeText(mActivity, msg, Toast.LENGTH_SHORT).show();
+
+                        System.out.println("sree id "+currentUser.getPhoneNumber()+" "+
+                                currentUser.getProviderId()+"  "+params.get("passkey"));
+
+                        Executor diskIO = new AppExecutors().getDiskIO();
+                        diskIO.execute(new Runnable() {
+                            @Override
+                            public void run() {
+                                UserDao userDao = LocalDatabase.getInstance(mActivity).userDao();
+                                if(userDao.getUserCount()==0 || userDao.getGcmToken()==null){
+                                    addToDatabase(userDao);
+                                }else if((!userDao.getPhoneNumber().equalsIgnoreCase(currentUser.getPhoneNumber()) || !userDao.getGcmToken().equalsIgnoreCase(params.get("passkey")))){
+                                    addToDatabase(userDao);
+                                }
+                            }
+
+                            public void addToDatabase(UserDao userDao){
+                                Log.d(TAG, "sendPostCred/run: Inserting into database for user:"+userDao.getPhoneNumber());
+                                User user = new User();
+                                user.setPhonenumber(currentUser.getPhoneNumber());
+                                user.setUserid(currentUser.getUid());
+                                user.setGcmToken(params.get("passKey"));
+                                userDao.insertDetails(user);
+
+                                //RequestBody body  = RequestBody.create(okhttp3.MediaType.parse("application/json; charset=utf-8"),(new JSONObject(params)).toString());
+                                RequestBody body = RequestBody.create((new JSONObject(params)).toString(),okhttp3.MediaType.parse("application/json; charset=utf-8"));
+                                ApiInstanceClass.getInstance().submitPostRequest(ApiInstanceClass.getBaseInterface(),body,null,"post_user_cred",null);
+                            }
+                        });
+                    }
+                });
+    }
+
+    private void createNotificationChannel() {
+
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            // Create channel to show notifications.
+            String channelId  = getString(R.string.default_notification_channel_id);
+            String channelName = getString(R.string.default_notification_channel_name);
+            NotificationManager notificationManager =
+                    getSystemService(NotificationManager.class);
+            if(notificationManager.getNotificationChannel(channelId) == null) {
+                notificationManager.createNotificationChannel(new NotificationChannel(channelId,
+                        channelName, NotificationManager.IMPORTANCE_HIGH));
             }
-        })*/
-
-        ApiInstanceClass.getInstance().postUsedCred(ApiInstanceClass.getBaseInterface(),body,mActivity);
-
+        }
     }
 
     @Override

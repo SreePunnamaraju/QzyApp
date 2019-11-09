@@ -4,6 +4,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.SystemClock;
+import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -23,6 +24,8 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.google.gson.Gson;
 import com.qyz.malls.UserDetails;
 import com.qyz.malls.R;
+import com.qyz.malls.apicall.ApiCallBackInterface;
+import com.qyz.malls.apicall.ApiInstanceClass;
 import com.qyz.malls.restaurants.adapters.MenuPrimaryAdapter;
 import com.qyz.malls.restaurants.fragment.MenuItemSearchFragment;
 import com.qyz.malls.restaurants.interfaces.CartListener;
@@ -39,11 +42,15 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.List;
 
-public class RestaurantDetailActivity extends BaseActivity implements CartListener {
+public class RestaurantDetailActivity extends BaseActivity implements CartListener, ApiCallBackInterface {
 
-    ArrayList<MenuModel> menuModels = new ArrayList<>();
+    ArrayList<MenuModel> menuModels = new ArrayList<MenuModel>();
     RestaurantListModel restaurantListModel;
     RecyclerView restDetailRecyler;
     ImageView backIcon,restImage,favIcon;
@@ -58,7 +65,7 @@ public class RestaurantDetailActivity extends BaseActivity implements CartListen
     MenuPrimaryAdapter menuPrimaryAdapter;
     long mLastClickTime=0;
     FrameLayout frame;
-
+    private static final String TAG = "Qzy/RestaurantDetail";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -184,8 +191,8 @@ public class RestaurantDetailActivity extends BaseActivity implements CartListen
     }
 
     public void setMenu() {
-        getMenuData();
-        setMenuData();
+        //getMenuData();
+        getMenuDataFromAPI();
     }
     private void getMenuData() {
         BufferedReader reader = null;
@@ -204,7 +211,7 @@ public class RestaurantDetailActivity extends BaseActivity implements CartListen
         jsonArray= jsonObject.getJSONArray("menu");
         for(int i=0;i<jsonArray.length();i++){
             JSONObject menuJson = jsonArray.getJSONObject(i);
-            MenuModel menuModel = new MenuModel();
+            MenuModel menuModel = new MenuModel(new ArrayList<MenuItemModel>());
             ArrayList<MenuItemModel> menuItemModels = new ArrayList<>();
             menuModel.setName(menuJson.getString("name"));
             JSONArray items = menuJson.getJSONArray("items");
@@ -222,8 +229,16 @@ public class RestaurantDetailActivity extends BaseActivity implements CartListen
         }
     }
 
+    private  void getMenuDataFromAPI(){
+        LinkedHashMap<String, String> apiCallMap = new LinkedHashMap<>();
+        String restId = this.getIntent().getStringExtra(RestaurantHomeActivity.RESTAURANTID);
+        apiCallMap.put("restaurant",restId);
+        ApiInstanceClass.getInstance().submitGetRequest(ApiInstanceClass.getBaseInterface(),apiCallMap,this,"items_list");
+    }
+
     private void setMenuData() {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this,RecyclerView.VERTICAL,false);
+        Log.d(TAG, "setMenuData: menuModels size:"+menuModels.size());
         MenuPrimaryAdapter menuPrimaryAdapter = new MenuPrimaryAdapter(this,menuModels,this,restaurantListModel.getRestid());
         restDetailRecyler.setLayoutManager(linearLayoutManager);
         restDetailRecyler.setAdapter(menuPrimaryAdapter);
@@ -231,21 +246,27 @@ public class RestaurantDetailActivity extends BaseActivity implements CartListen
 
 
     public void addItemToCart(final MenuItemModel model) {
-        System.out.println("sree bool "+ cart.getMallId().equals("-1"));
-        if(cart.getMallId().equals("-1") ){
-            System.out.println("sree id in this "+cart.getMallId());
-            cart.setMallId(model.getMallid());
-            System.out.println("sree id in this 1"+cart.getMallId()+" "+cart.getRestId());
+//        System.out.println("sree bool "+ cart.getMallId().equals("-1"));
+//        if(cart.getMallId().equals("-1") ){
+//            System.out.println("sree id in this "+cart.getMallId());
+//            cart.setMallId(model.getMallid());
+//            System.out.println("sree id in this 1"+cart.getMallId()+" "+cart.getRestId());
+//            cart.setRestId(model.getRestid());
+//            System.out.println("sree id in this 2"+cart.getRestId());
+//        }
+        if(cart.getRestId().equals("-1")){
+            Log.d(TAG, "addItemToCart: "+cart.getRestId());
             cart.setRestId(model.getRestid());
-            System.out.println("sree id in this 2"+cart.getRestId());
         }
+
         System.out.println("sree id "+cart.getRestId()+" "+model.getRestid() );
-        if(cart.getMallId().equals(model.getMallid()) && cart.getRestId().equals(model.getRestid())){
-            System.out.println("sree id in this if");
+        if(cart.getRestId().equals(model.getRestid())){
+            Log.d(TAG, "addItemToCart: adding item");
             addItem(model);
         }
         else{
-            System.out.println("sree id in this else");
+
+            Log.d(TAG, "addItemToCart: item from different restaurent");
             AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
             builder1.setMessage("You already have items in your cart.Do you want to discard them?");
             builder1.setCancelable(true);
@@ -254,7 +275,7 @@ public class RestaurantDetailActivity extends BaseActivity implements CartListen
                     new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
                             cart= new CheckoutCart();
-                            System.out.println("sree cart "+cart.getRestId()+" "+cart.getMallId()+" "+cart.getCount());
+                            System.out.println("sree cart "+cart.getRestId()+" "+cart.getCount());
                             addItem(model);
                             dialog.cancel();
                         }
@@ -275,8 +296,7 @@ public class RestaurantDetailActivity extends BaseActivity implements CartListen
 
 
     public void addItem(MenuItemModel model){
-        if(cart.getMallId().equals("-1") ){
-            cart.setMallId(model.getMallid());
+        if(cart.getRestId().equals("-1") ){
             cart.setRestId(model.getRestid());
         }
         final HashMap<MenuItemModel,Integer> shopCart = cart.getCart();
@@ -347,5 +367,39 @@ public class RestaurantDetailActivity extends BaseActivity implements CartListen
     private void launchCart() {
         Intent intent = new Intent(this,CheckOutPageActivity.class);
         startActivity(intent);
+    }
+
+    @Override
+    public void onResponseSuccess(JSONObject json, String requestTag) throws JSONException {
+        System.out.println("sree json "+ json.toString()+" tag "+ requestTag);
+        Gson gson = new Gson();
+        JSONArray categoryJsonArray,itemsJsonArray;
+        categoryJsonArray= json.getJSONArray("categories");
+        Log.d(TAG, "onResponseSuccess: categories:"+categoryJsonArray.length());
+        itemsJsonArray = json.getJSONArray("items");
+        Log.d(TAG, "onResponseSuccess: items:"+itemsJsonArray.length());
+        HashMap<String,MenuModel> menuModelsMap = new HashMap<>();
+        for (int i=0;i<categoryJsonArray.length();i++){
+            JSONObject categoryJson = categoryJsonArray.getJSONObject(i);
+            MenuModel menuModel = new MenuModel(new ArrayList<MenuItemModel>());
+            String category = categoryJson.getString("category");
+            menuModel.setName(category);
+            menuModelsMap.put(category,menuModel);
+        }
+        for (int i=0;i<itemsJsonArray.length();i++){
+            JSONObject itemJson = itemsJsonArray.getJSONObject(i);
+            Log.d(TAG, "onResponseSuccess: itemJson:"+itemJson.toString());
+            MenuModel m = menuModelsMap.get(itemJson.getString("category"));
+            m.addMenuItemToList(gson.fromJson(itemJson.toString(),MenuItemModel.class));
+        }
+        for (int i=0;i<categoryJsonArray.length();i++){
+            menuModels.add(menuModelsMap.get(categoryJsonArray.getJSONObject(i).getString("category")));
+        }
+        setMenuData();
+    }
+
+    @Override
+    public void onResponseFailure(String requestTag) {
+
     }
 }

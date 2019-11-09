@@ -22,6 +22,7 @@ public class ApiInstanceClass {
     static ApiInstanceClass mInstance;
     okhttp3.OkHttpClient okHttpClient;
     public static final int CONNECTION_TIMEOUT_MS = 30000;
+    private static final String TAG = "ApiInstanceClass";
 
     public static synchronized ApiInstanceClass getInstance() {
         if (mInstance == null) {
@@ -54,9 +55,9 @@ public class ApiInstanceClass {
         return okHttpClient;
     }
 
-    public void getRestaurantList(ApiInterfaceClass apiInstanceClass, LinkedHashMap<String, String> apiCallMap, final ApiCallBackInterface callBackInterface,final String requestTag) {
+    public void submitGetRequest(ApiInterfaceClass apiInstanceClass, LinkedHashMap<String, String> apiCallMap, final ApiCallBackInterface callBackInterface,final String requestTag) {
 
-        apiInstanceClass.getRestaurants(apiCallMap).enqueue(new Callback<JSONObject>() {
+        Callback<JSONObject> requestCallback = new Callback<JSONObject>() {
             @Override
             public void onResponse(Call<JSONObject> call, Response<JSONObject> response) {
                 try {
@@ -72,22 +73,39 @@ public class ApiInstanceClass {
             public void onFailure(Call<JSONObject> call, Throwable t) {
                 callBackInterface.onResponseFailure(requestTag);
             }
-        });
+        };
+        if(requestTag.equalsIgnoreCase("restaurant_list"))
+            apiInstanceClass.getRestaurants(apiCallMap).enqueue(requestCallback);
+        else if(requestTag.equalsIgnoreCase("items_list"))
+            apiInstanceClass.getItems(apiCallMap).enqueue(requestCallback);
 
     }
+        
+    public void submitPostRequest(ApiInterfaceClass apiInstanceClass, RequestBody params,final ApiCallBackInterface callBackInterface,final String requestTag,LinkedHashMap<String, String> queryMap) {
 
-    public void postUsedCred(ApiInterfaceClass apiInstanceClass, RequestBody params, Activity mActivity) {
-        apiInstanceClass.postUser(params).enqueue(new Callback<JSONObject>() {
+        Callback<JSONObject> requestCallback = new Callback<JSONObject>(){
+
             @Override
             public void onResponse(Call<JSONObject> call, Response<JSONObject> response) {
-                Log.e("Sree on response ",response.toString());
-                Log.e("Sree on response call",call.request().toString());
+                Log.d(TAG, "onResponse: request Success");
+                if(callBackInterface != null)
+                    try {
+                        callBackInterface.onResponseSuccess(response.body(), requestTag);
+                    }catch (Exception e){
+                        Log.d(TAG, "onResponse: exception");
+                        e.printStackTrace();
+                    }
             }
 
             @Override
             public void onFailure(Call<JSONObject> call, Throwable t) {
-                Log.e("Sree on response fail",call.toString());
+                Log.d(TAG, "onResponse: request Failure");
             }
-        });
+        };
+        if(requestTag == "post_user_cred")
+            apiInstanceClass.postUser(params).enqueue(requestCallback);
+        else if (requestTag=="get_sequence_number"){
+            apiInstanceClass.getSequenceNumber(queryMap).enqueue(requestCallback);
+        }
     }
 }

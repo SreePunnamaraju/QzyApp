@@ -2,12 +2,15 @@ package com.qyz.malls.restaurants.models;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.util.Log;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 
 public class MenuModel implements Serializable, Parcelable {
     String name;
+    ArrayList<MenuItemModel> menuItemList;
+    private static final String TAG = "Qzy/MenuModel";
 
     protected MenuModel(Parcel in) {
         name = in.readString();
@@ -26,8 +29,8 @@ public class MenuModel implements Serializable, Parcelable {
         }
     };
 
-    public MenuModel() {
-
+    public MenuModel(ArrayList<MenuItemModel> menuItemList) {
+        this.menuItemList=menuItemList;
     }
 
     public String getName() {
@@ -46,7 +49,10 @@ public class MenuModel implements Serializable, Parcelable {
         this.menuItemList = menuItemList;
     }
 
-    ArrayList<MenuItemModel> menuItemList;
+    public void addMenuItemToList(MenuItemModel menuItemModel){
+        Log.d(TAG, "addMenuItemToList: added item");
+        this.menuItemList.add(menuItemModel);
+    }
 
     @Override
     public int describeContents() {

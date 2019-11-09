@@ -89,18 +89,19 @@ public class RestaurantResultAdapter extends RecyclerView.Adapter<RecyclerView.V
                         return;
                     }
                     mLastClickTime = SystemClock.elapsedRealtime();
-                    launchRestDetailsPage(position);
+                    launchRestDetailsPage(position,model.getRestid());
                 }
             });
         }
 
     }
 
-    private void launchRestDetailsPage(int position) {
+    private void launchRestDetailsPage(int position,String restId) {
         Intent intent = new Intent(restaurantHomeActivity, RestaurantDetailActivity.class);
         intent.putExtra(RestaurantHomeActivity.MODEL, (Serializable) restList.get(position));
         intent.putExtra("pos",position);
         intent.putExtra("frm","HOMEACTIVITY");
+        intent.putExtra(RestaurantHomeActivity.RESTAURANTID,restId);
         restaurantHomeActivity.startActivity(intent);
     }
 

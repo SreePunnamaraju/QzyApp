@@ -10,29 +10,42 @@ import java.io.Serializable;
 
 public class MenuItemModel implements Serializable, Parcelable {
 
-    @SerializedName("itemid")
+    @SerializedName("partition")
+    @Expose
+    private String restid;
+
+    @SerializedName("sort")
     @Expose
     private String itemid;
-
-    @SerializedName("name")
-    @Expose
-    private String name;
 
     @SerializedName("price")
     @Expose
     private String price;
 
-    @SerializedName("restid")
+    @SerializedName("item_name")
     @Expose
-    private String restid;
+    private String name;
 
-    @SerializedName("mallid")
+    @SerializedName("vegeterian")
     @Expose
-    private String mallid;
+    private String vegeterian;
 
-    @SerializedName("cuisines")
+    @SerializedName("category")
     @Expose
-    private String cuisines;
+    private String category;
+
+    @SerializedName("in_stock")
+    @Expose
+    private String inStock;
+
+    @SerializedName("description")
+    @Expose
+    private String description;
+
+    @SerializedName("image")
+    @Expose
+    private String image;
+
 
     public int getCount() {
         return count;
@@ -45,22 +58,24 @@ public class MenuItemModel implements Serializable, Parcelable {
     public int count = 0;
 
     protected MenuItemModel(Parcel in) {
-        itemid = in.readString();
+        vegeterian = in.readString();
         name = in.readString();
-        price = in.readString();
+        category = in.readString();
         restid = in.readString();
-        mallid = in.readString();
-        cuisines = in.readString();
+        itemid = in.readString();
+        price = in.readString();
+        inStock = in.readString();
     }
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(itemid);
+        dest.writeString(vegeterian);
         dest.writeString(name);
-        dest.writeString(price);
+        dest.writeString(category);
         dest.writeString(restid);
-        dest.writeString(mallid);
-        dest.writeString(cuisines);
+        dest.writeString(itemid);
+        dest.writeString(price);
+        dest.writeString(inStock);
     }
 
     @Override
@@ -112,20 +127,45 @@ public class MenuItemModel implements Serializable, Parcelable {
         this.restid = restid;
     }
 
-    public String getMallid() {
-        return mallid;
+    public String getVegeterian() {
+        return vegeterian;
     }
 
-    public void setMallid(String mallid) {
-        this.mallid = mallid;
+    public void setVegeterian(String vegeterian) {
+        this.vegeterian = vegeterian;
     }
 
-    public String getCuisines() {
-        return cuisines;
+    public String getCategory() {
+        return category;
     }
 
-    public void setCuisines(String cuisines) {
-        this.cuisines = cuisines;
+    public void setCategory(String category) {
+        this.category = category;
     }
+
+    public String getInStock() {
+        return inStock;
+    }
+
+    public void setInStock(String inStock) {
+        this.inStock = inStock;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
 }
 

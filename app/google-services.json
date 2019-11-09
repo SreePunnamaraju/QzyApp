@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "880215740712-rh4s1pucej8rtnkm0kfv7ri91qd6stjs.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.qyz.malls",
+            "certificate_hash": "579828f84614d92bff95b856681bd23f4e72088a"
+          }
+        },
+        {
           "client_id": "880215740712-0q7o70vhrte3b7i81pe2ogesr71t531h.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
