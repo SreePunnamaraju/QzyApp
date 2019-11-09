@@ -11,6 +11,7 @@
         <enum name="Montserrat-ExtraBoldItalic" value="7"/>
         <enum name="Montserrat-BoldItalic" value="8"/>
         <enum name="Montserrat-Bold" value="9"/>
+        <enum name="Montserrat-Black" value="10"/>
 
     </attr>
     <declare-styleable name="QzyTextView"><attr name="Montserrat_Font"/></declare-styleable>
