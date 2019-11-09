@@ -1,0 +1,18 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <attr format="enum" name="Montserrat_Font">
+        <enum name="none" value="0"/>
+        <enum name="Montserrat-Regular" value="1"/>
+        <enum name="Montserrat-SemiboldItalic" value="2"/>
+        <enum name="Montserrat-Semibold" value="3"/>
+        <enum name="Montserrat-LightItalic" value="4"/>
+        <enum name="Montserrat-Light" value="5"/>
+        <enum name="Montserrat-Italic" value="6"/>
+        <enum name="Montserrat-ExtraBoldItalic" value="7"/>
+        <enum name="Montserrat-BoldItalic" value="8"/>
+        <enum name="Montserrat-Bold" value="9"/>
+
+    </attr>
+    <declare-styleable name="QzyTextView"><attr name="Montserrat_Font"/></declare-styleable>
+
+</resources>
