@@ -3,11 +3,12 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/restResultLay">
+    android:id="@+id/restResultLay"
+    android:background="@color/grey">
 
     <RelativeLayout
         android:id="@+id/mainView"
-        android:layout_height="@dimen/dp_100"
+        android:layout_height="@dimen/dp_70"
         android:layout_width="match_parent"
         android:layout_marginTop="@dimen/dp_20"
         android:layout_marginBottom="@dimen/dp_10"
@@ -16,25 +17,24 @@
 
     <RelativeLayout
         android:id="@+id/imageView"
-        android:layout_height="@dimen/dp_95"
-        android:layout_width="@dimen/dp_120">
+        android:layout_height="@dimen/dp_65"
+        android:layout_width="@dimen/dp_90">
         <ImageView
             android:id="@+id/restImage"
-            android:layout_width="@dimen/dp_95"
-            android:layout_height="@dimen/dp_95"
+            android:layout_width="@dimen/dp_65"
+            android:layout_height="@dimen/dp_65"
             app:srcCompat="@drawable/no_image"
             android:scaleType="fitXY"
             android:background="@drawable/round_bg"
             />
 
         <RelativeLayout
-            android:layout_height="@dimen/dp_24"
-            android:layout_width="@dimen/dp_60"
+            android:layout_height="@dimen/dp_18"
+            android:layout_width="@dimen/dp_40"
             android:background="@drawable/round_bg_rating"
             android:layout_alignParentBottom="true"
             android:layout_alignParentEnd="true"
-            android:layout_marginBottom="2dp"
-            android:layout_marginStart="@dimen/dp_75">
+            android:layout_marginBottom="2dp">
                 <TextView
                     android:id="@+id/rating"
                     android:text="4.2"
@@ -63,33 +63,35 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_toEndOf="@+id/imageView"
-        android:layout_marginStart="20dp"
+        android:layout_marginStart="10dp"
         android:layout_centerVertical="true"
         android:layout_toStartOf="@+id/fav">
 
-        <TextView
+        <com.qyz.malls.qzyCustom.QzyTextView
             android:id="@+id/restName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Shoalin Work"
-            android:textSize="20sp"
+            android:textSize="@dimen/sp_15"
             android:textColor="#1d1d1d"
             android:lineSpacingExtra="2.5sp"
             android:maxLines="1"
-            android:ellipsize="end"/>
+            android:ellipsize="end"
+            app:Font="Montserrat-SemiBold"/>
 
-        <TextView
+        <com.qyz.malls.qzyCustom.QzyTextView
             android:layout_below="@+id/restName"
             android:id="@+id/cusineName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Chinese"
-            android:textSize="18sp"
+            android:textSize="@dimen/sp_12"
             android:textColor="#1d1d1d"
             android:lineSpacingExtra="2.5sp"
             android:layout_marginTop="5dp"
             android:maxLines="1"
-            android:ellipsize="end"/>
+            android:ellipsize="end"
+            app:Font="Montserrat-SemiBold"/>
 
 
 
@@ -106,15 +108,16 @@
                 app:srcCompat="@drawable/ic_clock"
                 android:layout_centerVertical="true"/>
 
-        <TextView
+        <com.qyz.malls.qzyCustom.QzyTextView
             android:id="@+id/time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="25-30 MIN"
-            android:textSize="12sp"
+            android:textSize="10sp"
             android:textColor="#535353"
             android:layout_marginStart="@dimen/dp_8"
-            android:layout_toEndOf="@id/clock"/>
+            android:layout_toEndOf="@id/clock"
+            app:Font="Montserrat-Regular"/>
         </RelativeLayout>
 
         <RelativeLayout
@@ -130,12 +133,12 @@
                 android:layout_height="@dimen/dp_16"
                 app:srcCompat="@drawable/ic_rupee"
                 android:layout_centerVertical="true" />
-            <TextView
+            <com.qyz.malls.qzyCustom.QzyTextView
                 android:id="@+id/price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="300 for 2"
-                android:textSize="12sp"
+                android:textSize="10sp"
                 android:textColor="#535353"
                 android:layout_marginStart="@dimen/dp_8"
                 android:layout_toEndOf="@id/rupee"

@@ -1,10 +1,10 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
 
-    <attr format="enum" name="Montserrat_Font">
+    <attr format="enum" name="Font">
         <enum name="none" value="0"/>
         <enum name="Montserrat-Regular" value="1"/>
-        <enum name="Montserrat-SemiboldItalic" value="2"/>
-        <enum name="Montserrat-Semibold" value="3"/>
+        <enum name="Montserrat-SemiBoldItalic" value="2"/>
+        <enum name="Montserrat-SemiBold" value="3"/>
         <enum name="Montserrat-LightItalic" value="4"/>
         <enum name="Montserrat-Light" value="5"/>
         <enum name="Montserrat-Italic" value="6"/>
@@ -12,8 +12,12 @@
         <enum name="Montserrat-BoldItalic" value="8"/>
         <enum name="Montserrat-Bold" value="9"/>
         <enum name="Montserrat-Black" value="10"/>
+        <enum name="RobotoCondensed-Bold" value="11"/>
+        <enum name="Roboto-Medium" value="12"/>
+        <enum name="Roboto-Black" value="13"/>
+        <enum name="Montserrat-ExtraBold" value="14"/>
 
     </attr>
-    <declare-styleable name="QzyTextView"><attr name="Montserrat_Font"/></declare-styleable>
+    <declare-styleable name="QzyTextView"><attr name="Font"/></declare-styleable>
 
 </resources>
