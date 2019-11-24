@@ -35,9 +35,14 @@ public class RestaurantResultAdapter extends RecyclerView.Adapter<RecyclerView.V
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        System.out.println("sree in this rest 1");
-        View view  = LayoutInflater.from(restaurantHomeActivity).inflate(R.layout.rest_list_lay,parent,false);
-        return new RestaurantResultSecondaryHolder(view);
+        if(viewType == -1) {
+            System.out.println("sree in this rest 1");
+            View view = LayoutInflater.from(restaurantHomeActivity).inflate(R.layout.rest_list_lay, parent, false);
+            return new RestaurantResultSecondaryHolder(view);
+        }else{
+            View view = LayoutInflater.from(restaurantHomeActivity).inflate(R.layout.layout_empty, parent, false);
+            return new ItemHolder(view);
+        }
     }
 
     @Override
@@ -107,7 +112,21 @@ public class RestaurantResultAdapter extends RecyclerView.Adapter<RecyclerView.V
 
     @Override
     public int getItemCount() {
-        return restList.size();
+        return restList.size()+1;
     }
 
+    @Override
+    public int getItemViewType(int position) {
+        if(position<restList.size()){
+            return -1;
+        }else{
+            return -2;
+        }
+      }
+
+    private class ItemHolder extends RecyclerView.ViewHolder {
+        public ItemHolder(View view) {
+            super(view);
+        }
+    }
 }

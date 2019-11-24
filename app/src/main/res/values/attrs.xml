@@ -16,6 +16,8 @@
         <enum name="Roboto-Medium" value="12"/>
         <enum name="Roboto-Black" value="13"/>
         <enum name="Montserrat-ExtraBold" value="14"/>
+        <enum name="Montserrat-Medium" value="15"/>
+        <enum name="Montserrat-MediumItalic" value="16"/>
 
     </attr>
     <declare-styleable name="QzyTextView"><attr name="Font"/></declare-styleable>

@@ -77,6 +77,12 @@ public class QzyTextView extends AppCompatTextView {
                 case 14:
                     this.setTypeface(Typeface.createFromAsset(context.getAssets(),"fonts/Montserrat-ExtraBold.ttf"));
                     break;
+                case 15:
+                    this.setTypeface(Typeface.createFromAsset(context.getAssets(),"fonts/Montserrat-Medium.ttf"));
+                    break;
+                case 16:
+                    this.setTypeface(Typeface.createFromAsset(context.getAssets(),"fonts/Montserrat-MediumItalic.ttf"));
+                    break;
                 default:
                     this.setTypeface(Typeface.createFromAsset(context.getAssets(),"fonts/Montserrat-Regular.ttf"));
                     break;
