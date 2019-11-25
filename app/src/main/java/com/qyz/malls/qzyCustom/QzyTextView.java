@@ -31,7 +31,7 @@ public class QzyTextView extends AppCompatTextView {
         int defaultFont = 1;
         if (attrs != null) {
                 TypedArray a = context.getTheme().obtainStyledAttributes(attrs, R.styleable.QzyTextView, 0, 0);
-            int  type = a.getInt(R.styleable.QzyTextView_Montserrat_Font, defaultFont);
+            int  type = a.getInt(R.styleable.QzyTextView_Font, defaultFont);
             //   System.out.println("Ritesh here type "+type);
             switch (type)
             {
@@ -39,10 +39,10 @@ public class QzyTextView extends AppCompatTextView {
                     this.setTypeface(Typeface.createFromAsset(context.getAssets(),"fonts/Montserrat-Regular.ttf"));
                     break;
                 case 2:
-                    this.setTypeface(Typeface.createFromAsset(context.getAssets(),"fonts/Montserrat-SemiboldItalic.ttf"));
+                    this.setTypeface(Typeface.createFromAsset(context.getAssets(),"fonts/Montserrat-SemiBoldItalic.ttf"));
                     break;
                 case 3:
-                    this.setTypeface(Typeface.createFromAsset(context.getAssets(),"fonts/Montserrat-Semibold.ttf"));
+                    this.setTypeface(Typeface.createFromAsset(context.getAssets(),"fonts/Montserrat-SemiBold.ttf"));
                     break;
                 case 4:
                     this.setTypeface(Typeface.createFromAsset(context.getAssets(),"fonts/Montserrat-LightItalic.ttf"));
@@ -64,6 +64,24 @@ public class QzyTextView extends AppCompatTextView {
                     break;
                 case 10:
                     this.setTypeface(Typeface.createFromAsset(context.getAssets(),"fonts/Montserrat-Black.ttf"));
+                    break;
+                case 11:
+                    this.setTypeface(Typeface.createFromAsset(context.getAssets(),"fonts/RobotoCondensed-Bold.ttf"));
+                    break;
+                case 12:
+                    this.setTypeface(Typeface.createFromAsset(context.getAssets(),"fonts/Roboto-Medium.ttf"));
+                    break;
+                case 13:
+                    this.setTypeface(Typeface.createFromAsset(context.getAssets(),"fonts/Roboto-Black.ttf"));
+                    break;
+                case 14:
+                    this.setTypeface(Typeface.createFromAsset(context.getAssets(),"fonts/Montserrat-ExtraBold.ttf"));
+                    break;
+                case 15:
+                    this.setTypeface(Typeface.createFromAsset(context.getAssets(),"fonts/Montserrat-Medium.ttf"));
+                    break;
+                case 16:
+                    this.setTypeface(Typeface.createFromAsset(context.getAssets(),"fonts/Montserrat-MediumItalic.ttf"));
                     break;
                 default:
                     this.setTypeface(Typeface.createFromAsset(context.getAssets(),"fonts/Montserrat-Regular.ttf"));

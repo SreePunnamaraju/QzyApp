@@ -4,9 +4,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
@@ -38,6 +40,7 @@ class BannerAdapter extends PagerAdapter {
         ImageView imageView = viewItem.findViewById(R.id.banner);
         TextView bannerName = viewItem.findViewById(R.id.bannerName);
         TextView bannerOffer = viewItem.findViewById(R.id.bannerOffer);
+        RelativeLayout layout = viewItem.findViewById(R.id.bannerLinear);
         Glide.with(restaurantHomeActivity.getBaseContext())
                 .load(bannerList.get(position).getImageUrl())
                 .asBitmap()
@@ -45,6 +48,7 @@ class BannerAdapter extends PagerAdapter {
                 .into(imageView);
         bannerName.setText(bannerList.get(position).getName());
         bannerOffer.setText(bannerList.get(position).getOffer());
+     //   layout.setBackgroundColor(ContextCompat.getColor(restaurantHomeActivity, android.R.color.transparent));
 
         viewPager.addView(viewItem);
 

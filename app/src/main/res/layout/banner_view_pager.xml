@@ -1,18 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginLeft="@dimen/dp_40"
-    android:layout_marginTop="@dimen/dp_20"
-    android:layout_marginRight="@dimen/dp_40"
-    android:layout_marginBottom="@dimen/dp_20">
+    android:layout_marginLeft="@dimen/dp_20"
+    android:layout_marginTop="@dimen/dp_10"
+    android:layout_marginRight="@dimen/dp_20"
+    android:layout_marginBottom="@dimen/dp_10"
+    android:elevation="@dimen/dp_5"
+    android:background="@color/transparent"
+    app:cardCornerRadius="20dp">
 
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/banner_view_pager"
         android:layout_width="match_parent"
-        android:layout_height="220dp"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+        android:layout_height="@dimen/dp_170"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        android:background="@color/transparent"/>
 
-</LinearLayout>
+</androidx.cardview.widget.CardView>
