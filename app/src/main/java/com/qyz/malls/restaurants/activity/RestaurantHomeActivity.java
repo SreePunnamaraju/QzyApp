@@ -178,7 +178,8 @@ public class RestaurantHomeActivity extends AppCompatActivity
     }
 
     public void setCuisine() {
-        populateList("dummy_cus_list", "cus");
+        populateList("Cusine_payload", "cus");
+        System.out.println("sree cusine data "+cusinefilter.size());
         if(homePageMainRecyler.getAdapter() == null){
             restaurantResultPageAdapter = new RestaurantResultPageAdapter(this, banner, cusinefilter, restList);
             homePageMainRecyler.setAdapter(restaurantResultPageAdapter);
@@ -189,7 +190,8 @@ public class RestaurantHomeActivity extends AppCompatActivity
     }
 
     public void setBanner() {
-         populateList("dummy_banner_list", "banner");
+         populateList("Banner_payload", "banner");
+         System.out.println("sree banner data "+banner.size());
         if(homePageMainRecyler.getAdapter() == null){
             restaurantResultPageAdapter = new RestaurantResultPageAdapter(this, banner, cusinefilter, restList);
             homePageMainRecyler.setAdapter(restaurantResultPageAdapter);
@@ -251,7 +253,7 @@ public class RestaurantHomeActivity extends AppCompatActivity
       }
       catch (IOException | JSONException e )
       {
-          System.out.println("sree in this error "+ e.getMessage());
+          System.out.println("sree in this error "+ e.getMessage() + e.toString());
          e.printStackTrace();
       }
    }
