@@ -9,6 +9,8 @@ public class RestaurantSearchActivity extends AppCompatActivity {
 
     private RestaurantSearchActivity mContext;
     private RestaurantSearchActivity mActivity;
+    private String mSearch="";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,5 +22,8 @@ public class RestaurantSearchActivity extends AppCompatActivity {
         mContext = this;
         mActivity = this;
         setContentView(R.layout.activity_restaurant_search);
+        if(getIntent()!=null && getIntent().hasExtra("current") && getIntent().getStringExtra("current")!=null){
+            mSearch = getIntent().getStringExtra("current");
+        }
     }
 }

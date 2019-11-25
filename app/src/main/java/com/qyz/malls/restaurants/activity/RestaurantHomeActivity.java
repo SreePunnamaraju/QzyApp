@@ -166,6 +166,8 @@ public class RestaurantHomeActivity extends AppCompatActivity
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, VERTICAL, false);
         homePageMainRecyler.setLayoutManager(layoutManager);
         setRestaurantResult();
+        setBanner();
+        setCuisine();
     }
 
     public void setRestaurantResult() {
@@ -177,10 +179,24 @@ public class RestaurantHomeActivity extends AppCompatActivity
 
     public void setCuisine() {
         populateList("dummy_cus_list", "cus");
+        if(homePageMainRecyler.getAdapter() == null){
+            restaurantResultPageAdapter = new RestaurantResultPageAdapter(this, banner, cusinefilter, restList);
+            homePageMainRecyler.setAdapter(restaurantResultPageAdapter);
+        }else{
+            ((RestaurantResultPageAdapter)homePageMainRecyler.getAdapter()).setCusineData(cusinefilter); ;
+            homePageMainRecyler.getAdapter().notifyDataSetChanged();
+        }
     }
 
     public void setBanner() {
          populateList("dummy_banner_list", "banner");
+        if(homePageMainRecyler.getAdapter() == null){
+            restaurantResultPageAdapter = new RestaurantResultPageAdapter(this, banner, cusinefilter, restList);
+            homePageMainRecyler.setAdapter(restaurantResultPageAdapter);
+        }else{
+            ((RestaurantResultPageAdapter)homePageMainRecyler.getAdapter()).setBannerData(banner) ;
+            homePageMainRecyler.getAdapter().notifyDataSetChanged();
+        }
 
     }
 
@@ -320,10 +336,13 @@ public class RestaurantHomeActivity extends AppCompatActivity
                     restList.add(model);
                     System.out.println("sree rest " + model.toString());
                 }
-                setBanner();
-                setCuisine();
-                restaurantResultPageAdapter = new RestaurantResultPageAdapter(this, banner, cusinefilter, restList);
-                homePageMainRecyler.setAdapter(restaurantResultPageAdapter);
+                if(homePageMainRecyler.getAdapter() == null){
+                    restaurantResultPageAdapter = new RestaurantResultPageAdapter(this, banner, cusinefilter, restList);
+                    homePageMainRecyler.setAdapter(restaurantResultPageAdapter);
+                }else{
+                    ((RestaurantResultPageAdapter)homePageMainRecyler.getAdapter()).setRestaurantData(restList); ;
+                  homePageMainRecyler.getAdapter().notifyDataSetChanged();
+                }
             } catch (JSONException e) {
                 e.printStackTrace();
             }

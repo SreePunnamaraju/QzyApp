@@ -56,6 +56,16 @@ public class RestaurantResultPageAdapter extends RecyclerView.Adapter<RecyclerVi
         this.cusineFilterList= cusinefilter;
         this.restList = restList;
     }
+    public void setBannerData(ArrayList<RestaurantBannerModel> banner){
+        this.bannerList = banner;
+    }
+    public void setRestaurantData(ArrayList<RestaurantListModel> banner){
+        this.restList = banner;
+    }
+    public void setCusineData(ArrayList<CuisineFilterModel> banner){
+        this.cusineFilterList = banner;
+    }
+
 
     @NonNull
     @Override
@@ -135,6 +145,7 @@ public class RestaurantResultPageAdapter extends RecyclerView.Adapter<RecyclerVi
                     @Override
                     public void onClick(View view) {
                         Intent intent = new Intent(restaurantHomeActivity, RestaurantSearchActivity.class);
+                        intent.putExtra("current",cusineFilterHolder.searchbar.getText().toString());
                         intent.putExtra(RestaurantHomeActivity.MODEL,restList);
                         restaurantHomeActivity.startActivity(intent);
                     }
