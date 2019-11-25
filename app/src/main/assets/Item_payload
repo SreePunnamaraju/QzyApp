@@ -1,0 +1,83 @@
+{
+	"menu": [{
+			"name": "STARTERS",
+			"items": [{
+					"itemid": "1",
+					"name": "Gobi Manchuria",
+					"price": "Rs. 150",
+					"restid": "1",
+					"mallid": "1",
+					"cuisines": "STARTERS"
+				},
+				{
+					"itemid": "2",
+					"name": "Veg Manchuria",
+					"price": "Rs. 250",
+					"restid": "1",
+					"mallid": "1",
+					"cuisines": "STARTERS"
+				}
+			]
+		},
+		{
+			"name": "DESSERTS",
+			"items": [{
+					"itemid": "3",
+					"name": "Death By Chocolate",
+					"price": "Rs. 200",
+					"restid": "1",
+					"mallid": "1",
+					"cuisines": "DESSERTS"
+				},
+				{
+					"itemid": "4",
+					"name": "Pistachio",
+					"price": "Rs. 250",
+					"restid": "1",
+					"mallid": "1",
+					"cuisines": "DESSERTS"
+				}
+			]
+		},
+		{
+			"name": "SIDES",
+			"items": [{
+					"itemid": "5",
+					"name": "Fries",
+					"price": "Rs. 150",
+					"restid": "1",
+					"mallid": "1",
+					"cuisines": "SIDES"
+				},
+				{
+					"itemid": "6",
+					"name": "Nachos",
+					"price": "Rs. 250",
+					"restid": "1",
+					"mallid": "1",
+					"cuisines": "SIDES"
+				}
+			]
+		},
+		{
+			"name": "JUICES",
+			"items": [{
+					"itemid": "7",
+					"name": "Oreo Milkshake",
+					"price": "Rs. 200",
+					"restid": "1",
+					"mallid": "1",
+					"cuisines": "JUICES"
+				},
+				{
+					"itemid": "8",
+					"name": "Berry Shake",
+					"price": "Rs. 250",
+					"restid": "1",
+					"mallid": "1",
+					"cuisines": "JUICES"
+				}
+			]
+		}
+	]
+}

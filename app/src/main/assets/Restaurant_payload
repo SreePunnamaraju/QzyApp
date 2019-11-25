@@ -1,0 +1,124 @@
+{
+	"restaurants": [
+	    {
+			"restid": "1",
+			"fav": 0,
+			"mallid": "1",
+			"name": "Shaolin Work",
+			"cuisine": "Chinese",
+			"rating": "4.2",
+			"time": "25-30 MIN",
+			"imageUrl": "https://www.gstatic.com/webp/gallery3/2.png",
+			"offer": "",
+			"price": "Rs. 300 for 2"
+		},
+		{
+			"restid": "2",
+			"fav": "1",
+			"mallid": "1",
+			"name": "Freshery",
+			"cuisine": "Salads, Juices, Healthy",
+			"rating": "4.0",
+			"time": "25-30 MIN",
+			"imageUrl": "https://www.gstatic.com/webp/gallery3/5.png",
+			"offer": "",
+			"price": "Rs. 300 for 2"
+		},
+		{
+			"restid": "3",
+			"fav": "0",
+			"mallid": "1",
+			"name": "Restaurant 3",
+			"cuisine": "Desserts",
+			"rating": "4.0",
+			"time": "25-30 MIN",
+			"imageUrl": "https://www.gstatic.com/webp/gallery3/3.png",
+			"offer": "",
+			"price": "Rs. 300 for 2"
+		},
+		{
+			"restid": "4",
+			"fav": "0",
+			"mallid": "1",
+			"name": "Restaurant 4",
+			"cuisine": "Desserts",
+			"rating": "4.0",
+			"time": "25-30 MIN",
+			"imageUrl": "https://www.gstatic.com/webp/gallery3/3.png",
+			"offer": "",
+			"price": "Rs. 300 for 2"
+		},
+		{
+			"restid": "5",
+			"fav": "0",
+			"mallid": "1",
+			"name": "Restaurant 5",
+			"cuisine": "Desserts",
+			"rating": "4.0",
+			"time": "25-30 MIN",
+			"imageUrl": "https://www.gstatic.com/webp/gallery3/3.png",
+			"offer": "",
+			"price": "Rs. 300 for 2"
+		},
+		{
+			"restid": "6",
+			"fav": "0",
+			"mallid": "1",
+			"name": "Restaurant 6",
+			"cuisine": "Desserts",
+			"rating": "4.0",
+			"time": "25-30 MIN",
+			"imageUrl": "https://www.gstatic.com/webp/gallery3/3.png",
+			"offer": "",
+			"price": "Rs. 300 for 2"
+		},
+		{
+			"restid": "7",
+			"fav": "0",
+			"mallid": "1",
+			"name": "Restaurant 7",
+			"cuisine": "Desserts",
+			"rating": "4.0",
+			"time": "25-30 MIN",
+			"imageUrl": "https://www.gstatic.com/webp/gallery3/3.png",
+			"offer": "",
+			"price": "Rs. 300 for 2"
+		},
+		{
+			"restid": "8",
+			"fav": "0",
+			"mallid": "1",
+			"name": "Restaurant 8",
+			"cuisine": "Desserts",
+			"rating": "4.0",
+			"time": "25-30 MIN",
+			"imageUrl": "https://www.gstatic.com/webp/gallery3/3.png",
+			"offer": "",
+			"price": "Rs. 300 for 2"
+		},
+		{
+			"restid": "9",
+			"fav": "0",
+			"mallid": "1",
+			"name": "Restaurant 9",
+			"cuisine": "Desserts",
+			"rating": "4.0",
+			"time": "25-30 MIN",
+			"imageUrl": "https://www.gstatic.com/webp/gallery3/3.png",
+			"offer": "",
+			"price": "Rs. 300 for 2"
+		},
+		{
+			"restid": "10",
+			"fav": "0",
+			"mallid": "1",
+			"name": "Restaurant 10",
+			"cuisine": "Desserts",
+			"rating": "4.0",
+			"time": "25-30 MIN",
+			"imageUrl": "https://www.gstatic.com/webp/gallery3/3.png",
+			"offer": "",
+			"price": "Rs. 300 for 2"
+		}
+	]
+}
