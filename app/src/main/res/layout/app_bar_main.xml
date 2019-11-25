@@ -38,7 +38,7 @@
                 android:text="Inorbit mall"
                 android:textColor="#de000000"
                 android:textSize="20sp"
-                app:Font="Roboto-Black"
+                app:Font="Montserrat-ExtraBold"
                 android:textStyle="bold"/>
             <RelativeLayout
                 android:layout_height="@dimen/dp_60"

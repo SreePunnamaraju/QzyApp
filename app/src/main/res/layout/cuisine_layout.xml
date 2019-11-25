@@ -8,9 +8,9 @@
     android:layout_marginStart="@dimen/dp_10"
     android:background="@drawable/round_bg_cuisine">
 
-        <TextView
+        <com.qyz.malls.qzyCustom.QzyTextView
             android:layout_width="180dp"
-            android:layout_height="48dp"
+            android:layout_height="35dp"
             android:id="@+id/cuisineTextView"
             android:layout_gravity="center"
             android:textColor="@color/white"

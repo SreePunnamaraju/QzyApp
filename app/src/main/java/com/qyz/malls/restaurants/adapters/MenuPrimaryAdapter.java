@@ -42,15 +42,20 @@ public class MenuPrimaryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(mActivity).inflate(R.layout.menu_main_scroll,parent,false);
-        MenuPrimaryHolder holder = new MenuPrimaryHolder(view);
-        return holder;
+        if(viewType == -1) {
+            View view = LayoutInflater.from(mActivity).inflate(R.layout.menu_main_scroll, parent, false);
+            MenuPrimaryHolder holder = new MenuPrimaryHolder(view);
+            return holder;
+        }else {
+            View view = LayoutInflater.from(mActivity).inflate(R.layout.layout_empty, parent, false);
+            return new ItemHolder(view);
+        }
     }
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        MenuModel menuModel = menuModels.get(position);
         if(holder instanceof MenuPrimaryHolder){
+            MenuModel menuModel = menuModels.get(position);
             final MenuPrimaryHolder primaryHolder = (MenuPrimaryHolder) holder;
             primaryHolder.categoryName.setText(menuModel.getName());
             LinearLayoutManager layoutManager = new LinearLayoutManager(mActivity,RecyclerView.VERTICAL,false);
@@ -77,6 +82,21 @@ public class MenuPrimaryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
     @Override
     public int getItemCount() {
-        return menuModels.size();
+        return menuModels.size()+1;
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        if(position<menuModels.size()){
+            return -1;
+        }else{
+            return -2;
+        }
+    }
+
+    private class ItemHolder extends RecyclerView.ViewHolder {
+        public ItemHolder(View view) {
+            super(view);
+        }
     }
 }

@@ -30,7 +30,9 @@ public class RestaurantListModel implements Parcelable, Serializable {
     @Expose
     private String name;
 
-    private String cusine="";
+    @SerializedName("cusine")
+    @Expose
+    private String cusine;
 
     @SerializedName("rating")
     @Expose
@@ -78,9 +80,7 @@ public class RestaurantListModel implements Parcelable, Serializable {
         this.name = name;
     }
 
-    public String getCusine() {
-        return cusine;
-    }
+    public String getCusine() { return cusine;}
 
     public void setCusine(String cusine) {
         this.cusine = cusine;
@@ -139,6 +139,7 @@ public class RestaurantListModel implements Parcelable, Serializable {
         restid = in.readString();
         mallid = in.readString();
         name = in.readString();
+        cusine = in.readString();
         rating = in.readString();
         time = in.readString();
         imageUrl = in.readString();
@@ -169,6 +170,7 @@ public class RestaurantListModel implements Parcelable, Serializable {
         parcel.writeString(restid);
         parcel.writeString(mallid);
         parcel.writeString(name);
+        parcel.writeString(cusine);
         parcel.writeString(rating);
         parcel.writeString(time);
         parcel.writeString(imageUrl);
@@ -197,7 +199,7 @@ public class RestaurantListModel implements Parcelable, Serializable {
            builder.append(",");
         }
         builder.append(cusines.get(cusines.size()-1).toString());
-        cusine = builder.toString();
+        setCusine(builder.toString());
         System.out.println("sree cus string 1"+cusine);
     }
 }

@@ -8,7 +8,7 @@
 
     <RelativeLayout
         android:id="@+id/mainView"
-        android:layout_height="@dimen/dp_70"
+        android:layout_height="@dimen/dp_85"
         android:layout_width="match_parent"
         android:layout_marginTop="@dimen/dp_20"
         android:layout_marginBottom="@dimen/dp_10"
@@ -17,12 +17,12 @@
 
     <RelativeLayout
         android:id="@+id/imageView"
-        android:layout_height="@dimen/dp_65"
-        android:layout_width="@dimen/dp_90">
+        android:layout_height="@dimen/dp_75"
+        android:layout_width="@dimen/dp_100">
         <ImageView
             android:id="@+id/restImage"
-            android:layout_width="@dimen/dp_65"
-            android:layout_height="@dimen/dp_65"
+            android:layout_width="@dimen/dp_75"
+            android:layout_height="@dimen/dp_75"
             app:srcCompat="@drawable/no_image"
             android:scaleType="fitXY"
             android:background="@drawable/round_bg"
@@ -100,7 +100,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/timeName"
             android:layout_below="@+id/cusineName"
-            android:layout_marginTop="@dimen/dp_10">
+            android:layout_marginTop="@dimen/dp_5">
             <ImageView
                 android:id="@+id/clock"
                 android:layout_width="@dimen/dp_16"
@@ -126,7 +126,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_10sdp"
-            android:layout_marginTop="@dimen/dp_10">
+            android:layout_marginTop="@dimen/dp_5">
             <ImageView
                 android:id="@+id/rupee"
                 android:layout_width="wrap_content"
@@ -146,7 +146,15 @@
                 android:ellipsize="end"/>
         </RelativeLayout>
 
-
+        <com.qyz.malls.qzyCustom.QzyTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/timeName"
+            app:Font="Montserrat-SemiBold"
+            android:textColor="@color/offerColor"
+            android:text="Offer"
+            android:layout_marginStart="@dimen/dp_1"
+            android:id="@+id/offer_text"/>
 
     </RelativeLayout>
 

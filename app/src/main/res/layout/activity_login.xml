@@ -6,11 +6,12 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <com.qyz.malls.qzyCustom.QzyTextView
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="@dimen/sp_20"
-        android:layout_margin="20dp"
+        android:layout_marginTop="@dimen/dp_30"
+        android:layout_marginStart="@dimen/dp_30"
         android:textStyle="bold"
         android:textColor="@color/colorPrimaryDark"
         android:text="Phone Number Authentication"
@@ -47,14 +48,14 @@
         android:text="Generate OTP"
         android:layout_height="wrap_content"
         android:visibility="visible"
-        android:layout_below="@+id/number"/>
+        android:layout_below="@+id/number" />
     <ProgressBar
         android:layout_width="match_parent"
         android:visibility="gone"
         android:id="@+id/progressBar"
         android:layout_height="wrap_content" />
 
-    <com.qyz.malls.qzyCustom.QzyTextView
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Skip"

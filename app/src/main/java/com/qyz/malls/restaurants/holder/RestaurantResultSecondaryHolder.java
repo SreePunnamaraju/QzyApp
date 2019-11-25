@@ -9,12 +9,14 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.qyz.malls.R;
+import com.qyz.malls.qzyCustom.QzyTextView;
 
 public class RestaurantResultSecondaryHolder extends RecyclerView.ViewHolder {
 
     public ImageView restImage,fav;
     public TextView rating,restName,cusineName,time,price;
     public RelativeLayout restResultLay;
+    public QzyTextView offerText;
 
     public RestaurantResultSecondaryHolder(@NonNull View itemView) {
         super(itemView);
@@ -26,5 +28,6 @@ public class RestaurantResultSecondaryHolder extends RecyclerView.ViewHolder {
         time = itemView.findViewById(R.id.time);
         price = itemView.findViewById(R.id.price);
         restResultLay = itemView.findViewById(R.id.restResultLay);
+        offerText = itemView.findViewById(R.id.offer_text);
     }
 }

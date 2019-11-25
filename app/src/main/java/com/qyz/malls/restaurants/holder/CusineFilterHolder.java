@@ -19,7 +19,7 @@ public class CusineFilterHolder extends RecyclerView.ViewHolder implements Filte
     public CusineFilterHolder(@NonNull View itemView) {
         super(itemView);
         recyclerView = itemView.findViewById(R.id.cusineRecyler);
-        filterIcon = itemView.findViewById(R.id.filterIcon);
+//        filterIcon = itemView.findViewById(R.id.filterIcon);
         searchbar= itemView.findViewById(R.id.search_bar);
         searchbox= itemView.findViewById(R.id.searchbox);
     }
