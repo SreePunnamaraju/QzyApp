@@ -6,20 +6,21 @@
     android:layout_height="wrap_content">
 
     <RelativeLayout
-        android:layout_height="@dimen/dp_60"
+        android:layout_height="@dimen/dp_50"
         android:layout_width="match_parent"
         android:background="@drawable/black_rectangle">
-        <TextView
+        <com.qyz.malls.qzyCustom.QzyTextView
             android:id="@+id/categoryName"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:textSize="16.5sp"
+            android:textSize="@dimen/sp_16"
             android:textColor="#d01d1d1d"
             android:letterSpacing="0.15"
             android:lineSpacingExtra="11sp"
             android:text="CATEGORY"
             android:gravity="center_vertical"
-            android:layout_marginStart="@dimen/dp_30"/>
+            android:layout_marginStart="@dimen/dp_20"
+            app:Font="Montserrat-Medium"/>
         <ImageView
             android:id="@+id/minimizeIcon"
             android:layout_width="wrap_content"

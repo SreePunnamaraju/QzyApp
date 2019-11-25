@@ -67,6 +67,11 @@ public class RestaurantResultAdapter extends RecyclerView.Adapter<RecyclerView.V
             secondaryHolder.restName.setText(model.getName());
             secondaryHolder.rating.setText(model.getRating());
             secondaryHolder.time.setText(model.getTime() +" "+ restaurantHomeActivity.getString(R.string.min));
+            if(model.getOffer() != null && !model.getOffer().equalsIgnoreCase("NA")){
+                secondaryHolder.offerText.setText(model.getOffer());
+            }else{
+                secondaryHolder.offerText.setVisibility(View.GONE);
+            }
             if(model.getFav()==0){
                 secondaryHolder.fav.setImageDrawable(restaurantHomeActivity.getDrawable(R.drawable.ic_heart_grey));
             }

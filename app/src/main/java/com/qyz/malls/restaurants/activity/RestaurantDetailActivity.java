@@ -12,7 +12,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -54,7 +53,7 @@ public class RestaurantDetailActivity extends BaseActivity implements CartListen
     RestaurantListModel restaurantListModel;
     RecyclerView restDetailRecyler;
     ImageView backIcon,restImage,favIcon;
-    TextView rating,restName,cusineName,time,price;
+    TextView rating,restName,cusineName,time,price,offerText;
     RelativeLayout fav,shoppingCartIcon,searchIcon;
     public CheckoutCart cart;
     TextView  cartCount;
@@ -89,6 +88,7 @@ public class RestaurantDetailActivity extends BaseActivity implements CartListen
         restImage = findViewById(R.id.restImage);
         fav = findViewById(R.id.fav);
         rating = findViewById(R.id.rating);
+        offerText = findViewById(R.id.offer_text);
         restName = findViewById(R.id.restName);
         cusineName = findViewById(R.id.cusineName);
         time = findViewById(R.id.time);
@@ -99,13 +99,13 @@ public class RestaurantDetailActivity extends BaseActivity implements CartListen
         footerCart = findViewById(R.id.footer_cart);
         shoppingCartIcon = findViewById(R.id.shopping_cart);
         pos = getIntent().getIntExtra("pos",0);
-        searchIcon = findViewById(R.id.searchIcon);
-        searchIcon.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                launchSearchPage();
-            }
-        });
+//        searchIcon = findViewById(R.id.searchIcon);
+//        searchIcon.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                launchSearchPage();
+//            }
+//        });
         System.out.println("sree in this "+restaurantListModel.getName());
         setDetailPage();
         setMenu();
@@ -163,10 +163,11 @@ public class RestaurantDetailActivity extends BaseActivity implements CartListen
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(restImage);
         cusineName.setText(restaurantListModel.getCusine());
-        price.setText(restaurantListModel.getPrice());
+        price.setText(restaurantListModel.getPrice() + " for 2");
         restName.setText(restaurantListModel.getName());
         rating.setText(restaurantListModel.getRating());
-        time.setText(restaurantListModel.getTime());
+        time.setText(restaurantListModel.getTime() + " min");
+        offerText.setText("20% off on all items");
         if(restaurantListModel.getFav()==0){
             favIcon.setImageDrawable(getDrawable(R.drawable.ic_heart_grey));
         }
@@ -232,7 +233,8 @@ public class RestaurantDetailActivity extends BaseActivity implements CartListen
     private  void getMenuDataFromAPI(){
         LinkedHashMap<String, String> apiCallMap = new LinkedHashMap<>();
         String restId = this.getIntent().getStringExtra(RestaurantHomeActivity.RESTAURANTID);
-        apiCallMap.put("restaurant",restId);
+        //TODO: change below SCCP001 to restId
+        apiCallMap.put("restaurant","SCCP001");
         ApiInstanceClass.getInstance().submitGetRequest(ApiInstanceClass.getBaseInterface(),apiCallMap,this,"items_list");
     }
 
