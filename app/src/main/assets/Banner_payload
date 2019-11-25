@@ -1,0 +1,74 @@
+{
+	"banners": [
+	    {
+			"restid": "1",
+			"mallid": "1",
+			"name": "Shaolin Work",
+			"imageUrl": "https://www.gstatic.com/webp/gallery3/2.png",
+			"offer": "60% OFFER ON ALL EXOTIC PIZZAS"
+		},
+		{
+			"restid": "2",
+			"mallid": "1",
+			"name": "Freshery",
+			"imageUrl": "https://www.gstatic.com/webp/gallery3/5.png",
+			"offer": "60% OFFER ON ALL EXOTIC PIZZAS"
+		},
+		{
+			"restid": "3",
+			"mallid": "1",
+			"name": "Banner Restaurant 3",
+			"imageUrl": "https://www.gstatic.com/webp/gallery3/2.png",
+			"offer": "60% OFFER ON ALL EXOTIC PIZZAS"
+		},
+		{
+			"restid": "4",
+			"mallid": "1",
+			"name": "Banner Restaurant 4",
+			"imageUrl": "https://www.gstatic.com/webp/gallery3/3.png",
+			"offer": "60% OFFER ON ALL EXOTIC PIZZAS"
+		},
+		{
+			"restid": "5",
+			"mallid": "1",
+			"name": "Banner Restaurant 5",
+			"imageUrl": "https://www.gstatic.com/webp/gallery3/2.png",
+			"offer": "60% OFFER ON ALL EXOTIC PIZZAS"
+		},
+		{
+			"restid": "6",
+			"mallid": "1",
+			"name": "BannerRestaurant 6",
+			"imageUrl": "https://www.gstatic.com/webp/gallery3/3.png",
+			"offer": "60% OFFER ON ALL EXOTIC PIZZAS"
+		},
+		{
+			"restid": "7",
+			"mallid": "1",
+			"name": "Banner Restaurant 7",
+			"imageUrl": "https://www.gstatic.com/webp/gallery3/2.png",
+			"offer": "60% OFFER ON ALL EXOTIC PIZZAS"
+		},
+		{
+			"restid": "8",
+			"mallid": "1",
+			"name": "Banner Restaurant 8",
+			"imageUrl": "https://www.gstatic.com/webp/gallery3/3.png",
+			"offer": "60% OFFER ON ALL EXOTIC PIZZAS"
+		},
+		{
+			"restid": "9",
+			"mallid": "1",
+			"name": "Banner Restaurant 9",
+			"imageUrl": "https://www.gstatic.com/webp/gallery3/2.png",
+			"offer": "60% OFFER ON ALL EXOTIC PIZZAS"
+		},
+		{
+			"restid": "10",
+			"mallid": "1",
+			"name": "Banner Restaurant 10",
+			"imageUrl": "https://www.gstatic.com/webp/gallery3/3.png",
+			"offer": "60% OFFER ON ALL EXOTIC PIZZAS"
+		}
+	]
+}
